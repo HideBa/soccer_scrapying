@@ -16,20 +16,24 @@ class SoccerspiderSpider(scrapy.Spider):
     #         print("-----------")
 
     def parse(self, response):
-        print("start ----------")
-        for item in response.css('table.table_theme1 tbody tr.end td'):
-            yield SoccerProjItem(
-            team_home = item.css('li::text').extract_first()
-            )
-            print("-----------")
+        # print('666666666666666666666')
+        # page2 = response.urljoin(response.css('div.shcedule-tournament a::text')).extract_first()
+        # print(page2)
+        for topic in response.css('table.table_theme1'):
+            item = SoccerProjItem()
+            item['headline'] = topic.css('a::text').extract_first()
+            print(item['headline'])
+            page = topic.css('a::attr(href)').extract_first()
+            print("0000000000000000000000000000000")
+            print(page)
+            yield scrapy.Request(topic.css('a::attr(href)').extract_first(), callback=self.parse_detail, meta={'item': item})
+
+    def parse_detail(self, response):
+        item = response.meta['item']
+        item['url'] = response.url
+        item['team_home'] = response.css('div.score-board-header p::text').extract_first()
+        yield item
 
 
-
-    # def parse(self, response):
-    #     print("start scrapy --------------")
-    #     for soccer in response.css('div.shcedule-tournament'):
-    #         item = SoccerProjItem()
-    #         item['team_home'] = soccer.css('div.trigger-tournament::text')
-    #         yield item
 
     

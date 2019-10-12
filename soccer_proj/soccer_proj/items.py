@@ -9,4 +9,5 @@ import scrapy
 
 
 class SoccerProjItem(scrapy.Item):
-    team_home = scrapy.Field()
+    headline = scrapy.Field()
+    url = scrapy.Field()
