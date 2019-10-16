@@ -24,18 +24,14 @@ class SoccerspiderSpider(scrapy.Spider):
     def start_requests(self):
         url = "http://www.jfa.jp/match/takamado_jfa_u18_premier2019/east/schedule_result/"
         selenium_get(url)
-        a = get_dom('li.score a')
-        print("99999999999999999999999999999999999999999")
-        page = a.get_attribute('href')
-        page1 = url
-        print("----------------------------------------------")
-        print("page=", page)
-        print(type(page))
-        print("page1=", page1)
-        print(type(page1))
-        yield scrapy.Request(page1, self.parse)
+        alist = get_a('li.score a')
+        for a in alist:
+            page = a.get_attribute('href')
+            yield scrapy.Request(page, self.parse)
 
     def parse(self, response):
+        print('response====================' + str(response))
+    # def parse(self, response):
 
         # alist = get_dom('li.score a').get_attribute('href')
         # print('alist =' + str(alist))

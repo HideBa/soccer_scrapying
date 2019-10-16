@@ -44,6 +44,12 @@ def selenium_get(url):
     driver.get(url)
 
 
+def get_a(query):
+    alist = driver.find_elements_by_css_selector(query)
+    print(str(type(alist)))
+    return alist
+
+
 def get_dom(query):
     dom = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, query)))
