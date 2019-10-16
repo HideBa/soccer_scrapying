@@ -6,3 +6,19 @@
 [1016/171324.837:ERROR:exception_snapshot_win.cc(98)] thread ID 5460 not found in process
 [1016/171512.057:ERROR:process_reader_win.cc(123)] NtOpenThread: {アクセス拒否} プロセスはオブジェクトのアクセスを要求しましたが、アクセス権が与えられていません。 (0xc0000022)
 [1016/171512.059:ERROR:exception_snapshot_win.cc(98)] thread ID 37720 not found in process
+[1016/181147.362:ERROR:process_reader_win.cc(123)] NtOpenThread: {アクセス拒否} プロセスはオブジェクトのアクセスを要求しましたが、アクセス権が与えられていません。 (0xc0000022)
+[1016/181147.364:ERROR:exception_snapshot_win.cc(98)] thread ID 35916 not found in process
+[1016/181230.695:ERROR:process_reader_win.cc(123)] NtOpenThread: {アクセス拒否} プロセスはオブジェクトのアクセスを要求しましたが、アクセス権が与えられていません。 (0xc0000022)
+[1016/181230.698:ERROR:exception_snapshot_win.cc(98)] thread ID 5156 not found in process
+[1016/181848.306:ERROR:process_reader_win.cc(123)] NtOpenThread: {アクセス拒否} プロセスはオブジェクトのアクセスを要求しましたが、アクセス権が与えられていません。 (0xc0000022)
+[1016/181848.309:ERROR:exception_snapshot_win.cc(98)] thread ID 14388 not found in process
+[1016/181939.875:ERROR:process_reader_win.cc(123)] NtOpenThread: {アクセス拒否} プロセスはオブジェクトのアクセスを要求しましたが、アクセス権が与えられていません。 (0xc0000022)
+[1016/181939.877:ERROR:exception_snapshot_win.cc(98)] thread ID 38704 not found in process
+[1016/182438.731:ERROR:process_reader_win.cc(123)] NtOpenThread: {アクセス拒否} プロセスはオブジェクトのアクセスを要求しましたが、アクセス権が与えられていません。 (0xc0000022)
+[1016/182438.733:ERROR:exception_snapshot_win.cc(98)] thread ID 32720 not found in process
+[1016/182720.986:ERROR:process_reader_win.cc(123)] NtOpenThread: {アクセス拒否} プロセスはオブジェクトのアクセスを要求しましたが、アクセス権が与えられていません。 (0xc0000022)
+[1016/182720.988:ERROR:exception_snapshot_win.cc(98)] thread ID 40692 not found in process
+[1016/182720.991:ERROR:process_reader_win.cc(123)] NtOpenThread: {アクセス拒否} プロセスはオブジェクトのアクセスを要求しましたが、アクセス権が与えられていません。 (0xc0000022)
+[1016/182720.993:ERROR:exception_snapshot_win.cc(98)] thread ID 40352 not found in process
+[1016/183951.393:ERROR:process_reader_win.cc(123)] NtOpenThread: {アクセス拒否} プロセスはオブジェクトのアクセスを要求しましたが、アクセス権が与えられていません。 (0xc0000022)
+[1016/183951.396:ERROR:exception_snapshot_win.cc(98)] thread ID 40488 not found in process

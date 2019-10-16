@@ -22,32 +22,33 @@ class SoccerspiderSpider(scrapy.Spider):
     }
 
     def start_requests(self):
+        # ここに取得したい試合結果一覧のURLをかく
         url = "http://www.jfa.jp/match/takamado_jfa_u18_premier2019/east/schedule_result/"
+        # ここで、ブラウザを起動してページを開く
         selenium_get(url)
+        # get_aで各試合の詳細URLのa要素を取得
         alist = get_a('li.score a')
+        # for文を回してそれぞれのhref属性を取得
         for a in alist:
             page = a.get_attribute('href')
-            yield scrapy.Request(page, self.parse)
+            # それぞれのURLにおいてScrapyRequestを生成
+            yield scrapy.Request(page, callback=self.parse)
 
     def parse(self, response):
         print('response====================' + str(response))
-    # def parse(self, response):
+        # target = response.xpath('//html/body/text()')
+        # print('target-------------------------------------' + str(target))
 
-        # alist = get_dom('li.score a').get_attribute('href')
-        # print('alist =' + str(alist))
-        # for a in alist:
+        # for target in response.xpath('//html/body/text()'):
         #     item = SoccerProjItem()
-        #     item['headline'] = a.css('a::text').extract()
+        #     item['headline'] = target.css(
+        #         'div.text-schedule::text').extract_first()
         #     yield item
+        item = SoccerProjItem()
+        item['headline'] = response.css(
+            '#inner-header-score > div.text-schedule::text').extract_first()
 
-        # def parse(self, response):
-        #     alist = response.css(
-        #         '#main-colum > div.section-block > div > div:nth-child(1) > div.table-wrap-tournament > table > tbody > tr:nth-child(1) > td:nth-child(3) > div.tdWrap1 > ul > li.score')
-        #     print('alist =' + str(alist))
-        #     for a in alist:
-        #         item = SoccerProjItem()
-        #         item['headline'] = a.css('a::text').extract()
-        #         yield item
+        yield item
 
         # 違うサイトを参考にして見たミドルウェアの書き方（Chromeの場合）
         # def start_requests(self):
