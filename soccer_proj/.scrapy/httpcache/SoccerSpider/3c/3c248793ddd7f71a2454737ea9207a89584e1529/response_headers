@@ -1,0 +1,11 @@
+Date: Wed, 16 Oct 2019 10:19:59 GMT
+Server: openresty/1.7.4.1
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: Origin, Authorization, Accept
+Access-Control-Allow-Methods: POST, GET, OPTIONS
+Access-Control-Allow-Origin: *
+Cache-Control: no-cache, no-store
+Content-Type: text/html; charset=UTF-8
+Pragma: no-cache
+Set-Cookie: lang=en; Expires=Wed, 16-Oct-19 11:19:59 GMT; Max-Age=3600; Path=/wi2auth/at_STARBUCKS_Wi2/; Secure
+Set-Cookie: type=xhr; Expires=Wed, 16-Oct-19 11:19:59 GMT; Max-Age=3600; Path=/wi2auth/at_STARBUCKS_Wi2/; Secure; HttpOnly

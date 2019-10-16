@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script>window['adrum-start-time'] = new Date().getTime();</script>
+<script src="https://service.wi2.ne.jp/originalfreewifi/common/js/adrum.js"></script>
+<script>
+ADRUM.command ("addUserData","SSID","at_STARBUCKS_Wi2");
+ADRUM.command ("addUserData","TCP", performance.timing.connectEnd - performance.timing.connectStart);
+</script>
+<title>TOP</title>
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0,  maximum-scale=1.0, user-scalable=no" />
+<script type="text/javascript" src="js/top-1.0-min.js"></script>
+<link media="print,projection,screen" rel="stylesheet" href="css/oneClick.css" type="text/css" media="screen,projection,print" />
+</head>
+<body>
+
+	<div id="logoArea">
+		<div id="logo_lo">
+			<img id="image_logo" src="images/Wi2_SP_Logo.png" alt="logo:at_STARBUCKS_Wi2" />
+		</div>
+		<div id="langArea" class="select-box">
+			<select name="language" id="language_selector">
+				<option value="">(Language)</option>
+				<option value="ja">日本語</option>
+				<option value="en">English</option>
+				<option value="zh-cn">中文简体字</option>
+				<option value="zh-tw">中文繁體字</option>
+				<option value="ko">한국어</option>
+				<option value="th">ไทย</option>
+			</select>
+		</div>
+	</div>
+	<div id="wrap">
+
+		<div id="image" class="image">
+			<img id="image_main" src="images/Wi2_SP_Banner.png" alt="at_STARBUCKS_Wi2" />
+		</div>
+
+		
+
+		<form action="agreement.html" method="get">
+			<input type="submit" value="Connect" id="button_next_page" />
+		</form>
+
+		<div id="content_1" class="content_normal">
+			<!-- zone1 -->
+		</div>
+
+		<div id="content_2" class="warning_area">
+			<!-- zone3 -->
+		</div>
+
+		<div id="content_3" class="content_normal">
+			<!-- zone2 -->
+		</div>
+
+		<div id="optional_message" class="content_normal"></div>
+
+	</div>
+
+	<div id="linkArea" class="wi2-exclude-onetap-landing-page">
+		<ul id="link_list">
+			<!-- li id="qanda"><a id="qanda_link" href="https://service.wi2.ne.jp/wi2net/contact/"
+				target="_blank">よくあるご質問</a></li-->
+			<li><a id="contact_link" href="https://service.wi2.ne.jp/wi2net/contact/" target="_blank"><!-- お問い合わせ --></a></li>
+			<li><a id="privacy_link" href="http://wi2.co.jp/jp/privacy/" target="_blank"><!-- プライバシーポリシー --></a></li>
+			<li class="last"><a id="company_link" href="http://wi2.co.jp/jp/" target="_blank"><!-- 運営会社 --></a></li>
+		</ul>
+	</div>
+	<p id="copyrightArea">
+		Copyright &copy; WIRE AND WIRELESS All rights reserved.
+	</p>
+</body>
+</html>

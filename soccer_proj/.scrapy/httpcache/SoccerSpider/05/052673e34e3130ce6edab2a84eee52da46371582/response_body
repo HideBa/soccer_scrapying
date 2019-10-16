@@ -1,0 +1,3 @@
+<html><!--
+<?xml version="1.0" encoding="UTF-8"?><WISPAccessGatewayParam xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.acmewisp.com/WISPAccessGatewayParam.xsd"><Redirect><AccessProcedure>1.0</AccessProcedure><MessageType>100</MessageType><ResponseCode>0</ResponseCode><AccessLocation>Wi20086749</AccessLocation><LocationName>Wi2</LocationName><LoginURL>https://service.wi2.ne.jp/wi2auth/wispr/login</LoginURL></Redirect></WISPAccessGatewayParam>
+--><html>
