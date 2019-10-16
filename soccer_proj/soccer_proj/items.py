@@ -9,5 +9,17 @@ import scrapy
 
 
 class SoccerProjItem(scrapy.Item):
-    headline = scrapy.Field()
+    leagu_name = scrapy.Field()
+    year = scrapy.Field()
+    month = scrapy.Field()
+    day = scrapy.Field()
+    round = scrapy.Field()
+    team_home = scrapy.Field()
+    team_away = scrapy.Field()
     url = scrapy.Field()
+    results_home = scrapy.Field()
+    results_away = scrapy.Field()
+    goal_home = scrapy.Field()
+    goal_away = scrapy.Field()
+    time = scrapy.Field()
+    player = scrapy.Field()

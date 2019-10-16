@@ -36,18 +36,19 @@ class SoccerspiderSpider(scrapy.Spider):
 
     def parse(self, response):
         print('response====================' + str(response))
-        # target = response.xpath('//html/body/text()')
-        # print('target-------------------------------------' + str(target))
-
-        # for target in response.xpath('//html/body/text()'):
-        #     item = SoccerProjItem()
-        #     item['headline'] = target.css(
-        #         'div.text-schedule::text').extract_first()
-        #     yield item
         item = SoccerProjItem()
-        item['headline'] = response.css(
+        item['leagu_name'] = response.css(
+            '#ttl_sp > img::attr(alt)').extract_first()
+        # いったんHeadlineとして値を取得しているが、ここから後は正規表現だの、Splitみたいなので不要な文字列を削って出力すればよし
+        item['round'] = response.css(
             '#inner-header-score > div.text-schedule::text').extract_first()
-
+        item['team_home'] = response.css(
+            '#score-board-header > div:nth-child(1) > p:nth-child(2)::text').extract_first()
+        item['team_away'] = response.css(
+            '#score-board-header > div:nth-child(5) > p:nth-child(2)::text').extract_first()
+        item['url'] = response.url
+        item['results_home'] = response.css(
+            '#score-board-header > div:nth-child(2)::text').extract_first()
         yield item
 
         # 違うサイトを参考にして見たミドルウェアの書き方（Chromeの場合）
