@@ -49,7 +49,22 @@ class SoccerspiderSpider(scrapy.Spider):
         item['url'] = response.url
         item['results_home'] = response.css(
             '#score-board-header > div:nth-child(2)::text').extract_first()
+        item['results_away'] = response.css(
+            '#score-board-header > div:nth-child(4)::text').extract_first()
         yield item
+
+    def closed(self, response):
+        selenium_close()
+
+    # year = scrapy.Field()
+    # month = scrapy.Field()
+    # day = scrapy.Field()
+    # goal_home = scrapy.Field()
+    # goal_away = scrapy.Field()
+    # time = scrapy.Field()
+    # player = scrapy.Field()
+
+    #  CSVに書き出す場合はーーーーー　scrapy crawl SoccerSpider -o results/soccer.csv
 
         # 違うサイトを参考にして見たミドルウェアの書き方（Chromeの場合）
         # def start_requests(self):

@@ -1,7 +1,0 @@
-Date: Wed, 16 Oct 2019 10:19:38 GMT
-Server: openresty/1.7.4.1
-Cache-Control: no-cache, no-store
-Content-Type: text/html; charset=UTF-8
-Location: https://service.wi2.ne.jp/wi2auth/at_STARBUCKS_Wi2/index.html
-Pragma: no-cache
-Set-Cookie: session_id=a540fd59-089e-40ae-8a24-f8a9e6fbff61; Expires=Wed, 16-Oct-19 11:19:38 GMT; Max-Age=3600; Path=/; Secure; HttpOnly
