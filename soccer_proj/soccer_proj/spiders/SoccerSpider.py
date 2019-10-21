@@ -3,6 +3,7 @@ import scrapy
 import pprint
 from ..items import SoccerProjItem
 from ..selenium_middleware import *
+import re
 # from sclapy_selenium import SeleniumRequest
 
 # yield SeleniumRequest(url=url, callback=self.parse_result)
@@ -39,8 +40,8 @@ class SoccerspiderSpider(scrapy.Spider):
         item = SoccerProjItem()
         item['leagu_name'] = response.css(
             '#ttl_sp > img::attr(alt)').extract_first()
-        # いったんHeadlineとして値を取得しているが、ここから後は正規表現だの、Splitみたいなので不要な文字列を削って出力すればよし
-        item['round'] = response.css(
+        # いったんtempとして値を取得しているが、ここから後は正規表現だの、Splitみたいなので不要な文字列を削って出力すればよし
+        temp = response.css(
             '#inner-header-score > div.text-schedule::text').extract_first()
         item['team_home'] = response.css(
             '#score-board-header > div:nth-child(1) > p:nth-child(2)::text').extract_first()
@@ -51,6 +52,27 @@ class SoccerspiderSpider(scrapy.Spider):
             '#score-board-header > div:nth-child(2)::text').extract_first()
         item['results_away'] = response.css(
             '#score-board-header > div:nth-child(4)::text').extract_first()
+        year_pattern = '20[0-9]{2}'
+        item['year'] = re.findall(year_pattern, temp)
+        month_pattern = '[0-1][0-9]月'
+        item['month'] = re.findall(month_pattern, temp)
+        day_pattern = '[0-3][0-9]日'
+        item['day'] = re.findall(day_pattern, temp)
+        item['goal_home'] = response.css(
+            '#game-content-wrap > div.scorerLeft::text').extract()
+        item['goal_away'] = response.css(
+            '#game-content-wrap > div.scorerRight::text').extract()
+        time_temp = response.css('#game-content-wrap::text').extract()
+        # print("time_temp =========" + time_temp)
+        item['time'] = []
+        for elem in item['goal_home']:
+            item['time'].append(re.findall('.*分', elem))
+
+        for elem in item['goal_away']:
+            item['time'].append(re.findall('.*分', elem))
+
+        print('time=' + str(item['time']))
+
         yield item
 
     def closed(self, response):
