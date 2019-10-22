@@ -23,3 +23,4 @@ class SoccerProjItem(scrapy.Item):
     goal_away = scrapy.Field()
     time = scrapy.Field()
     player = scrapy.Field()
+    id = scrapy.Field()

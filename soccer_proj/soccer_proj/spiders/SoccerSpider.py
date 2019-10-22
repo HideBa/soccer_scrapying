@@ -48,22 +48,45 @@ class SoccerspiderSpider(scrapy.Spider):
         item['team_away'] = response.css(
             '#score-board-header > div:nth-child(5) > p:nth-child(2)::text').extract_first()
         item['url'] = response.url
-        item['results_home'] = response.css(
+        results_home = response.css(
             '#score-board-header > div:nth-child(2)::text').extract_first()
-        item['results_away'] = response.css(
+        if results_home:
+            item['results_home'] = results_home
+        else:
+            item['results_home'] = 'None'
+
+        results_away = response.css(
             '#score-board-header > div:nth-child(4)::text').extract_first()
+        if results_away:
+            item['results_away'] = results_away
+        else:
+            item['results_away'] = 'None'
+
         year_pattern = '20[0-9]{2}'
         item['year'] = re.findall(year_pattern, temp)
         month_pattern = '[0-1][0-9]月'
         item['month'] = re.findall(month_pattern, temp)
         day_pattern = '[0-3][0-9]日'
         item['day'] = re.findall(day_pattern, temp)
-        item['goal_home'] = response.css(
+        # 以下試合がまだ行われていないデータにはNoneを入れる
+        goal_home = response.css(
             '#game-content-wrap > div.scorerLeft::text').extract()
-        item['goal_away'] = response.css(
+        if goal_home:
+
+            item['goal_home'] = goal_home
+        else:
+            item['goal_home'] = 'None'
+
+        goal_away = response.css(
             '#game-content-wrap > div.scorerRight::text').extract()
-        time_temp = response.css('#game-content-wrap::text').extract()
+        if goal_away:
+            item['goal_away'] = goal_away
+        else:
+            item['goal_away'] = 'None'
+        item['round'] = temp
+        # time_temp = response.css('#game-content-wrap::text').extract()
         # print("time_temp =========" + time_temp)
+        item['id'] = re.search('[0-9]{3,4}', temp).group()
         item['time'] = []
         for elem in item['goal_home']:
             item['time'].append(re.findall('.*分', elem))
