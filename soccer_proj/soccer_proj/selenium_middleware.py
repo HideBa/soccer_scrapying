@@ -44,10 +44,33 @@ def selenium_get(url):
     driver.get(url)
 
 
+# def get_sample(query):
+#     sample = driver.find_elements_by_css_selector(query)
+#     return sample
+
+
+def get_a_past_games(query):
+    past_games_alist = driver.find_elements_by_css_selector(query)
+    # print(str(past_games_alist))
+    return past_games_alist
+
+
+def get_a_schedule_results(query):
+    schedule_results_alist = driver.find_element_by_css_selector(query)
+    # print("schedule_results_alist===========" + str(schedule_results_alist))
+    return schedule_results_alist
+
+
 def get_a(query):
     alist = driver.find_elements_by_css_selector(query)
-    print(str(type(alist)))
+    # print(str(type(alist)))
     return alist
+
+
+def get_doms(query):
+    doms = WebDriverWait(driver, 10).until(
+        EC.visibility_of_all_elements_located((By.CSS_SELECTOR, query)))
+    return doms
 
 
 def get_dom(query):
