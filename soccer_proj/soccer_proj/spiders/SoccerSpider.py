@@ -14,7 +14,7 @@ class SoccerspiderSpider(scrapy.Spider):
     allowed_domains = ['jfa.jp']
     # 高円宮杯U18サッカープレミアリーグ
     start_urls = [
-        'http://www.jfa.jp/match/takamado_jfa_u18_premier2019/east/schedule_result/']
+        'http://www.jfa.jp/match/takamado_jfa_u18_premier2019/']
     # 高円宮杯U15サッカー選手権大会
     # start_urls = ['']
     # U12サッカー選手権大会
@@ -39,51 +39,121 @@ class SoccerspiderSpider(scrapy.Spider):
         selenium_get(url)
 
         print("一番最初ーーーーーーーーーーーーーーーーー")
-
+        # ここで各年度のURLを取得する
         past_game_alist = get_doms('#select-year2 > option')
-
-        # self.initial_request(past_game_alist, callback=self.second_requests)
-
-    # def initial_request(self, past_game_alist, callback):
-    #     domain = 'http://www.jfa.jp'
+        # yield self.initial_request(past_game_alist)
         count = 0
+        print("past_game_alist======================================" +
+              str(past_game_alist))
+        past_game_results_list = []
+        for a in past_game_alist:
+            page_year = domain + a.get_attribute('value')
+            past_game_results_list.append(page_year)
+        print("past_game_results_list ============= " +
+              str(past_game_results_list))
+        # years_alist = get_years_list(past_game_alist)
+        # for a in years_alist:
+        page_result_list = []
         for a in past_game_alist:
             count += 1
             print("count===================" + str(count))
             page_year = domain + a.get_attribute('value')
             print("page_year ====" + page_year)
-            print("---------start_request----------")
-            yield self.second_requests(page_year, callback=self.third_request)
+            selenium_get(page_year)
+            print("---------selenium_get----------")
+            schedule_results_a = get_dom(
+                '#sub > div.subMenu > ul > li.local-east_schedule > a')
+            print("schedule_results_a================" +
+                  str(schedule_results_a))
+            page_result = schedule_results_a.get_attribute('href')
+            print("schdule a = --------------------" + page_result)
+            page_result_list.append(page_result)
+            selenium_get(url)
+        print('page_result_list=======' + str(page_result_list))
+        for a in page_result_list:
+            selenium_get(a)
+            print("--------------second_request selenium get--------")
+            # get_aで各試合の詳細URLのa要素を取得
+            alist = get_doms('li.score a')
+            # for文を回してそれぞれのhref属性を取得
+            for a in alist:
+                page = a.get_attribute('href')
+                # それぞれのURLにおいてScrapyRequestを生成
+                yield scrapy.Request(page, callback=self.parse)
+            # selenium_get(url)
 
-    def second_requests(self, page_year, callback):
-        # selenium_close()
-        # print("-------start second_request----------")
-        count2 = 0
-        count2 += 1
-        print("count2=============" + str(count2))
-        print("-------page_year-----=" + page_year)
-        selenium_get(page_year)
-        # print("--------------second_request selenium get--------")
-        schedule_results_a = get_dom(
-            '#sub > div.subMenu > ul > li.local-east_schedule > a')
-        print("schedule_results_a================" +
-              str(schedule_results_a))
-        page_result = schedule_results_a.get_attribute('href')
-        print("schdule a = --------------------" + page_result)
-        print("---------------second_request  success")
-        yield callback(page_result)
-        # yield self.third_request(page_result)
+        # for a in past_game_alist:
+        #     count += 1
+        #     print("count===================" + str(count))
+        #     page_year = domain + a.get_attribute('value')
+        #     print("page_year ====" + page_year)
+        #     selenium_get(page_year)
+        #     print("---------selenium_get----------")
+        #     schedule_results_a = get_dom(
+        #         '#sub > div.subMenu > ul > li.local-east_schedule > a')
+        #     print("schedule_results_a================" +
+        #           str(schedule_results_a))
+        #     page_result = schedule_results_a.get_attribute('href')
+        #     print("schdule a = --------------------" + page_result)
+        #     selenium_get(page_result)
+        #     print("--------------second_request selenium get--------")
+        #     # get_aで各試合の詳細URLのa要素を取得
+        #     alist = get_doms('li.score a')
+        #     # for文を回してそれぞれのhref属性を取得
+        #     for a in alist:
+        #         page = a.get_attribute('href')
+        #         # それぞれのURLにおいてScrapyRequestを生成
+        #         yield scrapy.Request(page, callback=self.parse)
+        #     selenium_get(url)
 
-    def third_request(self, page_result):
-        print("third_request_start ============================")
-        selenium_get(page_result)
-        # get_aで各試合の詳細URLのa要素を取得
-        alist = get_doms('li.score a')
-        # for文を回してそれぞれのhref属性を取得
-        for a in alist:
-            page = a.get_attribute('href')
-            # それぞれのURLにおいてScrapyRequestを生成
-            yield scrapy.Request(page, callback=self.parse)
+        # yield self.second_requests(page_year, callback=self.third_request)
+        # self.second_requests(page_year)
+
+    # def initial_request(self, past_game_alist, callback):
+
+    # def initial_request(self, past_game_alist):
+
+    #     domain = 'http://www.jfa.jp'
+    #     count = 0
+    #     for a in past_game_alist:
+    #         count += 1
+    #         print("count===================" + str(count))
+    #         page_year = domain + a.get_attribute('value')
+    #         print("page_year ====" + page_year)
+    #         print("---------start_request----------")
+    #         # yield self.second_requests(page_year, callback=self.third_request)
+    #         self.second_requests(page_year)
+
+    # def second_requests(self, page_year, callback):
+
+    # def second_requests(self, page_year):
+    #     print("-------start second_request----------")
+    #     selenium_get(page_year)
+    #     print("--------------second_request selenium get--------")
+    #     schedule_results_a = get_dom(
+    #         '#sub > div.subMenu > ul > li.local-east_schedule > a')
+    #     print("schedule_results_a================" +
+    #           str(schedule_results_a))
+    #     page_result = schedule_results_a.get_attribute('href')
+    #     print("schdule a = --------------------" + page_result)
+    #     print("---------------second_request  success")
+    #     count2 = 0
+    #     count2 += 1
+    #     print("count2=============" + str(count2))
+    #     print("-------page_year-----=" + page_year)
+    #     # yield callback(page_result)
+    #     yield self.third_request(page_result)
+
+    # def third_request(self, page_result):
+    #     print("third_request_start ============================")
+    #     selenium_get(page_result)
+    #     # get_aで各試合の詳細URLのa要素を取得
+    #     alist = get_doms('li.score a')
+    #     # for文を回してそれぞれのhref属性を取得
+    #     for a in alist:
+    #         page = a.get_attribute('href')
+    #         # それぞれのURLにおいてScrapyRequestを生成
+    #         yield scrapy.Request(page, callback=self.parse)
 
     def parse(self, response):
         print('response====================' + str(response))

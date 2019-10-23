@@ -12,6 +12,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+import time
+from selenium.common.exceptions import TimeoutException
 
 # options = Options()
 
@@ -38,10 +40,28 @@ from selenium.webdriver.support.ui import WebDriverWait
 # Chromeで任意のサイトを開く
 
 driver = webdriver.Chrome()
+driver.set_page_load_timeout(10)
+retries = 3
+timeout = 10
 
 
 def selenium_get(url):
-    driver.get(url)
+    i = 0
+    while i < retries:
+        try:
+            driver.get(url)
+            time.sleep(5)
+            print('----------------------the page was loaded in time -------------')
+        except TimeoutException:
+            i = i + 1
+            print("Time out, Retrying..........(%(i)s/%(max)s)" %
+                  {'i': i, 'max': retries})
+            continue
+        else:
+            return True
+
+    msg = "Page was anot loaded in time"
+    raise TimeoutException(msg)
 
 
 # def get_sample(query):
@@ -67,14 +87,30 @@ def get_a(query):
     return alist
 
 
+def get_years_list(query):
+    domain = 'http://www.jfa.jp'
+
+    # doms = WebDriverWait(driver, 20).until(
+    #     EC.presence_of_all_elements_located((By.CSS_SELECTOR, query)))
+    years_alist = []
+    for a in query:
+        page_year = domain + a.get_attribute('value')
+        years_alist.append(page_year)
+        print("pageyear ========= " + page_year)
+    # print('doms =========== ' + str(doms))
+    # doms = WebDriverWait(driver, 20).until(
+    #     EC.visibility_of_all_elements_located((By.CSS_SELECTOR, query)))
+    return years_alist
+
+
 def get_doms(query):
-    doms = WebDriverWait(driver, 10).until(
-        EC.visibility_of_all_elements_located((By.CSS_SELECTOR, query)))
+    doms = WebDriverWait(driver, 20).until(
+        EC.presence_of_all_elements_located((By.CSS_SELECTOR, query)))
     return doms
 
 
 def get_dom(query):
-    dom = WebDriverWait(driver, 10).until(
+    dom = WebDriverWait(driver, 20).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, query)))
     return dom
 
