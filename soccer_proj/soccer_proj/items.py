@@ -24,3 +24,4 @@ class SoccerProjItem(scrapy.Item):
     time = scrapy.Field()
     player = scrapy.Field()
     id = scrapy.Field()
+    parent_url = scrapy.Field()

@@ -104,13 +104,13 @@ def get_years_list(query):
 
 
 def get_doms(query):
-    doms = WebDriverWait(driver, 20).until(
+    doms = WebDriverWait(driver, 40).until(
         EC.presence_of_all_elements_located((By.CSS_SELECTOR, query)))
     return doms
 
 
 def get_dom(query):
-    dom = WebDriverWait(driver, 20).until(
+    dom = WebDriverWait(driver, 40).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, query)))
     return dom
 
