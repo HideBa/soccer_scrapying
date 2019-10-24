@@ -40,7 +40,12 @@ class SoccerspiderSpider(scrapy.Spider):
         # url = "http://www.jfa.jp/match/prince_takamado_trophy_u18_2015/premier_2015/west/schedule_result/"
         # url = "http://www.jfa.jp/match/prince_takamado_trophy_u18_2014/2014/premier/east/schedule_result/"
         # url = "http://www.jfa.jp/match/prince_takamado_trophy_u18_2014/2014/premier/west/schedule_result/"
-        url = "http://www.jfa.or.jp/match/matches/2013/premier_league/east/match/index2.html"
+        # url = "http://www.jfa.or.jp/match/matches/2013/premier_league/east/match/index2.html"
+        # url = "http://www.jfa.or.jp/match/matches/2013/premier_league/west/match/index2.html"
+        # url = "http://www.jfa.or.jp/match/matches/2012/premier_league/east/match/index2.html"
+        # url = "http://www.jfa.or.jp/match/matches/2012/premier_league/west/match/index2.html"
+        # url = "http://www.jfa.or.jp/match/matches/2011/premier_league/east/match/index2.html"
+        url = "http://www.jfa.or.jp/match/matches/2011/premier_league/west/match/index2.html"
 
         # 以下2014年以降用
         # # ここで、ブラウザを起動してページを開く
@@ -59,25 +64,38 @@ class SoccerspiderSpider(scrapy.Spider):
         # get_aで各試合の詳細URLのa要素を取得
         next = get_a(
             '#u18wrapper > div > div.mainarea > div > div > a:nth-child(2)')
+
         next = next[0]
         next_url = next.get_attribute('href')
-
-        alist = get_a('div.mainarea a')
-        # u18wrapper > div > div.mainarea > div > table > tbody > tr:nth-child(2) > td:nth-child(6) > a
+        print("next_url ========== " + next_url)
+        # 2012、13年は以下を使用。
+        # alist = get_a('div.mainarea div > table > tbody td:nth-child(6) a')
+        # 2011年はサイト構造が違うため以下を使用。
+        alist = get_a('div.mainarea div > table > tbody td:nth-child(5) a')
         # for文を回してそれぞれのhref属性を取得
+        pages = []
         for a in alist:
             page = a.get_attribute('href')
-            # それぞれのURLにおいてScrapyRequestを生成
-            # yield scrapy.Request(page, callback=self.parse)
+            pages.append(page)
+            print("page ============ " + page)
+
+        for page in pages:
             yield scrapy.Request(page, callback=self.parse2)
 
         selenium_get(next_url)
-        next_alist = get_a('div.mainarea a')
+        # 2012、13年の場合は以下を使用。
+        # next_alist = get_a(
+        #     'div.mainarea div > table > tbody td:nth-child(6) a')
+        # 2011年のモノはサイト構造が違うため、以下を使用。
+        next_alist = get_a(
+            'div.mainarea div > table > tbody td:nth-child(5) a')
+        next_pages = []
         for a in next_alist:
-            page = a.get_attribute('href')
-            # それぞれのURLにおいてScrapyRequestを生成
-            # yield scrapy.Request(page, callback=self.parse)
-            yield scrapy.Request(page, callback=self.parse2)
+            next_page = a.get_attribute('href')
+            next_pages.append(next_page)
+
+        for next_page in next_pages:
+            yield scrapy.Request(next_page, callback=self.parse2)
 
     # def start_requests(self):
     #     # ここに取得したい試合結果一覧のURLをかく
@@ -245,12 +263,16 @@ class SoccerspiderSpider(scrapy.Spider):
             '#u18wrapper > div > div.mainarea > div > p.matchtitle::text').extract_first()
         item['team_home'] = response.css(
             '#u18wrapper > div > div.mainarea > div > div.matchteam.clearfix > p.matchteam1::text').extract_first()
-        extract_team_home = re.findall('(.{2, 4})', item['team_home'])
-        item['team_home'] = item['team_home'].strip(extract_team_home)
+        extract_team_home = re.findall("（.+）", item['team_home'])
+        item['team_home'] = item['team_home'].replace(extract_team_home[0], "")
+        item['team_home'] = item['team_home'].strip()
         item['team_away'] = response.css(
             '#u18wrapper > div > div.mainarea > div > div.matchteam.clearfix > p.matchteam2::text').extract_first()
-        extract_team_away = re.findall('(.{2, 4})', item['team_away'])
-        item['team_away'] = item['team_away'].strip(extract_team_away)
+        extract_team_away = re.findall('（.+）', item['team_away'])
+        # print("extract_team_away=========" + str(extract_team_away))
+        item['team_away'] = item['team_away'].replace(extract_team_away[0], "")
+        item['team_away'] = item['team_away'].strip()
+        # print("item_away ====================== " + item['team_away'])
         item['url'] = response.url
         results_home = response.css(
             '#u18wrapper > div > div.mainarea > div > div.resultarea.clearfix > p.point1::text').extract_first()
@@ -274,38 +296,51 @@ class SoccerspiderSpider(scrapy.Spider):
         day_pattern = '[0-3][0-9]日'
         item['day'] = re.findall(day_pattern, temp)
         # 以下試合がまだ行われていないデータにはNoneを入れる
+        # ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+        # 現状以下に問題あり、おそらく要素取得できていない
+        #u18wrapper > div > div.mainarea > div > table > tbody > tr > td.matchgoal1
         goal_home = response.css(
-            '#u18wrapper > div > div.mainarea > div > table > tbody > tr > td.matchgoal1::text').extract()
+            'td.matchgoal1::text').extract()
+        print("goal_home ============ " + str(goal_home))
         if goal_home:
-
-            item['goal_home'] = goal_home
+            item['goal_home'] = " ".join(goal_home).strip()
         else:
             item['goal_home'] = 'None'
 
         goal_away = response.css(
-            '#u18wrapper > div > div.mainarea > div > table > tbody > tr > td.matchgoal2::text').extract()
+            'td.matchgoal2::text').extract()
         if goal_away:
-            item['goal_away'] = goal_away
+            item['goal_away'] = " ".join(goal_away).strip()
         else:
             item['goal_away'] = 'None'
         # time_temp = response.css('#game-content-wrap::text').extract()
         # print("time_temp =========" + time_temp)
         # item['id'] = re.search('[0-9]{3,4}', temp).group()
         temp2 = response.css(
-            '#u18wrapper > div > div.mainarea > div > p.league.matcheast::text').extract()
-        round_num = re.search('No..', temp2)
-        round_num = round_num.strip('No.')
-        item['round'] = re.search('第[0-9]+節', temp2).group() + round_num
+            '#u18wrapper > div > div.mainarea > div > p.league::text').extract()
+        print("temp2 ====== " + str(temp2))
+        # round_num = re.search('No\..*', temp2[0]).group()
+        round_num = re.search('[0-9]+', temp2[0]).group()
+        print("round num ========" + round_num)
+
+        # round_num = round_num.strip('No.')
+        # print("round num ========" + round_num)
+        item['round'] = re.search('第[0-9]+節', temp2[0]).group() + round_num
         item['time'] = []
-        for elem in item['goal_home']:
+        # print("temp ============ " + str(temp))
+        for elem in goal_home:
+            # print("elem ========= " + str(elem))
             temp = re.findall('.*分', elem)
+            temp = " ".join(temp).strip()
             if temp:
+                # print("temp in for stntense ====== " + str(temp))
                 item['time'].append(temp)
             else:
                 continue
 
-        for elem in item['goal_away']:
+        for elem in goal_away:
             temp = re.findall('.*分', elem)
+            temp = " ".join(temp).strip()
             if temp:
                 item['time'].append(temp)
             else:
