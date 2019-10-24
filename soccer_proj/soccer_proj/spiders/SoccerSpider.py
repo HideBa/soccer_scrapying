@@ -30,7 +30,7 @@ class SoccerspiderSpider(scrapy.Spider):
 
     def start_requests(self):
         # ここに取得したい試合結果一覧のURLをかく
-        # url = "http://www.jfa.jp/match/takamado_jfa_u18_premier2019/east/schedule_result/"
+        url = "http://www.jfa.jp/match/takamado_jfa_u18_premier2019/east/schedule_result/"
         # url = "http://www.jfa.jp/match/takamado_jfa_u18_premier2019/west/schedule_result/"
         # url = "http://www.jfa.jp/match/takamado_jfa_u18_premier2018/east/schedule_result/"
         # url = "http://www.jfa.jp/match/takamado_jfa_u18_premier2018/west/schedule_result/"
@@ -47,58 +47,58 @@ class SoccerspiderSpider(scrapy.Spider):
         # url = "http://www.jfa.or.jp/match/matches/2012/premier_league/east/match/index2.html"
         # url = "http://www.jfa.or.jp/match/matches/2012/premier_league/west/match/index2.html"
         # url = "http://www.jfa.or.jp/match/matches/2011/premier_league/east/match/index2.html"
-        url = "http://www.jfa.or.jp/match/matches/2011/premier_league/west/match/index2.html"
+        # url = "http://www.jfa.or.jp/match/matches/2011/premier_league/west/match/index2.html"
 
         # 以下2014年以降用-------------------------------------------------------
-        # # ここで、ブラウザを起動してページを開く
-        # selenium_get(url)
-        # # get_aで各試合の詳細URLのa要素を取得
-        # alist = get_a('li.score a')
-        # # for文を回してそれぞれのhref属性を取得
-        # for a in alist:
-        #     page = a.get_attribute('href')
-        #     # それぞれのURLにおいてScrapyRequestを生成
-        #     yield scrapy.Request(page, callback=self.parse)
-        # ------------------------------------------------------------------------------------
-
-        # 以下2013年以前用-----------------------------------------
         # ここで、ブラウザを起動してページを開く
         selenium_get(url)
         # get_aで各試合の詳細URLのa要素を取得
-        next = get_a(
-            '#u18wrapper > div > div.mainarea > div > div > a:nth-child(2)')
-
-        next = next[0]
-        next_url = next.get_attribute('href')
-        print("next_url ========== " + next_url)
-        # 2012、13年は以下を使用。-------------------------
-        # alist = get_a('div.mainarea div > table > tbody td:nth-child(6) a')
-        # 2011年はサイト構造が違うため以下を使用。--------------------------------------
-        alist = get_a('div.mainarea div > table > tbody td:nth-child(5) a')
+        alist = get_a('li.score a')
         # for文を回してそれぞれのhref属性を取得
-        pages = []
         for a in alist:
             page = a.get_attribute('href')
-            pages.append(page)
-            print("page ============ " + page)
+            # それぞれのURLにおいてScrapyRequestを生成
+            yield scrapy.Request(page, callback=self.parse)
+        # ------------------------------------------------------------------------------------
 
-        for page in pages:
-            yield scrapy.Request(page, callback=self.parse2)
+        # # 以下2013年以前用-----------------------------------------
+        # # ここで、ブラウザを起動してページを開く
+        # selenium_get(url)
+        # # get_aで各試合の詳細URLのa要素を取得
+        # next = get_a(
+        #     '#u18wrapper > div > div.mainarea > div > div > a:nth-child(2)')
 
-        selenium_get(next_url)
-        # 2012、13年の場合は以下を使用。----------------------------------------
+        # next = next[0]
+        # next_url = next.get_attribute('href')
+        # print("next_url ========== " + next_url)
+        # # 2012、13年は以下を使用。-------------------------
+        # # alist = get_a('div.mainarea div > table > tbody td:nth-child(6) a')
+        # # 2011年はサイト構造が違うため以下を使用。--------------------------------------
+        # alist = get_a('div.mainarea div > table > tbody td:nth-child(5) a')
+        # # for文を回してそれぞれのhref属性を取得
+        # pages = []
+        # for a in alist:
+        #     page = a.get_attribute('href')
+        #     pages.append(page)
+        #     print("page ============ " + page)
+
+        # for page in pages:
+        #     yield scrapy.Request(page, callback=self.parse2)
+
+        # selenium_get(next_url)
+        # # 2012、13年の場合は以下を使用。----------------------------------------
+        # # next_alist = get_a(
+        # #     'div.mainarea div > table > tbody td:nth-child(6) a')
+        # # 2011年のモノはサイト構造が違うため、以下を使用。--------------------------------
         # next_alist = get_a(
-        #     'div.mainarea div > table > tbody td:nth-child(6) a')
-        # 2011年のモノはサイト構造が違うため、以下を使用。--------------------------------
-        next_alist = get_a(
-            'div.mainarea div > table > tbody td:nth-child(5) a')
-        next_pages = []
-        for a in next_alist:
-            next_page = a.get_attribute('href')
-            next_pages.append(next_page)
+        #     'div.mainarea div > table > tbody td:nth-child(5) a')
+        # next_pages = []
+        # for a in next_alist:
+        #     next_page = a.get_attribute('href')
+        #     next_pages.append(next_page)
 
-        for next_page in next_pages:
-            yield scrapy.Request(next_page, callback=self.parse2)
+        # for next_page in next_pages:
+        #     yield scrapy.Request(next_page, callback=self.parse2)
 
         # # 以下はU18の年度によってサイト構成が違うものを自動化する段階（途中）－－－－－－－－－－－－－－－－－－－－－－－－
         # selenium_get(url)
@@ -246,7 +246,7 @@ class SoccerspiderSpider(scrapy.Spider):
             item['results_away'] = 'None'
 
         year_pattern = '20[0-9]{2}'
-        item['year'] = re.findall(year_pattern, temp)
+        item['year'] = re.search(year_pattern, temp).group()
         # item['year'] = re.search(year_pattern, temp).group()
         month_pattern = '[0-1][0-9]月'
         item['month'] = re.findall(month_pattern, temp)
@@ -331,7 +331,7 @@ class SoccerspiderSpider(scrapy.Spider):
             item['results_away'] = 'None'
 
         year_pattern = '20[0-9]{2}'
-        item['year'] = re.findall(year_pattern, temp)
+        item['year'] = re.search(year_pattern, temp).group()
         # item['year'] = re.search(year_pattern, temp).group()
         month_pattern = '[0-1][0-9]月'
         item['month'] = re.findall(month_pattern, temp)
