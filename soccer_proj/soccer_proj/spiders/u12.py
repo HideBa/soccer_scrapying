@@ -21,20 +21,62 @@ class U12Spider(scrapy.Spider):
 
     def start_requests(self):
         # url = "http://www.jfa.jp/match/japan_u12_football_championship_2018/schedule_result/"
-        url = "http://www.jfa.jp/match/japan_u12_football_championship_2017/schedule_result/"
+        # url = "http://www.jfa.jp/match/japan_u12_football_championship_2017/schedule_result/"
+        # url = "http://www.jfa.jp/match/japan_u12_football_championship_2016/schedule_result/"
+        # url = "http://www.jfa.jp/match/japan_u12_football_championship_2015/schedule_result/"
+        # url = "http://www.jfa.jp/match/japan_u12_football_championship_2014/schedule_result/index.html#pankz"
+        url = "http://www.jfa.or.jp/match/matches/2013/0803zensho/schedule_result/schedule.html"
+
+        # selenium_get(url)
+        # # get_aで各試合の詳細URLのa要素を取得
+        # # 以下2014-2018年用ーーーーーーーーーーーーーーーーーーー
+        # alist = get_a('li.score a')
+        # # alist = get_a('#Map222 > area')
+        # # for文を回してそれぞれのhref属性を取得
+        # for a in alist:
+        #     page = a.get_attribute('href')
+        #     print("page===============" + page)
+        #     # それぞれのURLにおいてScrapyRequestを生成
+        #     # yield scrapy.Request(page, callback=self.parse)
+        #     yield scrapy.Request(page, callback=self.parse)
 
         selenium_get(url)
-        # get_aで各試合の詳細URLのa要素を取得
-        # 以下2014-2018年用ーーーーーーーーーーーーーーーーーーー
-        alist = get_a('li.score a')
-        # alist = get_a('#Map222 > area')
-        # for文を回してそれぞれのhref属性を取得
+
+        alist = get_a(
+            '#ContentsLeft > table > tbody > tr > td > div > a')
+        # ContentsLeft > table:nth-child(3) > tbody > tr:nth-child(5) > td:nth-child(2) > div > a
+        print("alist length ============" + str(len(alist)))
         for a in alist:
             page = a.get_attribute('href')
-            print("page===============" + page)
-            # それぞれのURLにおいてScrapyRequestを生成
-            # yield scrapy.Request(page, callback=self.parse)
-            yield scrapy.Request(page, callback=self.parse)
+            print("page=============" + page)
+            yield scrapy.Request(page, callback=self.before_parse)
+
+    def before_parse(self, response):
+        domain_url = ""
+        print("respose===========" + str(response))
+        temp = response.css(
+            '#mainContents table a::attr(href)').extract()
+        temp_final = response.css(
+            '#ContentsLeft table a::attr(href)').extract()
+        # ContentsLeft > table:nth-child(5) > tbody > tr:nth-child(2) > td.blue.center > a
+        temp = list(set(temp))
+        temp = [elem for elem in temp if 'pdf' not in elem]
+        print("temp ========== " + str(temp) +
+              "temp len ====== " + str(len(temp)))
+        if temp_final:
+            temp_final = list(set(temp_final))
+            temp_final = [elem for elem in temp_final if 'pdf' not in elem]
+            temp_final = map(lambda i: )
+        print("temp_final ===== " + str(temp_final) +
+              "length = " + str(len(temp_final)))
+
+        if temp:
+            for page in temp:
+                yield scrapy.Request(page, callback=self.parse2)
+
+        elif temp_final:
+            for page in temp_final:
+                yield scrapy.Request(page, callback=self.parse2)
 
     def parse(self, response):
         print('response====================' + str(response))
