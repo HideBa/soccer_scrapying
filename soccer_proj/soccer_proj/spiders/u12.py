@@ -26,10 +26,12 @@ class U12Spider(scrapy.Spider):
         # url = "http://www.jfa.jp/match/japan_u12_football_championship_2015/schedule_result/"
         # url = "http://www.jfa.jp/match/japan_u12_football_championship_2014/schedule_result/index.html#pankz"
         # url = "http://www.jfa.or.jp/match/matches/2013/0803zensho/schedule_result/schedule.html"
-        url = "http://www.jfa.or.jp/match/matches/2012/0804zensho/schedule_result/schedule.html"
+        # url = "http://www.jfa.or.jp/match/matches/2012/0804zensho/schedule_result/schedule.html"
+        url = "http://www.jfa.or.jp/match/matches/2011/0806zensho/schedule_result/schedule.html"
+
+        # 以下2014-2018年用ーーーーーーーーーーーーーーーーーーー
         # selenium_get(url)
         # # get_aで各試合の詳細URLのa要素を取得
-        # # 以下2014-2018年用ーーーーーーーーーーーーーーーーーーー
         # alist = get_a('li.score a')
         # # alist = get_a('#Map222 > area')
         # # for文を回してそれぞれのhref属性を取得
@@ -40,6 +42,7 @@ class U12Spider(scrapy.Spider):
         #     # yield scrapy.Request(page, callback=self.parse)
         #     yield scrapy.Request(page, callback=self.parse)
 
+        # 以下2013年ーーーーーーーーーー
         selenium_get(url)
 
         alist = get_a(
@@ -173,8 +176,8 @@ class U12Spider(scrapy.Spider):
         # item = SoccerProjItem()
         item = response.meta['item']
         leagu_name = response.css(
-            '#mainContents-innner > div.premier_title > a > img::attr(alt)').extract_first()
-        item['leagu_name'] = re.search('.+大会', leagu_name).group()
+            'head > title::text').extract_first()
+        item['leagu_name'] = re.search('第.+ー大会', leagu_name).group()
         # いったんtempとして値を取得しているが、ここから後は正規表現だの、Splitみたいなので不要な文字列を削って出力すればよし
         temp = response.css(
             '#ContentsLeft > div.topTitleTxtMatchPage2.bottom10::text').extract_first()

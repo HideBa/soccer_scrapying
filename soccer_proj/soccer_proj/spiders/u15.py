@@ -35,6 +35,7 @@ class U15Spider(scrapy.Spider):
         # get_aで各試合の詳細URLのa要素を取得
         # 以下2014-2018年用ーーーーーーーーーーーーーーーーーーー
         # alist = get_a('li.score a')
+        # 以下2013-用ーーーーーーーーーー
         alist = get_a('#Map222 > area')
         # for文を回してそれぞれのhref属性を取得
         for a in alist:
