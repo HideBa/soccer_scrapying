@@ -28,7 +28,7 @@ class U15Spider(scrapy.Spider):
         # url = "http://www.jfa.or.jp/match/matches/2013/1228takamado_u15/index.html"
         # url = "http://www.jfa.or.jp/match/matches/2012/1229takamado_u15/index.html"
         # url = "http://www.jfa.or.jp/match/matches/2011/1229takamado_u15/index.html"
-        # url = "http://www.jfa.or.jp/match/matches/2010/takamado_u15/index.html"
+        url = "http://www.jfa.or.jp/match/matches/2010/takamado_u15/index.html"
         # ----------------------------------2009年以前はそもそも各試合の詳細ページが存在しない。－－－－－－－－－－
 
         selenium_get(url)
@@ -129,10 +129,10 @@ class U15Spider(scrapy.Spider):
         # いったんtempとして値を取得しているが、ここから後は正規表現だの、Splitみたいなので不要な文字列を削って出力すればよし
         temp = response.css(
             '#ContentsLeft > div.topTitleTxtMatchPage2.bottom10::text').extract_first()
-        print("temp===========" + str(temp))
+        # print("temp===========" + str(temp))
         item['team_home'] = response.css(
             '#resultbox-inner > div.l_team::text').extract_first()
-        print("teamhome -=============" + str(item['team_home']))
+        # print("teamhome -=============" + str(item['team_home']))
         # extract_team_home = re.findall("（.+）", item['team_home'])
         # item['team_home'] = item['team_home'].replace(extract_team_home[0], "")
         item['team_home'] = item['team_home'].strip()
@@ -146,7 +146,7 @@ class U15Spider(scrapy.Spider):
         item['url'] = response.url
         results_home = response.css(
             '#resultbox-inner > div.score > span::text').extract()[0]
-        print("result_home ======== " + str(results_home.replace("\xa0", "")))
+        # print("result_home ======== " + str(results_home.replace("\xa0", "")))
         if results_home:
             item['results_home'] = results_home.replace("\xa0", "")
         else:
@@ -169,23 +169,26 @@ class U15Spider(scrapy.Spider):
         # 以下試合がまだ行われていないデータにはNoneを入れる
         # ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
         # ここのGoalHomeの値が一向にとれない。
-        goal_home = response.xpath(
-            'table/tbody/tr/td[1]//text()').extract_first()
-        # goal_home = response.css(
-        #     '#resultbox > table > tbody > tr > td.t_right::text').extract()
-
-        print("goal_home ============ " + str(goal_home))
+        # goal_home = response.xpath(
+        #     '//*[@id="resultbox"]/table/tbody/tr/td[1]/text()').extract()
+        goal_home = response.css(
+            'td.t_right::text').extract()
+        #resultbox > table > tbody > tr > td.t_right
+        # print("goal home ======- " + str(goal_home))
         if goal_home:
-            item['goal_home'] = " ".join(goal_home).strip()
+            # item['goal_home'] = " ".join(goal_home).strip().replace(
+            #     '\n', "").replace("\t", "")
+            item['goal_home'] = " ".join(goal_home).replace(' ', '').replace(
+                "\n", "").replace("\t", "")
         else:
             item['goal_home'] = 'None'
 
-        goal_away = response.xpath(
-            'table/tbody/tr/td[1]//text()').extract()
-        # goal_away = response.css(
-        #     '#resultbox > table > tbody > tr > td.t_left::text').extract()
+        goal_away = response.css('td.t_left span::text').extract()
+        #resultbox > table > tbody > tr > td.t_left > span
+        # print("goal_away ============ " + str(goal_away))
         if goal_away:
-            item['goal_away'] = " ".join(goal_away).strip()
+            item['goal_away'] = " ".join(goal_away).replace(' ', '').replace(
+                "\n", "").replace("\t", "")
         else:
             item['goal_away'] = 'None'
         # time_temp = response.css('#game-content-wrap::text').extract()
@@ -208,23 +211,23 @@ class U15Spider(scrapy.Spider):
         else:
             item['round'] = re.search(
                 '.+勝', temp2[0]).group()
-        # for elem in goal_home:
-        #     # print("elem ========= " + str(elem))
-        #     temp = re.findall('.*分', elem)
-        #     temp = " ".join(temp).strip()
-        #     if temp:
-        #         # print("temp in for stntense ====== " + str(temp))
-        #         item['time'].append(temp)
-        #     else:
-        #         continue
+        for elem in goal_home:
+            # print("elem ========= " + str(elem))
+            temp = re.findall('.*分', elem)
+            temp = " ".join(temp).strip()
+            if temp:
+                # print("temp in for stntense ====== " + str(temp))
+                item['time'].append(temp)
+            else:
+                continue
 
-        # for elem in goal_away:
-        #     temp = re.findall('.*分', elem)
-        #     temp = " ".join(temp).strip()
-        #     if temp:
-        #         item['time'].append(temp)
-        #     else:
-        #         continue
+        for elem in goal_away:
+            temp = re.findall('.*分', elem)
+            temp = " ".join(temp).strip()
+            if temp:
+                item['time'].append(temp)
+            else:
+                continue
 
         # print('time=' + str(item['time']))
 
