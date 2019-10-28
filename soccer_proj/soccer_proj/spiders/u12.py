@@ -49,13 +49,16 @@ class U12Spider(scrapy.Spider):
             '#ContentsLeft > table > tbody > tr > td > div > a')
         # ContentsLeft > table:nth-child(3) > tbody > tr:nth-child(5) > td:nth-child(2) > div > a
         print("alist length ============" + str(len(alist)))
+        count = 0
         for a in alist:
             page = a.get_attribute('href')
+            count += 1
+            print("count===========" + str(count))
             print("page=============" + page)
             yield scrapy.Request(page, callback=self.before_parse)
 
     def before_parse(self, response):
-        print("respose===========" + str(response))
+        # print("respose===========" + str(response))
         temp = response.css(
             '#mainContents table a::attr(href)').extract()
         temp_final = response.css(
@@ -65,8 +68,8 @@ class U12Spider(scrapy.Spider):
         temp = [elem for elem in temp if 'pdf' not in elem]
         temp = list(map(lambda x: response.url.rstrip(
             "schedule_result/schedule.html") + x.strip(".."), temp))
-        print("temp ========== " + str(temp) +
-              "temp len ====== " + str(len(temp)))
+        # print("temp ========== " + str(temp) +
+            #   "temp len ====== " + str(len(temp)))
         # http: // www.jfa.or.jp/match/matches/2013/0803zensho/dream_final/match_page/m27.html
         # http: // www.jfa.or.jp/match/matches/2013/0803zensho/dream_fina/match_page/m27.html
         if temp_final:
@@ -74,19 +77,24 @@ class U12Spider(scrapy.Spider):
             temp_final = [elem for elem in temp_final if 'pdf' not in elem]
             temp_final = list(map(lambda x: response.url.replace(
                 "/schedule_result/schedule.html", "") + x.strip(".."), temp_final))
-        print("temp_final ===== " + str(temp_final) +
-              "length = " + str(len(temp_final)))
+        # print("temp_final ===== " + str(temp_final) +
+        #       "length = " + str(len(temp_final)))
 
+        count2 = 0
         if temp:
             for detail in temp:
                 item = SoccerProjItem()
-                print("page0000000000000= " + detail)
+                # print("page0000000000000= " + detail)
+                count2 += 1
+                print("count2 ============================" + str(count2))
                 yield scrapy.Request(detail, callback=self.parse2, meta={'item': item}, dont_filter=True)
 
         elif temp_final:
             for page in temp_final:
                 item = SoccerProjItem()
-                print("page0000000000000= " + page)
+                count2 += 1
+                print("count2 ============================ " + str(count2))
+                # print("page0000000000000= " + page)
                 yield scrapy.Request(page, callback=self.parse2, meta={'item': item}, dont_filter=True)
 
     def parse(self, response):
@@ -167,7 +175,7 @@ class U12Spider(scrapy.Spider):
             else:
                 continue
 
-        print('time=' + str(item['time']))
+        # print('time=' + str(item['time']))
 
         yield item
 
@@ -181,10 +189,10 @@ class U12Spider(scrapy.Spider):
         # いったんtempとして値を取得しているが、ここから後は正規表現だの、Splitみたいなので不要な文字列を削って出力すればよし
         temp = response.css(
             '#ContentsLeft > div.topTitleTxtMatchPage2.bottom10::text').extract_first()
-        print("temp===========" + str(temp))
+        # print("temp===========" + str(temp))
         item['team_home'] = response.css(
             '#resultbox-inner > div.l_team::text').extract_first()
-        print("teamhome -=============" + str(item['team_home']))
+        # print("teamhome -=============" + str(item['team_home']))
         # extract_team_home = re.findall("（.+）", item['team_home'])
         # item['team_home'] = item['team_home'].replace(extract_team_home[0], "")
         item['team_home'] = item['team_home'].strip()
@@ -198,7 +206,7 @@ class U12Spider(scrapy.Spider):
         item['url'] = response.url
         results_home = response.css(
             '#resultbox-inner > div.score > span::text').extract()[0]
-        print("result_home ======== " + str(results_home.replace("\xa0", "")))
+        # print("result_home ======== " + str(results_home.replace("\xa0", "")))
         if results_home:
             item['results_home'] = results_home.replace("\xa0", "")
         else:
@@ -225,7 +233,7 @@ class U12Spider(scrapy.Spider):
         goal_home = response.css(
             'td.t_right::text').extract()
 
-        print("goal_home ============ " + str(goal_home))
+        # print("goal_home ============ " + str(goal_home))
         if goal_home:
             item['goal_home'] = " ".join(goal_home).replace(' ', '').replace(
                 "\n", "").replace("\t", "")
@@ -245,7 +253,7 @@ class U12Spider(scrapy.Spider):
         # print("time_temp =========" + time_temp)
         temp2 = response.css(
             '#ContentsLeft > div.topTitleTxt.bottom10::text').extract()
-        print("temp2 ====== " + str(temp2))
+        # print("temp2 ====== " + str(temp2))
         item['id'] = re.search('[0-9]+', temp2[0]).group()
         if re.search('No\..*', temp2[0]):
             round_num = re.search('No\..*', temp2[0]).group()
