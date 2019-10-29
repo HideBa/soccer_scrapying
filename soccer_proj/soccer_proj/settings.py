@@ -69,9 +69,9 @@ DOWNLOAD_DELAY = 5
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#    'soccer_proj.pipelines.SoccerProjPipeline': 300,
-# }
+ITEM_PIPELINES = {
+    'soccer_proj.pipelines.SoccerProjPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -95,3 +95,11 @@ HTTPCACHE_IGNORE_HTTP_CODES = []
 HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 DEPTH_LIMIT = 1
+
+# FEED_EXPORT_FIELDS = ["id", "leagu_name", "year", "month", "day", "round", "team_home",
+#                       "team_away", "url", "results_home", "results_away", "goal_home", "goal_away", "time"]
+# FEED_EXPORTERS = {
+#     'csv':
+# }
+FEED_EXPORT_ENCODING = 'utf-8'
+FEED_FORMAT: 'csv'

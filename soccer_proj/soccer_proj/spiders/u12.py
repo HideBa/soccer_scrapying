@@ -27,35 +27,48 @@ class U12Spider(scrapy.Spider):
         # url = "http://www.jfa.jp/match/japan_u12_football_championship_2014/schedule_result/index.html#pankz"
         # url = "http://www.jfa.or.jp/match/matches/2013/0803zensho/schedule_result/schedule.html"
         # url = "http://www.jfa.or.jp/match/matches/2012/0804zensho/schedule_result/schedule.html"
-        url = "http://www.jfa.or.jp/match/matches/2011/0806zensho/schedule_result/schedule.html"
+        # url = "http://www.jfa.or.jp/match/matches/2011/0806zensho/schedule_result/schedule.html"
 
-        # 以下2014-2018年用ーーーーーーーーーーーーーーーーーーー
-        # selenium_get(url)
-        # # get_aで各試合の詳細URLのa要素を取得
-        # alist = get_a('li.score a')
-        # # alist = get_a('#Map222 > area')
-        # # for文を回してそれぞれのhref属性を取得
-        # for a in alist:
-        #     page = a.get_attribute('href')
-        #     print("page===============" + page)
-        #     # それぞれのURLにおいてScrapyRequestを生成
-        #     # yield scrapy.Request(page, callback=self.parse)
-        #     yield scrapy.Request(page, callback=self.parse)
+        url_list = [
+            "http://www.jfa.jp/match/japan_u12_football_championship_2018/schedule_result/",
+            "http://www.jfa.jp/match/japan_u12_football_championship_2017/schedule_result/",
+            "http://www.jfa.jp/match/japan_u12_football_championship_2016/schedule_result/",
+            "http://www.jfa.jp/match/japan_u12_football_championship_2015/schedule_result/",
+            "http://www.jfa.jp/match/japan_u12_football_championship_2014/schedule_result/index.html#pankz",
+            "http://www.jfa.or.jp/match/matches/2013/0803zensho/schedule_result/schedule.html",
+            "http://www.jfa.or.jp/match/matches/2012/0804zensho/schedule_result/schedule.html",
+            "http://www.jfa.or.jp/match/matches/2011/0806zensho/schedule_result/schedule.html"
+        ]
 
-        # 以下2013年ーーーーーーーーーー
-        selenium_get(url)
+        for url in url_list:
+            if any((s in url) for s in ['2018', '2017', '2016', '2015', '2014']):
+                # 以下2014-2018年用ーーーーーーーーーーーーーーーーーーー
+                selenium_get(url)
+                # get_aで各試合の詳細URLのa要素を取得
+                alist = get_a('li.score a')
+                # alist = get_a('#Map222 > area')
+                # for文を回してそれぞれのhref属性を取得
+                for a in alist:
+                    page = a.get_attribute('href')
+                    print("page===============" + page)
+                    # それぞれのURLにおいてScrapyRequestを生成
+                    yield scrapy.Request(page, callback=self.parse)
 
-        alist = get_a(
-            '#ContentsLeft > table > tbody > tr > td > div > a')
-        # ContentsLeft > table:nth-child(3) > tbody > tr:nth-child(5) > td:nth-child(2) > div > a
-        print("alist length ============" + str(len(alist)))
-        count = 0
-        for a in alist:
-            page = a.get_attribute('href')
-            count += 1
-            print("count===========" + str(count))
-            print("page=============" + page)
-            yield scrapy.Request(page, callback=self.before_parse)
+            elif any((s in url) for s in ['2013', '2012', '2011']):
+                # 以下2013年ーーーーーーーーーー
+                selenium_get(url)
+
+                alist = get_a(
+                    '#ContentsLeft > table > tbody > tr > td > div > a')
+                # ContentsLeft > table:nth-child(3) > tbody > tr:nth-child(5) > td:nth-child(2) > div > a
+                print("alist length ============" + str(len(alist)))
+                count = 0
+                for a in alist:
+                    page = a.get_attribute('href')
+                    count += 1
+                    print("count===========" + str(count))
+                    print("page=============" + page)
+                    yield scrapy.Request(page, callback=self.before_parse)
 
     def before_parse(self, response):
         # print("respose===========" + str(response))
@@ -69,7 +82,7 @@ class U12Spider(scrapy.Spider):
         temp = list(map(lambda x: response.url.rstrip(
             "schedule_result/schedule.html") + x.strip(".."), temp))
         # print("temp ========== " + str(temp) +
-            #   "temp len ====== " + str(len(temp)))
+        #   "temp len ====== " + str(len(temp)))
         # http: // www.jfa.or.jp/match/matches/2013/0803zensho/dream_final/match_page/m27.html
         # http: // www.jfa.or.jp/match/matches/2013/0803zensho/dream_fina/match_page/m27.html
         if temp_final:

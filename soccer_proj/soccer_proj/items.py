@@ -6,6 +6,14 @@
 # https://docs.scrapy.org/en/latest/topics/items.html
 
 import scrapy
+from scrapy.exporters import CsvItemExporter
+
+
+# class SoccerCsvExporter(CsvItemExporter):
+#     def serialize_field(self, field, name, value):
+#         if field == 'leagu_name':
+#             return '$ %s' % str(value)
+#         return super(SoccerProjItem, self).serialize_field(field, name, value)
 
 
 class SoccerProjItem(scrapy.Item):
@@ -24,4 +32,4 @@ class SoccerProjItem(scrapy.Item):
     time = scrapy.Field()
     player = scrapy.Field()
     id = scrapy.Field()
-    parent_url = scrapy.Field()
+    # parent_url = scrapy.Field()

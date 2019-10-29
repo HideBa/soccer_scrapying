@@ -30,20 +30,41 @@ class U15Spider(scrapy.Spider):
         # url = "http://www.jfa.or.jp/match/matches/2011/1229takamado_u15/index.html"
         url = "http://www.jfa.or.jp/match/matches/2010/takamado_u15/index.html"
         # ----------------------------------2009年以前はそもそも各試合の詳細ページが存在しない。－－－－－－－－－－
+        url_list = [
+            "http://www.jfa.jp/match/takamado_jfa_u15_2018/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u15_2017/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u15_2016/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u15_2015/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u15_2014/schedule_result/",
+            "http://www.jfa.or.jp/match/matches/2013/1228takamado_u15/index.html",
+            "http://www.jfa.or.jp/match/matches/2012/1229takamado_u15/index.html",
+            "http://www.jfa.or.jp/match/matches/2011/1229takamado_u15/index.html"
+        ]
 
-        selenium_get(url)
-        # get_aで各試合の詳細URLのa要素を取得
-        # 以下2014-2018年用ーーーーーーーーーーーーーーーーーーー
-        # alist = get_a('li.score a')
-        # 以下2013-用ーーーーーーーーーー
-        alist = get_a('#Map222 > area')
-        # for文を回してそれぞれのhref属性を取得
-        for a in alist:
-            page = a.get_attribute('href')
-            print("page===============" + page)
-            # それぞれのURLにおいてScrapyRequestを生成
-            # yield scrapy.Request(page, callback=self.parse)
-            yield scrapy.Request(page, callback=self.parse2)
+        for url in url_list:
+            if any((s in url) for s in ['2018', '2017', '2016', '2015', '2014']):
+                selenium_get(url)
+                # get_aで各試合の詳細URLのa要素を取得
+                # 以下2014-2018年用ーーーーーーーーーーーーーーーーーーー
+                alist = get_a('li.score a')
+                # for文を回してそれぞれのhref属性を取得
+                for a in alist:
+                    page = a.get_attribute('href')
+                    print("page===============" + page)
+                    # それぞれのURLにおいてScrapyRequestを生成
+                    yield scrapy.Request(page, callback=self.parse)
+
+            elif any((s in url) for s in ['2013', '2012', '2011']):
+                selenium_get(url)
+                # get_aで各試合の詳細URLのa要素を取得
+                # 以下2013-用ーーーーーーーーーー
+                alist = get_a('#Map222 > area')
+                # for文を回してそれぞれのhref属性を取得
+                for a in alist:
+                    page = a.get_attribute('href')
+                    print("page===============" + page)
+                    # それぞれのURLにおいてScrapyRequestを生成
+                    yield scrapy.Request(page, callback=self.parse2)
 
     def parse(self, response):
         print('response====================' + str(response))
