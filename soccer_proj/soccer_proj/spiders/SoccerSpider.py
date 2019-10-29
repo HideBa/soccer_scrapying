@@ -29,49 +29,29 @@ class SoccerspiderSpider(scrapy.Spider):
     }
 
     def start_requests(self):
-        # ここに取得したい試合結果一覧のURLをかく
-        # url = "http://www.jfa.jp/match/takamado_jfa_u18_premier2019/east/schedule_result/"
-        # url = "http://www.jfa.jp/match/takamado_jfa_u18_premier2019/west/schedule_result/"
-        # url = "http://www.jfa.jp/match/takamado_jfa_u18_premier2018/east/schedule_result/"
-        # url = "http://www.jfa.jp/match/takamado_jfa_u18_premier2018/west/schedule_result/"
-        # url = "http://www.jfa.jp/match/prince_takamado_trophy_u18_2017/premier_2017/east/schedule_result/"
-        # url = "http://www.jfa.jp/match/prince_takamado_trophy_u18_2017/premier_2017/west/schedule_result/"
-        # url = "http://www.jfa.jp/match/prince_takamado_trophy_u18_2016/premier_2016/east/schedule_result/"
-        # url = "http://www.jfa.jp/match/prince_takamado_trophy_u18_2016/premier_2016/west/schedule_result/"
-        # url = "http://www.jfa.jp/match/prince_takamado_trophy_u18_2015/premier_2015/east/schedule_result/"
-        # url = "http://www.jfa.jp/match/prince_takamado_trophy_u18_2015/premier_2015/west/schedule_result/"
-        # url = "http://www.jfa.jp/match/prince_takamado_trophy_u18_2014/2014/premier/east/schedule_result/"
-        # url = "http://www.jfa.jp/match/prince_takamado_trophy_u18_2014/2014/premier/west/schedule_result/"
-        # url = "http://www.jfa.or.jp/match/matches/2013/premier_league/east/match/index2.html"
-        # url = "http://www.jfa.or.jp/match/matches/2013/premier_league/west/match/index2.html"
-        # url = "http://www.jfa.or.jp/match/matches/2012/premier_league/east/match/index2.html"
-        # url = "http://www.jfa.or.jp/match/matches/2012/premier_league/west/match/index2.html"
-        # url = "http://www.jfa.or.jp/match/matches/2011/premier_league/east/match/index2.html"
-        # url = "http://www.jfa.or.jp/match/matches/2011/premier_league/west/match/index2.html"
+
         url_list = [
-            # "http://www.jfa.jp/match/takamado_jfa_u18_premier2019/east/schedule_result/",
-            # "http://www.jfa.jp/match/takamado_jfa_u18_premier2019/west/schedule_result/",
-            # "http://www.jfa.jp/match/takamado_jfa_u18_premier2018/east/schedule_result/",
-            # "http://www.jfa.jp/match/takamado_jfa_u18_premier2018/west/schedule_result/",
-            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2017/premier_2017/east/schedule_result/",
-            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2017/premier_2017/west/schedule_result/",
-            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2016/premier_2016/east/schedule_result/",
-            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2016/premier_2016/west/schedule_result/",
-            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2015/premier_2015/east/schedule_result/",
-            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2015/premier_2015/west/schedule_result/",
-            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2014/2014/premier/east/schedule_result/",
-            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2014/2014/premier/west/schedule_result/",
-            # "http://www.jfa.or.jp/match/matches/2013/premier_league/east/match/index2.html",
-            # "http://www.jfa.or.jp/match/matches/2013/premier_league/west/match/index2.html",
-            # "http://www.jfa.or.jp/match/matches/2012/premier_league/east/match/index2.html",
-            # "http://www.jfa.or.jp/match/matches/2012/premier_league/west/match/index2.html",
-            # "http://www.jfa.or.jp/match/matches/2011/premier_league/east/match/index2.html",
+            "http://www.jfa.jp/match/takamado_jfa_u18_premier2019/east/schedule_result/",
+            "http://www.jfa.jp/match/takamado_jfa_u18_premier2019/west/schedule_result/",
+            "http://www.jfa.jp/match/takamado_jfa_u18_premier2018/east/schedule_result/",
+            "http://www.jfa.jp/match/takamado_jfa_u18_premier2018/west/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2017/premier_2017/east/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2017/premier_2017/west/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2016/premier_2016/east/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2016/premier_2016/west/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2015/premier_2015/east/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2015/premier_2015/west/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2014/2014/premier/east/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2014/2014/premier/west/schedule_result/",
+            "http://www.jfa.or.jp/match/matches/2013/premier_league/east/match/index2.html",
+            "http://www.jfa.or.jp/match/matches/2013/premier_league/west/match/index2.html",
+            "http://www.jfa.or.jp/match/matches/2012/premier_league/east/match/index2.html",
+            "http://www.jfa.or.jp/match/matches/2012/premier_league/west/match/index2.html",
+            "http://www.jfa.or.jp/match/matches/2011/premier_league/east/match/index2.html",
             "http://www.jfa.or.jp/match/matches/2011/premier_league/west/match/index2.html"
         ]
         for url in url_list:
             if any((s in url) for s in ['2019', '2018', '2017', '2016', '2015', '2014']):
-                # if any((s in url) for s in ['2019, 2018']):
-                # if '2019' in url:
                 # 以下2014年以降用-------------------------------------------------------
                 # ここで、ブラウザを起動してページを開く
                 selenium_get(url)
@@ -82,7 +62,6 @@ class SoccerspiderSpider(scrapy.Spider):
                     page = a.get_attribute('href')
                     # それぞれのURLにおいてScrapyRequestを生成
                     yield scrapy.Request(page, callback=self.parse)
-                print("aaaaaaaaaaaaaaa")
                 # ------------------------------------------------------------------------------------
             elif any((s in url) for s in ['2013', '2012']):
                 # 以下2013年以前用-----------------------------------------
@@ -94,7 +73,6 @@ class SoccerspiderSpider(scrapy.Spider):
 
                 next = next[0]
                 next_url = next.get_attribute('href')
-                print("next_url ========== " + next_url)
                 # 2012、13年は以下を使用。-------------------------
                 alist = get_a(
                     'div.mainarea div > table > tbody td:nth-child(6) a')
@@ -103,7 +81,6 @@ class SoccerspiderSpider(scrapy.Spider):
                 for a in alist:
                     page = a.get_attribute('href')
                     pages.append(page)
-                    print("page ============ " + page)
 
                 for page in pages:
                     yield scrapy.Request(page, callback=self.parse2)
@@ -153,20 +130,7 @@ class SoccerspiderSpider(scrapy.Spider):
 
                 for next_page in next_pages:
                     yield scrapy.Request(next_page, callback=self.parse2)
-        # selenium_get(next_url)
-        # # 2012、13年の場合は以下を使用。----------------------------------------
-        # # next_alist = get_a(
-        # #     'div.mainarea div > table > tbody td:nth-child(6) a')
-        # # 2011年のモノはサイト構造が違うため、以下を使用。--------------------------------
-        # next_alist = get_a(
-        #     'div.mainarea div > table > tbody td:nth-child(5) a')
-        # next_pages = []
-        # for a in next_alist:
-        #     next_page = a.get_attribute('href')
-        #     next_pages.append(next_page)
-
-        # for next_page in next_pages:
-        #     yield scrapy.Request(next_page, callback=self.parse2)
+    
 
         # # 以下はU18の年度によってサイト構成が違うものを自動化する段階（途中）－－－－－－－－－－－－－－－－－－－－－－－－
         # selenium_get(url)
@@ -287,7 +251,6 @@ class SoccerspiderSpider(scrapy.Spider):
             # ここまでーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 
     def parse(self, response):
-        print('response====================' + str(response))
         item = SoccerProjItem()
         item['leagu_name'] = response.css(
             '#ttl_sp > img::attr(alt)').extract_first()
@@ -335,8 +298,6 @@ class SoccerspiderSpider(scrapy.Spider):
             item['goal_away'] = goal_away
         else:
             item['goal_away'] = 'None'
-        # time_temp = response.css('#game-content-wrap::text').extract()
-        # print("time_temp =========" + time_temp)
         item['id'] = re.search('[0-9]{3,4}', temp).group()
         if item['id'][-1] == 0:
             item['round'] = re.search('第[0-9]+節', temp).group() + '10'
@@ -358,8 +319,6 @@ class SoccerspiderSpider(scrapy.Spider):
                 item['time'].append(temp)
             else:
                 continue
-
-        print('time=' + str(item['time']))
 
         yield item
 
@@ -461,20 +420,3 @@ class SoccerspiderSpider(scrapy.Spider):
 
     def closed(self, response):
         selenium_close()
-
-        # def parse(self, response):
-        #     for topic in response.css('#main-colum > div.section-block > div.shcedule-tournament.js-createSchedule > div:nth-child(1) > div.table-wrap-tournament > table > tbody > tr:nth-child(1) > td:nth-child(3) > div.tdWrap1 > ul > li.score > a::attr(href)'):
-        #         item = SoccerProjItem()
-        #         item['headline'] = topic.css('a::text').extract_first()
-        #         print(item['headline'])
-        #         page = topic.css('a::attr(href)').extract_first()
-        #         print("0000000000000000000000000000000")
-        #         print(page)
-        #         yield scrapy.Request(topic.css('a::attr(href)').extract_first(), callback=self.parse_detail, meta={'item': item})
-
-        # def parse_detail(self, response):
-        #     item = response.meta['item']
-        #     item['url'] = response.url
-        #     item['team_home'] = response.css(
-        #         'div.score-board-header p::text').extract_first()
-        #     yield item

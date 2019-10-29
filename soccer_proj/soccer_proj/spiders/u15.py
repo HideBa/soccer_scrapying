@@ -19,17 +19,6 @@ class U15Spider(scrapy.Spider):
     }
 
     def start_requests(self):
-        # url = "http://www.jfa.jp/match/takamado_jfa_u15_2018/schedule_result/"
-        # url = "http://www.jfa.jp/match/prince_takamado_trophy_u15_2017/schedule_result/"
-        # url = "http://www.jfa.jp/match/prince_takamado_trophy_u15_2016/schedule_result/"
-        # url = "http://www.jfa.jp/match/prince_takamado_trophy_u15_2015/schedule_result/"
-        # url = "http://www.jfa.jp/match/prince_takamado_trophy_u15_2014/schedule_result/"
-        # ーーーーーーーーーーーーーーーーーーーここまでCSV出力済みーーーーーーーーーーーーーーーーーーー
-        # url = "http://www.jfa.or.jp/match/matches/2013/1228takamado_u15/index.html"
-        # url = "http://www.jfa.or.jp/match/matches/2012/1229takamado_u15/index.html"
-        # url = "http://www.jfa.or.jp/match/matches/2011/1229takamado_u15/index.html"
-        url = "http://www.jfa.or.jp/match/matches/2010/takamado_u15/index.html"
-        # ----------------------------------2009年以前はそもそも各試合の詳細ページが存在しない。－－－－－－－－－－
         url_list = [
             "http://www.jfa.jp/match/takamado_jfa_u15_2018/schedule_result/",
             "http://www.jfa.jp/match/prince_takamado_trophy_u15_2017/schedule_result/",
@@ -40,6 +29,7 @@ class U15Spider(scrapy.Spider):
             "http://www.jfa.or.jp/match/matches/2012/1229takamado_u15/index.html",
             "http://www.jfa.or.jp/match/matches/2011/1229takamado_u15/index.html"
         ]
+        # ----------------------------------2009年以前はそもそも各試合の詳細ページが存在しない。－－－－－－－－－－
 
         for url in url_list:
             if any((s in url) for s in ['2018', '2017', '2016', '2015', '2014']):
@@ -50,7 +40,6 @@ class U15Spider(scrapy.Spider):
                 # for文を回してそれぞれのhref属性を取得
                 for a in alist:
                     page = a.get_attribute('href')
-                    print("page===============" + page)
                     # それぞれのURLにおいてScrapyRequestを生成
                     yield scrapy.Request(page, callback=self.parse)
 
@@ -62,12 +51,10 @@ class U15Spider(scrapy.Spider):
                 # for文を回してそれぞれのhref属性を取得
                 for a in alist:
                     page = a.get_attribute('href')
-                    print("page===============" + page)
                     # それぞれのURLにおいてScrapyRequestを生成
                     yield scrapy.Request(page, callback=self.parse2)
 
     def parse(self, response):
-        print('response====================' + str(response))
         item = SoccerProjItem()
         item['leagu_name'] = response.css(
             '#ttl_sp > img::attr(alt)').extract_first()
@@ -138,13 +125,9 @@ class U15Spider(scrapy.Spider):
                 item['time'].append(temp)
             else:
                 continue
-
-        print('time=' + str(item['time']))
-
         yield item
 
     def parse2(self, response):
-        print('response====================' + str(response))
         item = SoccerProjItem()
         item['leagu_name'] = response.css(
             '#mainContents-innner > div.premier_title > a > img::attr(alt)').extract_first()
@@ -190,55 +173,35 @@ class U15Spider(scrapy.Spider):
         item['day'] = re.findall(day_pattern, temp)
         # 以下試合がまだ行われていないデータにはNoneを入れる
         # ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-        # ここのGoalHomeの値が一向にとれない。
-        # goal_home = response.xpath(
-        #     '//*[@id="resultbox"]/table/tbody/tr/td[1]/text()').extract()
         goal_home = response.css(
             'td.t_right::text').extract()
-        #resultbox > table > tbody > tr > td.t_right
-        # print("goal home ======- " + str(goal_home))
         if goal_home:
-            # item['goal_home'] = " ".join(goal_home).strip().replace(
-            #     '\n', "").replace("\t", "")
             item['goal_home'] = " ".join(goal_home).replace(' ', '').replace(
                 "\n", "").replace("\t", "")
         else:
             item['goal_home'] = 'None'
 
         goal_away = response.css('td.t_left span::text').extract()
-        #resultbox > table > tbody > tr > td.t_left > span
-        # print("goal_away ============ " + str(goal_away))
         if goal_away:
             item['goal_away'] = " ".join(goal_away).replace(' ', '').replace(
                 "\n", "").replace("\t", "")
         else:
             item['goal_away'] = 'None'
-        # time_temp = response.css('#game-content-wrap::text').extract()
-        # print("time_temp =========" + time_temp)
         temp2 = response.css(
             '#ContentsLeft > div.topTitleTxt.bottom10::text').extract()
         print("temp2 ====== " + str(temp2))
         item['id'] = re.search('[0-9]+', temp2[0]).group()
-        # round_num = re.search('No\..*', temp2[0]).group()
-        # round_num = re.search('[0-9]', temp2[0]).group()
-        # print("round num ========" + round_num)
 
-        # round_num = round_num.strip('No.')
-        # print("round num ========" + round_num)
-        # item['round'] = re.search('第[0-9]+節', temp2[0]).group() + round_num
         item['time'] = []
-        # print("temp ============ " + str(temp))
         if re.search('.回戦', temp2[0]):
             item['round'] = re.search('.回戦', temp2[0]).group()
         else:
             item['round'] = re.search(
                 '.+勝', temp2[0]).group()
         for elem in goal_home:
-            # print("elem ========= " + str(elem))
             temp = re.findall('.*分', elem)
             temp = " ".join(temp).strip()
             if temp:
-                # print("temp in for stntense ====== " + str(temp))
                 item['time'].append(temp)
             else:
                 continue
@@ -251,16 +214,9 @@ class U15Spider(scrapy.Spider):
             else:
                 continue
 
-        # print('time=' + str(item['time']))
-
         yield item
 
     def closed(self, response):
         selenium_close()
-
-
-# from sclapy_selenium import SeleniumRequest
-
-# yield SeleniumRequest(url=url, callback=self.parse_result)
 
 #  実行時CSVに書き出す場合はーーーーー　scrapy crawl SoccerSpider -o results/soccer.csv

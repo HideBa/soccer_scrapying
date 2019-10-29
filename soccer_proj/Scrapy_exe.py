@@ -12,6 +12,7 @@ settings = get_project_settings()
 settings.set('FEED_URI', 'results_all/all_results.csv')
 # settings.set('FEED_URI', 'results_all/%(filename)s.csv')
 
+# 複数スパイダー実行用ーーーーーーーーーーーーーーーーーーーーーーー
 # configure_logging()
 # # runner = CrawlerRunner()
 # runner = CrawlerRunner(settings)
@@ -28,6 +29,9 @@ settings.set('FEED_URI', 'results_all/all_results.csv')
 # crawl()
 # reactor.run()
 
+# ここまでーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+# 以下単独スパイダー実行用ーーーーーーーーーーーーーーー
 process = CrawlerProcess(get_project_settings())
 
 process.crawl('SoccerSpider')
