@@ -5,7 +5,7 @@
 *.jpeg
 *.png
 *.gif
-# *.csv
+*.csv
 *.zip
 *.shp
 *.dbf
