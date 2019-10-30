@@ -9,7 +9,8 @@ from soccer_proj.spiders.u12 import U12Spider
 from scrapy.crawler import CrawlerProcess
 
 settings = get_project_settings()
-settings.set('FEED_URI', 'results_all/all_results.csv')
+# settings.set('FEED_URI', 'results_all/all_results.csv')
+settings.set('FEED_URI', 'results/results_2013_2011.csv')
 # settings.set('FEED_URI', 'results_all/%(filename)s.csv')
 
 # 複数スパイダー実行用ーーーーーーーーーーーーーーーーーーーーーーー
@@ -34,9 +35,9 @@ settings.set('FEED_URI', 'results_all/all_results.csv')
 # 以下単独スパイダー実行用ーーーーーーーーーーーーーーー
 process = CrawlerProcess(get_project_settings())
 
-process.crawl('SoccerSpider')
-process.start()
-# process.crawl('u15')
+# process.crawl('SoccerSpider')
 # process.start()
+process.crawl('u15')
+process.start()
 # process.crawl('u12')
 # process.start()

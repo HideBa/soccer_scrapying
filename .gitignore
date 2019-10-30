@@ -5,7 +5,7 @@
 *.jpeg
 *.png
 *.gif
-*.csv
+# *.csv
 *.zip
 *.shp
 *.dbf
@@ -17,3 +17,4 @@
 *.pyc
 *-checkpoint.ipynb
 *.dump
+*/.scrapy

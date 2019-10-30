@@ -10,6 +10,9 @@ import re
 
 #  実行時CSVに書き出す場合はーーーーー　scrapy crawl SoccerSpider -o results/soccer.csv
 
+game_url_nums = 0
+game_url_exist = 0
+
 
 class SoccerspiderSpider(scrapy.Spider):
     name = 'SoccerSpider'
@@ -31,18 +34,18 @@ class SoccerspiderSpider(scrapy.Spider):
     def start_requests(self):
 
         url_list = [
-            "http://www.jfa.jp/match/takamado_jfa_u18_premier2019/east/schedule_result/",
-            "http://www.jfa.jp/match/takamado_jfa_u18_premier2019/west/schedule_result/",
-            "http://www.jfa.jp/match/takamado_jfa_u18_premier2018/east/schedule_result/",
-            "http://www.jfa.jp/match/takamado_jfa_u18_premier2018/west/schedule_result/",
-            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2017/premier_2017/east/schedule_result/",
-            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2017/premier_2017/west/schedule_result/",
-            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2016/premier_2016/east/schedule_result/",
-            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2016/premier_2016/west/schedule_result/",
-            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2015/premier_2015/east/schedule_result/",
-            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2015/premier_2015/west/schedule_result/",
-            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2014/2014/premier/east/schedule_result/",
-            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2014/2014/premier/west/schedule_result/",
+            # "http://www.jfa.jp/match/takamado_jfa_u18_premier2019/east/schedule_result/",
+            # "http://www.jfa.jp/match/takamado_jfa_u18_premier2019/west/schedule_result/",
+            # "http://www.jfa.jp/match/takamado_jfa_u18_premier2018/east/schedule_result/",
+            # "http://www.jfa.jp/match/takamado_jfa_u18_premier2018/west/schedule_result/",
+            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2017/premier_2017/east/schedule_result/",
+            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2017/premier_2017/west/schedule_result/",
+            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2016/premier_2016/east/schedule_result/",
+            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2016/premier_2016/west/schedule_result/",
+            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2015/premier_2015/east/schedule_result/",
+            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2015/premier_2015/west/schedule_result/",
+            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2014/2014/premier/east/schedule_result/",
+            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2014/2014/premier/west/schedule_result/",
             "http://www.jfa.or.jp/match/matches/2013/premier_league/east/match/index2.html",
             "http://www.jfa.or.jp/match/matches/2013/premier_league/west/match/index2.html",
             "http://www.jfa.or.jp/match/matches/2012/premier_league/east/match/index2.html",
@@ -130,7 +133,6 @@ class SoccerspiderSpider(scrapy.Spider):
 
                 for next_page in next_pages:
                     yield scrapy.Request(next_page, callback=self.parse2)
-    
 
         # # 以下はU18の年度によってサイト構成が違うものを自動化する段階（途中）－－－－－－－－－－－－－－－－－－－－－－－－
         # selenium_get(url)
@@ -323,7 +325,6 @@ class SoccerspiderSpider(scrapy.Spider):
         yield item
 
     def parse2(self, response):
-        print('response====================' + str(response))
         item = SoccerProjItem()
         item['leagu_name'] = response.css(
             '#u18wrapper > p > img:nth-child(1)::attr(alt)').extract_first()
@@ -338,10 +339,8 @@ class SoccerspiderSpider(scrapy.Spider):
         item['team_away'] = response.css(
             '#u18wrapper > div > div.mainarea > div > div.matchteam.clearfix > p.matchteam2::text').extract_first()
         extract_team_away = re.findall('（.+）', item['team_away'])
-        # print("extract_team_away=========" + str(extract_team_away))
         item['team_away'] = item['team_away'].replace(extract_team_away[0], "")
         item['team_away'] = item['team_away'].strip()
-        # print("item_away ====================== " + item['team_away'])
         item['url'] = response.url
         results_home = response.css(
             '#u18wrapper > div > div.mainarea > div > div.resultarea.clearfix > p.point1::text').extract_first()
@@ -369,27 +368,29 @@ class SoccerspiderSpider(scrapy.Spider):
         #u18wrapper > div > div.mainarea > div > table > tbody > tr > td.matchgoal1
         goal_home = response.css(
             'td.matchgoal1::text').extract()
-        print("goal_home ============ " + str(goal_home))
         if goal_home:
-            item['goal_home'] = " ".join(goal_home).strip()
+            item['goal_home'] = " ".join(goal_home).strip().replace('分 ', '分,')
+            print("goal_home=======--" + item['goal_home'])
         else:
             item['goal_home'] = 'None'
 
         goal_away = response.css(
             'td.matchgoal2::text').extract()
         if goal_away:
-            item['goal_away'] = " ".join(goal_away).strip()
+            item['goal_away'] = " ".join(
+                goal_away).strip().replace(' [0-9]+分 ', ',[0-9]+分')
         else:
             item['goal_away'] = 'None'
         # time_temp = response.css('#game-content-wrap::text').extract()
         # print("time_temp =========" + time_temp)
-        # item['id'] = re.search('[0-9]{3,4}', temp).group()
         temp2 = response.css(
             '#u18wrapper > div > div.mainarea > div > p.league::text').extract()
         print("temp2 ====== " + str(temp2))
         # round_num = re.search('No\..*', temp2[0]).group()
         round_num = re.search('[0-9]+', temp2[0]).group()
         print("round num ========" + round_num)
+        # item['id'] = re.search('[0-9]{1,3}', temp2).group()
+        item['id'] = re.search('[0-9]{1,3}', temp2[0]).group()
 
         # round_num = round_num.strip('No.')
         # print("round num ========" + round_num)
