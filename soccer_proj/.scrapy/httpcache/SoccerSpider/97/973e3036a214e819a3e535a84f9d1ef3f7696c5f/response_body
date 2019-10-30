@@ -1,0 +1,578 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<!-- InstanceBegin template="/http://www.jfa.or.jp/Templates/temp_c_1.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Script-type" content="text/javascript" />
+<meta http-equiv="Content-style-Type" content="text/css" />
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>マッチ｜高円宮杯U-18サッカーリーグ2012 プレミアリーグ｜日本サッカー協会</title>
+<link rel="stylesheet" type="text/css" href="../../common/css/index.css" />
+<!-- InstanceEndEditable -->
+<link rel="stylesheet" href="http://www.jfa.or.jp/css/common.css" type="text/css" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0"  href="/http://www.jfa.or.jp/src/rssfeed/default.xml">
+<script type="text/javascript" src="http://www.jfa.or.jp/js/script.js"></script>
+<script type="text/javascript" src="http://www.jfa.or.jp/js/smartrollover.js"></script>
+<script src="http://www.jfa.or.jp/Scripts/AC_RunActiveContent.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://www.jfa.or.jp/js/banner_data.js"></script>
+<script type="text/javascript" src="http://www.jfa.or.jp/js/banner_setter.js"></script>
+<!-- InstanceBeginEditable name="head" -->
+<link href="http://www.jfa.or.jp/css/match.css" rel="stylesheet" type="text/css" />
+<link href="http://www.jfa.or.jp/match/matches/2008/tennouhai/match_page/match_page.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="../../common/css/common.css" />
+<link rel="stylesheet" type="text/css" href="../../common/match/css/common.css" />
+<link rel="stylesheet" type="text/css" href="../../common/match/css/match.css" />
+<script src="http://www.jfa.or.jp/Scripts/AC_RunActiveContent.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+<!--
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+
+}
+
+//-->
+
+</script>
+
+<!-- InstanceEndEditable -->
+</head>
+<body>
+<!-- #BeginLibraryItem "/Library/header.lbi" -->
+<!-- Header Start -->
+<div id="header-container">
+  <div id="header-content"><a href="http://www.jfa.or.jp/index.html"><img src="http://www.jfa.or.jp/images/common/jfa_logo.gif" alt="JFA｜日本サッカー協会　 Japan Football Association" width="318" height="39" border="0" /></a></div>
+  <div id="header-btn"><a href="http://www.jfa.or.jp/registration/index.html" class="kickoff"><img src="http://www.jfa.or.jp/images/common/btn_touroku_off.gif" alt="JFAへの登録" width="165" height="22" /></a><a href="http://www.jfa.or.jp/link/index.html"><img src="http://www.jfa.or.jp/images/common/btn_link_off.gif" alt="リンク" width="90" height="22" border="0" /></a><a href="http://www.jfa.or.jp/eng/index.html"><img src="http://www.jfa.or.jp/images/common/btn_en_off.gif" alt="ENGLISH" width="90" height="22" border="0" /></a><a href="http://www.jfa.or.jp/rssfeed/rss.xml" class="rss"><img src="http://www.jfa.or.jp/images/common/btn_rss.gif" alt="RSS" width="41" height="16" border="0" /></a></div>
+  <div id="header-news">
+    <div id="ticker">
+	
+      <script language="javascript">
+
+	if (AC_FL_RunContent == 0) {
+		alert("このページでは “AC_RunActiveContent.js” が必要です。");
+	} else {
+		AC_FL_RunContent(
+			'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0',
+			'width', '400',
+			'height', '21',
+			'base','.',
+			'src', '/ticker/ticker?newsXml=/src/ticker/ticker.xml',
+			'quality', 'high',
+			'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
+			'align', 'middle',
+			'play', 'true',
+			'loop', 'true',
+			'scale', 'showall',
+			'wmode', 'transparent',
+			'devicefont', 'false',
+			'id', 'ticker',
+			'bgcolor', '#ffffff',
+			'name', 'ticker',
+			'menu', 'true',
+			'allowFullScreen', 'false',
+			'allowScriptAccess','sameDomain',
+			'movie', '/ticker/ticker?newsXml=/src/ticker/ticker.xml',
+			'salign', ''
+			); //end AC code
+
+	}
+
+  </script>
+      <noscript>
+      <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="400" height="21" id="ticker" align="middle">
+        <param name="allowScriptAccess" value="sameDomain" />
+        <param name="allowFullScreen" value="false" />
+        <param name="movie" value="/http://www.jfa.or.jp/ticker/ticker.swf?newsXml=/src/ticker/ticker.xml" />
+        <param name="quality" value="high" />
+        <param name="wmode" value="transparent" />
+        <param name="bgcolor" value="#ffffff" />
+        <param name="base" value="." />
+        <embed src="/http://www.jfa.or.jp/ticker/ticker.swf?newsXml=/src/ticker/ticker.xml" quality="high" wmode="transparent" bgcolor="#ffffff" width="400" height="21" name="ticker" align="middle" allowScriptAccess="sameDomain" base="." allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+      </object>
+      </noscript>
+	  
+    </div>
+  </div>
+</div>
+<!-- Header End -->
+<!-- #EndLibraryItem -->
+<!-- Contents Start -->
+<div id="container">
+  <div id="content">
+    <!-- Main Start -->
+    <div id="contentAreaAll">
+      <div id="contentArea-inner"><!-- InstanceBeginEditable name="gnav" --><!-- #BeginLibraryItem "/Library/gnav_04.lbi" -->
+        <ul id="gnav">
+          <li id="gnav_01"><a href="http://www.jfa.or.jp/index.html">ホーム</a></li>
+          <li id="gnav_02"><a href="http://www.jfa.or.jp/jfa/index.html">JFA</a></li>
+          <li id="gnav_03"><a href="http://www.jfa.or.jp/national_team/index.html">日本代表</a></li>
+          <li id="gnav_04"><em><a href="http://www.jfa.or.jp/match/index.html">大会・試合</a></em></li>
+          <li id="gnav_05"><a href="http://www.jfa.or.jp/training/index.html">選手育成</a></li>
+          <li id="gnav_06"><a href="http://www.jfa.or.jp/coach_referee/index.html">指導者・審判</a></li>
+        </ul>
+        <!-- #EndLibraryItem --><!-- InstanceEndEditable --></div>
+    </div>
+    <!-- Main End -->
+    <!-- SubNavi Start -->
+    <div id="subArea">
+      <div id="subArea-inner"><!-- InstanceBeginEditable name="SubNavi" -->
+        <div id="search">
+          <form action="http://www.jfa.or.jp/search/search.html" id="cse-search-box">
+            <input type="hidden" name="cx" value="007115596358168020744:5ftdxhenyqs" />
+            <input type="hidden" name="cof" value="FORID:11;NB:1" />
+            <input type="hidden" name="ie" value="UTF-8" />
+            <input name="q" type="text" class="input01 inputtop" id="keyword" size="30" maxlength="255" />
+            <input name="sa" type="image" class="input02" id="button" src="http://www.jfa.or.jp/images/common/btn_search.gif" alt="検索" />
+          </form>
+        </div>
+        <!-- InstanceEndEditable --></div>
+      <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <!-- SubNavi End -->
+    <!-- Main Start -->
+    <!-- InstanceBeginEditable name="Main" -->
+    <div id="mainContents-top">
+      <div id="mainContents-innner">
+        <div id="u18wrapper">
+          <p class="headerbanner"><img src="../../common/img/common/header2.gif" alt="高円宮杯U=18サッカーリーグ2012 プレミアリーグ 2012.4.15-" width="930" height="197" /><br />
+            <img src="../../common/img/common/team_logo.jpg" alt="高円宮杯U-18サッカーリーグ2012 プレミアリーグ" width="930" height="41" border="0" usemap="#Map2" /></p>
+          <div class="clearfix">
+            <div class="mainarea">
+              <p class="u18title"><img src="../../common/match/img/title_match.gif" alt="Match" width="650" height="26" /></p>
+              <div class="u18content">
+                <p class="league matcheast">Match No.38 第8節</p>
+                <p class="matchtitle">2012年07月08日　　13:00　キックオフ　　札幌サッカーアミューズメントパーク（天然芝）</p>
+
+
+                <div class="status clearfix">
+                  <p class="status1">試合結果</p>
+                  <p class="status2">
+																		<a href="" onClick="window.open('../schedule_result/pdf/m38.pdf','OfficialResultView','width=920, scrollbars=1');return false">公式記録</a>
+											
+									  </p>
+                </div>
+                <div class="matchteam clearfix">
+                  <p class="matchteam1">
+										（北海道）コンサドーレ札幌U-18
+						
+				  </p>
+                  <p class="matchteam2">
+										東京ヴェルディユース（東京都）						
+				  </p>
+                </div>
+                <div class="resultarea clearfix">
+                  <p class="photo1"><img src="../images/team_img/team01.JPG"  alt="" width="202" height="130" /></p>
+                  <p class="point1">0</p>
+                  <div class="pointdetail">
+                    <div class="zenhan clearfix">
+                      <p class="pd1">0<br /></p>
+                      <p class="pdc">前半</p>
+                      <p class="pd2">0<br /></p>
+                    </div>
+                    <div class="kohan clearfix">
+                      <p class="pd1">0<br /></p>
+                      <p class="pdc">後半</p>
+                      <p class="pd2">2<br /></p>
+                    </div>
+					
+                  </div>
+                  <p class="point2 win">2</p>
+                  <p class="photo2"><img src="../images/team_img/team04.JPG" alt="" width="202" height="130" /></p>
+                </div>
+				                <table class="wide">
+                  <tr>
+                    <td class="matchgoal1">
+										</td>
+                    <td class="matchgoal">GOAL</td>
+                    <td class="matchgoal2">
+										49分 菅嶋 弘希<br />
+										50分 菅嶋 弘希<br />
+										</td>
+                  </tr>
+                </table>
+								
+								<p class="membertitle">メンバー</p>
+                <div class="memberarea clearfix">
+                  <table class="membert1">
+                    <tr>
+                      <th colspan="3">コンサドーレ札幌U-18</th>
+                    </tr>
+																	<tr>
+							<td class="memnum">GK</td>
+							<td class="memnum">1</td>
+							<td>阿波加 俊太<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">DF</td>
+							<td class="memnum">2</td>
+							<td>小野 能寛<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">DF</td>
+							<td class="memnum">3</td>
+							<td>永坂 勇人<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">DF</td>
+							<td class="memnum">4</td>
+							<td>内山 裕貴<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">5</td>
+							<td>深井 一希<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">6</td>
+							<td>堀米 悠斗<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">7</td>
+							<td>中原 彰吾<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">8</td>
+							<td>濱下 賢<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">FW</td>
+							<td class="memnum">9</td>
+							<td>下田 康太<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">10</td>
+							<td>神田 夢実<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">FW</td>
+							<td class="memnum">11</td>
+							<td>國分 将<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">DF</td>
+							<td class="memnum">12</td>
+							<td>近藤 諒大<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">DF</td>
+							<td class="memnum">13</td>
+							<td>井端 純ノ輔<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">14</td>
+							<td>前 寛之<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">DF</td>
+							<td class="memnum">15</td>
+							<td>佐々木 大輔<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">GK</td>
+							<td class="memnum">16</td>
+							<td>輪島 稜<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">17</td>
+							<td>岡田 洋平<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">FW</td>
+							<td class="memnum">18</td>
+							<td>松尾 雄斗<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">19</td>
+							<td>蒲生 幹<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">DF</td>
+							<td class="memnum">20</td>
+							<td>進藤 亮佑<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">GK</td>
+							<td class="memnum">21</td>
+							<td>種村 優志<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">DF</td>
+							<td class="memnum">22</td>
+							<td>濱口 魁<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">23</td>
+							<td>藤井 慎之輔<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">DF</td>
+							<td class="memnum">24</td>
+							<td>泉谷 航輝<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">25</td>
+							<td>鈴木 翔<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">26</td>
+							<td>倉持 卓史<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">27</td>
+							<td>工藤 竜平<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">28</td>
+							<td>粟飯原 尚平<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">FW</td>
+							<td class="memnum">29</td>
+							<td>平川 元樹<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum" style="border-bottom-width: 5px;"></td>
+							<td class="memnum" style="border-bottom-width: 5px;"></td>
+							<td style="border-bottom-width: 5px;"><br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum" colspan="2">監督<br /></td>
+							<td>四方田 修平</td>
+						</tr>
+											                  </table>
+                  <table class="membert2">
+                    <tr>
+                      <th colspan="3">東京ヴェルディユース</th>
+                    </tr>
+																	<tr>
+							<td class="memnum">GK</td>
+							<td class="memnum">1</td>
+							<td>ポープ ウィリアム<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">DF</td>
+							<td class="memnum">2</td>
+							<td>宮地 元貴<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">DF</td>
+							<td class="memnum">3</td>
+							<td>畠中 槙之輔<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">4</td>
+							<td>吉野 恭平<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">5</td>
+							<td>楠美 圭史<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">DF</td>
+							<td class="memnum">6</td>
+							<td>安在 和樹<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">7</td>
+							<td>安西 幸輝<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">8</td>
+							<td>鯉沼 将希<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">FW</td>
+							<td class="memnum">9</td>
+							<td>高木 大輔<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">10</td>
+							<td>中島 翔哉<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">FW</td>
+							<td class="memnum">11</td>
+							<td>前田 直輝<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">GK</td>
+							<td class="memnum">12</td>
+							<td>三浦 和真<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">13</td>
+							<td>布施 周士<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">14</td>
+							<td>山口 陽一朗<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">FW</td>
+							<td class="memnum">15</td>
+							<td>菅嶋 弘希<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">16</td>
+							<td>三浦 俊太郎<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">FW</td>
+							<td class="memnum">17</td>
+							<td>金子 綺杜<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">18</td>
+							<td>澤井 直人<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">DF</td>
+							<td class="memnum">19</td>
+							<td>品田 賢祐<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">DF</td>
+							<td class="memnum">20</td>
+							<td>羽賀 健太<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">GK</td>
+							<td class="memnum">21</td>
+							<td>長谷川 洸<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">DF</td>
+							<td class="memnum">22</td>
+							<td>小松 峻輔<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">24</td>
+							<td>三竿 健斗<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">DF</td>
+							<td class="memnum">25</td>
+							<td>小田島 怜<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">MF</td>
+							<td class="memnum">26</td>
+							<td>中野 雅臣<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">FW</td>
+							<td class="memnum">27</td>
+							<td>安在 達弥<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">DF</td>
+							<td class="memnum">28</td>
+							<td>小坂 悠登<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">FW</td>
+							<td class="memnum">29</td>
+							<td>太田 伶<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum">FW</td>
+							<td class="memnum">32</td>
+							<td>室町 仁紀<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum" style="border-bottom-width: 5px;">DF</td>
+							<td class="memnum" style="border-bottom-width: 5px;">35</td>
+							<td style="border-bottom-width: 5px;">渡辺 太貴<br /></td>
+						</tr>
+																							<tr>
+							<td class="memnum" colspan="2">監督<br /></td>
+							<td>富樫 剛一</td>
+						</tr>
+											                  </table>
+                </div>
+				
+								
+				                <table class="wide matcht">
+                  <tr>
+                    <th colspan="4">警告・退場</th>
+                  </tr>
+									<tr>
+						<td class="memnum"></td><td class="memtd1"></td>
+						<td class="memnum">3</td><td class="memtd1">畠中 槙之輔　<img src="../../common/match/img/card_yellow.gif" alt="" width="14" height="18" />　14’</span></td>
+						</tr>
+				                </table>
+				              </div>
+            </div>
+            <script type="text/javascript" src="../../common/js/submenu.js"></script>
+          </div>
+        </div>
+        <script type="text/javascript" src="../../common/js/maplink.js"></script>
+        <!--Contents Right End -->
+        <div class="clear"></div>
+        <div class="toTop"><span class="pagetop"><a href="#">ページの先頭に戻る</a></span></div>
+      </div>
+    </div>
+    <!-- InstanceEndEditable -->
+    <!-- Main End -->
+  </div>
+</div>
+<!-- Contents End -->
+<div class="clear"></div>
+<div id="footer">
+  <div id="footer-inner">
+    <div id="footer-home"><!-- InstanceBeginEditable name="bclist" --><a href="http://www.jfa.or.jp/index.html">ホーム</a><!-- InstanceEndEditable --></div>
+    <div id="media"><a href="http://www.jfamedia.jp/media/" target="_blank">JFAメディアサービス</a><a href="http://www.jfa.or.jp/archive/index.html" target="_blank">アーカイブ</a></div>
+    <!-- #BeginLibraryItem "/Library/footer.lbi" -->
+    <!--Footer Start -->
+    <div id="copyright"><span><a href="http://www.jfa.or.jp/index.html"><img src="http://www.jfa.or.jp/images/common/ft_logo.gif" alt="JFA" width="83" height="28" border="0" /></a><img src="http://www.jfa.or.jp/images/common/ft_title.gif" alt="財団法人　日本サッカー協会　Copyright (c) JFA All rights reserved." width="159" height="28" /></span> <a href="http://www.jfa.or.jp/info/about/index.html">このサイトについて</a>&nbsp;｜&nbsp;<a href="http://www.jfa.or.jp/info/guideline/index.html">利用規約</a>&nbsp;｜&nbsp;<a href="http://www.jfa.or.jp/info/personal/index.html">個人情報</a>&nbsp;｜&nbsp;<a href="http://www.jfa.or.jp/info/privacy/index.html">プライバシーポリシー</a>&nbsp;｜&nbsp;<a href="http://www.jfa.or.jp/info/inquiry/index.html">お問い合わせ</a>&nbsp;｜&nbsp;<a href="http://www.jfa.or.jp/info/sitemap/index.html">サイトマップ</a></div>
+    <!--Footer End -->
+    <!-- #EndLibraryItem --></div>
+</div>
+</body>
+<!-- InstanceEnd -->
+</html>
