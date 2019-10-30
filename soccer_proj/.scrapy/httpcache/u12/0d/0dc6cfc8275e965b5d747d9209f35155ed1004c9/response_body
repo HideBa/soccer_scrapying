@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- start head -->
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1.5, user-scalable=no">
+  <link rel="stylesheet" href="/common/css/common.css" type="text/css" media="screen and (min-width: 641px), print">
+  <link rel="stylesheet" href="/common/css/sp_common.css" type="text/css" media="screen and (max-width: 640px)">
+  <link href="https://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <link rel="stylesheet" href="/common/css/common.css" type="text/css" media="screen">
+  <script type="text/javascript" src="/js/selectivizr-min.js"></script>
+  <![endif]-->
+
+  <meta name="apple-mobile-web-app-title" content="JFA" />
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script>
+
+
+		/*if ((navigator.userAgent.indexOf('Android') > 0 && navigator.userAgent.indexOf('Mobile') > 0) || navigator.userAgent.indexOf('iPod') > 0 || (navigator.userAgent.indexOf('iPhone') > 0 &&
+		navigator.userAgent.indexOf('iPad') == -1)) {
+		//スマホ(iPhone/Android)
+					document.write('<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no">');
+		}else if(navigator.userAgent.indexOf('Android') > 0 || navigator.userAgent.indexOf('iPad') > 0){
+		//タブレット(iPad/Android)
+          document.write('<meta name="viewport" content="width=1024, user-scalable=no">');
+		}else{
+		//それ以外(PC)
+					document.write('<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no">');
+}
+
+  (function (ua) {
+      if (ua.indexOf('ipad') !== -1) {
+          //document.write('<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no">');
+
+      } else {
+					document.write('<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no">');
+      }
+  })*/
+
+  (navigator.userAgent.toLowerCase());
+
+  (function (el, size) {
+     if (window.innerWidth && innerWidth < 641) {
+         el.style.zoom = innerWidth / size;
+     }
+     window.addEventListener && addEventListener('resize', function () {
+         if (window.innerWidth && innerWidth < 641) {
+             el.style.zoom = innerWidth / size;
+         } else {
+             el.style.zoom = 1;
+         }
+     }, false);
+ })(document.getElementsByTagName('html')[0], 320);
+  </script>
+
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+	    if(navigator.userAgent.indexOf('iPhone') > -1){
+	        jQuery("head").append(jQuery('<meta name="viewport" content="width=100%, initial-scale=1.0, user-scalable=no" />'));
+	    }
+	    else if(navigator.userAgent.indexOf('iPad') > -1){
+	        jQuery('head').append('<meta name="viewport" content="width=1024px, user-scalable=no" />');
+	    }else{
+		    jQuery('head').append('<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no">');
+	    }
+	});
+</script>
+<link rel="stylesheet" href="/js/jquery.bxslider/jquery.bxslider.css">
+<link rel="stylesheet" href="/css/top_new.css" media="screen and (min-width: 641px), print">
+<link rel="stylesheet" href="/css/sp_top_new.css" media="screen and (max-width: 640px)">
+<link rel="stylesheet" href="/common/css/renewal2018.css" media="screen and (min-width: 641px), print">
+<link rel="stylesheet" href="/common/css/sp_renewal2018.css" media="screen and (max-width: 640px)">
+<script src="/common/js/analytics_head.js"></script>
+
+  <!-- end head -->
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link rel="stylesheet" href="/match/css/match.css" type="text/css" media="screen and (min-width: 641px)">
+  <link rel="stylesheet" href="/match/css/match_hira.css" type="text/css" media="screen and (min-width: 641px)">
+  <link rel="stylesheet" href="/match/css/sp_match.css" type="text/css" media="screen and (max-width: 640px)">
+  <!--[if lt IE 9]>
+  <link rel="stylesheet" href="/match/css/match.css" type="text/css" media="screen">
+  <![endif]-->
+  <title>日程・結果 | 第39回全日本少年サッカー大会|大会・試合｜JFA｜日本サッカー協会</title>
+</head>
+<body class="match">
+
+  <!-- start header -->
+  <!-- //////////////// PC start //////////////// -->
+<div class="disp-pc" id="headerPC">
+
+  <div class="header-nav">
+    <div class="search-box">
+      <dl id="search-acMenu">
+        <dt><span class="ion-ios-search"></span></dt>
+        <dd>
+          <div class="search">
+            <script>
+              (function() {
+                var cx = '015586814962939828932:iymjtxroa7u';
+                var gcse = document.createElement('script');
+                gcse.type = 'text/javascript';
+                gcse.async = true;
+                gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                  '//www.google.com/cse/cse.js?cx=' + cx;
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(gcse, s);
+              })();
+            </script>
+            <gcse:searchbox-only></gcse:searchbox-only>
+          </div>
+        </dd>
+      </dl>
+     </div>
+    <h1 class="disp_pc"><a href="https://www.jfa.jp/"><img src="/common/img/jfa_jp_logo.png" alt="JFA.jp"></a></h1>
+    <ul class="top-menu">
+      <li class="entry"><a href="https://www.jfa.jp/registration/">JFAへの登録</a></li>
+      <li class="shop"><a href="https://www.jfa.jp/shop/">チケット/ショップ</a></li>
+      <li class="english"><a href="https://www.jfa.jp/eng/">EN</a></li>
+    </ul>
+  </div>
+
+	<nav id="gnav">
+		<span class="mouseFlag"></span>
+		<ul>
+			<li class="nationalTeam">
+				<a href="">代表</a>
+
+				<div class="menu">
+					<div class="subnav">
+						<div class="subnav__logoArea">
+							<figure class="subnav__logo"><img src="/common/img/nav_national00.png" width="90" height="122" alt=""></figure>
+							<div class="subnav__logo__text"><a href="https://www.jfa.jp/national_team/">日本代表</a></div>
+						</div>
+						<div class="subnav__contents">
+							<figure class="subnav__img"><img src="/common/img/nav_national01.png" width="220" height="80" alt=""></figure>
+							<div class="subnav__title">日本代表</div>
+							<div class="subnav__navArea">
+								<ul class="subnav__nav samurai">
+									<li class="subnav__nav__item"><a href="https://www.jfa.jp/samuraiblue/">SAMURAI BLUE</a></li>
+									<li class="subnav__nav__item"><a href="https://www.jfa.jp/national_team/u22_2019/">U-22</a></li>
+									<li class="subnav__nav__item"><a href="https://www.jfa.jp/national_team/u20_2019/">U-20</a></li>
+									<li class="subnav__nav__item"><a href="https://www.jfa.jp/national_team/u18_2019/">U-18</a></li>
+									<li class="subnav__nav__item"><a href="https://www.jfa.jp/national_team/u17_2019/">U-17</a></li>
+									<li class="subnav__nav__item"><a href="https://www.jfa.jp/national_team/u16_2019/">U-16</a></li>
+									<li class="subnav__nav__item"><a href="https://www.jfa.jp/national_team/u15_2019/">U-15</a></li>
+                 	<li class="subnav__nav__item"><a href="https://www.jfa.jp/national_team/university_2019/">大学</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="subnav__contents">
+							<figure class="subnav__img"><img src="/common/img/nav_national02.png" width="220" height="80" alt=""></figure>
+							<div class="subnav__title">日本女子代表</div>
+							<div class="subnav__navArea">
+								<ul class="subnav__nav nadeshiko">
+									<li class="subnav__nav__item"><a href="https://www.jfa.jp/nadeshikojapan/">NADESHIKO JAPAN</a></li>
+									<li class="subnav__nav__item"><a href="https://www.jfa.jp/national_team/u19w_2019/">U-19</a></li>
+									<li class="subnav__nav__item"><a href="https://www.jfa.jp/national_team/u17w_2019/">U-17</a></li>
+									<li class="subnav__nav__item"><a href="https://www.jfa.jp/national_team/u16w_2019/">U-16</a></li>
+									<li class="subnav__nav__item"><a href="https://www.jfa.jp/national_team/universityw_2019/">大学</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="subnav__contents">
+							<figure class="subnav__img"><img src="/common/img/nav_national03.png" width="220" height="80" alt=""></figure>
+							<div class="subnav__title">フットサル日本代表</div>
+							<div class="subnav__navArea">
+								<ul class="subnav__nav">
+									<li class="subnav__nav__item"><a href="https://www.jfa.jp/national_team/futsal_2019/">フットサル(男子)</a></li>
+									<li class="subnav__nav__item"><a href="https://www.jfa.jp/national_team/u20_futsal_2019/">U-20フットサル(男子)</a></li>
+									<li class="subnav__nav__item"><a href="https://www.jfa.jp/national_team/futsalw_2019/">フットサル(女子)</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="subnav__contents">
+							<figure class="subnav__img"><img src="/common/img/nav_national04.png" width="220" height="80" alt=""></figure>
+							<div class="subnav__title">ビーチサッカー日本代表</div>
+							<div class="subnav__navArea">
+								<ul class="subnav__nav">
+									<li class="subnav__nav__item"><a href="https://www.jfa.jp/national_team/beach_2019/">ビーチサッカー</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+
+			<li class="watch">
+				<a href="">見る</a>
+				<div class="menu">
+					<div class="subnav">
+						<div class="subnav__contents">
+							<div class="subnav__title2">日本代表</div>
+							<div class="subnav__text">日本サッカーの象徴としてより強く、世界に誇れる代表チームへ。</div>
+							<figure class="subnav__img"><a href="https://www.jfa.jp/national_team/"><img src="/common/img/nav_watch01.png" width="250" height="90" alt="日本代表"></a></figure>
+							<div class="subnav__btn"><a href="https://www.jfa.jp/international_match/">日本代表の大会・試合チケット販売情報</a></div>
+						</div>
+            <div class="subnav__contents">
+              <div class="subnav__title2">国内全国大会・試合</div>
+              <div class="subnav__text">Jリーグを頂点としたピラミッド型のリーグ構造を形成し、各年代、各カテゴリーのチームが参加できる各種大会・リーグを整備しています。</div>
+              <figure class="subnav__img"><a href="https://www.jfa.jp/match/"><img src="/common/img/nav_watch02.png" width="250" height="90" alt="国内全国大会・試合"></a></figure>
+              <div class="subnav__btn"><a href="https://www.jfa.jp/shop/">各種国内全国大会・試合チケット販売情報</a></div>
+            </div>
+            <div class="subnav__contents">
+              <div class="subnav__title2">ルールを知ろう！</div>
+              <div class="subnav__text">サッカー、フットサル、ビーチサッカーのルールのうち代表的なものをわかりやすく説明しています。</div>
+              <figure class="subnav__img"><a href="https://www.jfa.jp/rule/"><img src="/common/img/nav_watch04.png" width="250" height="90" alt="ルールを知ろう！"></a></figure>
+            </div>
+						<div class="subnav__contents">
+							<div class="subnav__title2">日本サッカーミュージアム</div>
+							<div class="subnav__text">日本サッカーの歴史資料を数多く収蔵・展示する施設で、日本を代表するサッカー専門ミュージアム。</div>
+							<figure class="subnav__img"><a href="https://www.jfa.jp/football_museum/"><img src="/common/img/nav_watch03.png" width="250" height="90" alt="日本サッカーミュージアム"></a></figure>
+						</div>
+					</div>
+				</div>
+			</li>
+
+			<li class="navplay">
+				<a href="">する</a>
+				<div class="menu">
+					<div class="subnav">
+						<div class="subnav__contents">
+							<div class="subnav__title2">グラスルーツ</div>
+							<div class="subnav__text">「Football for All サッカーを、もっとみんなのものへ。」誰もが生涯にわたり楽しめる、その環境づくりに取り組んでいます。</div>
+							<figure class="subnav__img"><a href="https://www.jfa.jp/grass_roots/"><img src="/common/img/nav_play01.png" width="250" height="90" alt="グラスルーツ"></a></figure>
+						</div>
+						<div class="subnav__contents">
+							<div class="subnav__title2">国内全国大会・試合</div>
+							<div class="subnav__text">Jリーグを頂点としたピラミッド型のリーグ構造を形成し、各年代、各カテゴリーのチームが参加できる各種大会・リーグを整備しています。</div>
+							<figure class="subnav__img"><a href="https://www.jfa.jp/match/"><img src="/common/img/nav_play02.png" width="250" height="90" alt="国内全国大会・試合"></a></figure>
+						</div>
+            <div class="subnav__contents">
+              <div class="subnav__title2">ルールを知ろう！</div>
+              <div class="subnav__text">サッカー、フットサル、ビーチサッカーのルールのうち代表的なものをわかりやすく説明しています。</div>
+              <figure class="subnav__img"><a href="https://www.jfa.jp/rule/"><img src="/common/img/nav_play03.png" width="250" height="90" alt="ルールを知ろう！"></a></figure>
+            </div>
+					</div>
+				</div>
+			</li>
+
+			<li class="getInvolved">
+				<a href="">関わる</a>
+				<div class="menu">
+					<div class="subnav">
+						<div class="subnav__contents">
+							<div class="subnav__title2">審判</div>
+							<div class="subnav__text">審判員は競技規則を理解し、試合はもちろん、研修会や講習会などで研さんを積んでいます。</div>
+							<figure class="subnav__img"><a href="https://www.jfa.jp/referee/"><img src="/common/img/nav_involved01.png" width="250" height="90" alt="審判"></a></figure>
+						</div>
+						<div class="subnav__contents">
+							<div class="subnav__title2">指導者</div>
+							<div class="subnav__text">各種養成制度、研修会、講習会のもと質の高い指導者の養成に取り組んでいます。</div>
+							<figure class="subnav__img"><a href="https://www.jfa.jp/coach/"><img src="/common/img/nav_involved02.png" width="250" height="90" alt="指導者"></a></figure>
+							<div class="subnav__btn"><a href="https://www.jfa.jp/jyd/">JFA Youth & Development Programme</a></div>
+						</div>
+						<div class="subnav__contents">
+							<div class="subnav__title2">メディカル</div>
+							<div class="subnav__text">選手のメディカルチェック、疾病や外傷・障害の予防と治療、現場での救急処置などスポーツ医学の教育と啓発を行います。</div>
+							<figure class="subnav__img"><a href="https://www.jfa.jp/medical/"><img src="/common/img/nav_involved03.png" width="250" height="90" alt="メディカル"></a></figure>
+						</div>
+						<div class="subnav__contents">
+							<div class="subnav__title2">リスペクト・フェアプレー</div>
+							<div class="subnav__text">リスペクトを「大切に思うこと」として、サッカーに関わるすべての人、ものを大切に思う精神を広く浸透させていきます。</div>
+							<figure class="subnav__img"><a href="https://www.jfa.jp/respect/"><img src="/common/img/nav_involved_respect.png" width="250" height="90" alt="リスペクト"></a></figure>
+							<div class="subnav__btn"><a href="https://www.jfa.jp/violence_eradication/">暴力等根絶相談窓口</a></div>
+						</div>
+					</div>
+				</div>
+			</li>
+
+			<li class="navJFA">
+				<a href=""><img src="/common/img/nav_jfa.png" width="40" alt="JFA" style="vertical-align: middle;"></a>
+				<div class="menu">
+					<div class="subnav">
+						<div class="subnav__contents">
+							<div class="subnav__title2">選手育成</div>
+							<div class="subnav__text">世界のトップ10入り標榜し「世界を基準とした強化策の推進」のもとに選手育成に取り組んでいます。</div>
+							<figure class="subnav__img"><a href="https://www.jfa.jp/youth_development/"><img src="/common/img/nav_jfa01.png" width="250" height="90" alt="選手育成"></a></figure>
+							<div class="subnav__btn"><a href="https://www.jfa.jp/jyd/">JFA Youth & Development Programme</a></div>
+						</div>
+						<div class="subnav__contents">
+							<div class="subnav__title2">社会貢献活動</div>
+							<div class="subnav__text">サッカー競技を統括する唯一の団体としての社会的責任をふまえ、サッカーを通じた様々な社会貢献活動を行っています。</div>
+							<figure class="subnav__img"><a href="https://www.jfa.jp/social_action_programme/"><img src="/common/img/nav_jfa02.png" width="250" height="90" alt="社会貢献活動"></a></figure>
+						</div>
+						<div class="subnav__contents">
+							<div class="subnav__title2">国際交流・アジア貢献活動</div>
+							<div class="subnav__text">日本サッカーが培ってきたもの、世界に誇れるフェアでリスペクトに満ちたサッカー文化を、アジアに、世界に、そして未来に広げていきます。</div>
+							<figure class="subnav__img"><a href="https://www.jfa.jp/social_action_programme/international_exchange/"><img src="/common/img/nav_jfa03.png" width="250" height="90" alt="国際交流・アジア貢献活動"></a></figure>
+						</div>
+						<div class="subnav__contents">
+							<div class="subnav__title2">日本サッカー協会</div>
+							<div class="subnav__text">サッカーを通じて豊かなスポーツ文化を創造し、人々の心身の健全な発達と社会の発展に貢献する。</div>
+							<figure class="subnav__img"><a href="https://www.jfa.jp/about_jfa/"><img src="/common/img/nav_jfa04.png" width="250" height="90" alt="日本サッカー協会"></a></figure>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</nav>
+</div>
+<div id="headerPC--space"></div>
+<!-- //////////////// PC fin //////////////// -->
+
+
+<!-- //////////////// SP start //////////////// -->
+<div class="header-nav disp-sp">
+  <a class="menu-trigger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </a>
+  <h1><a href="https://www.jfa.jp/"><img src="/common/img/jfa_jp_logo.png" alt="JFA.jp"></a></h1>
+  <div class="english"><a href="https://www.jfa.jp/eng/">EN</a></div>
+  <div class="search-box">
+    <dl id="search-acMenu">
+      <dt><span class="ion-ios-search"></span></dt>
+      <dd>
+        <div class="search">
+          <script>
+            (function() {
+              var cx = '015586814962939828932:iymjtxroa7u';
+              var gcse = document.createElement('script');
+              gcse.type = 'text/javascript';
+              gcse.async = true;
+              gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                '//www.google.com/cse/cse.js?cx=' + cx;
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(gcse, s);
+            })();
+          </script>
+          <gcse:searchbox-only></gcse:searchbox-only>
+        </div>
+      </dd>
+    </dl>
+   </div>
+  <nav id="g-nav" class="g-nav">
+    <ul class="top-menu">
+      <li class="entry"><a href="https://www.jfa.jp/registration/">JFAへの登録</a></li>
+      <li class="shop"><a href="https://www.jfa.jp/shop/">チケット/ショップ</a></li>
+    </ul>
+    <ul class="list contents-wrap clearfix">
+      <li class="national item">
+        <h4><a href="javascript:void(0);" class="slide">代表</a></h4>
+        <ul class="sub-sitemap">
+          <li class="bold_s"><a href="https://www.jfa.jp/national_team/">日本代表トップ</a></li>
+          <li><a href="https://www.jfa.jp/samuraiblue/">男子／SAMURAI BLUE</a></li>
+          <li><a href="https://www.jfa.jp/national_team/u22_2019/">男子／U-22</a></li>
+          <li><a href="https://www.jfa.jp/national_team/u20_2019/">男子／U-20</a></li>
+          <li><a href="https://www.jfa.jp/national_team/u18_2019/">男子／U-18</a></li>
+          <li><a href="https://www.jfa.jp/national_team/u17_2019/">男子／U-17</a></li>
+          <li><a href="https://www.jfa.jp/national_team/u16_2019/">男子／U-16</a></li>
+          <li><a href="https://www.jfa.jp/national_team/u15_2019/">男子／U-15</a></li>
+          <li><a href="https://www.jfa.jp/national_team/university_2019/">男子／大学</a></li>
+          <li><a href="https://www.jfa.jp/national_team/futsal_2019/">男子／フットサル</a></li>
+          <li><a href="https://www.jfa.jp/national_team/u20_futsal_2019/">男子／U-20 フットサル</a></li>
+          <li><a href="https://www.jfa.jp/national_team/beach_2019/">男子／ビーチサッカー</a></li>
+          <li><a href="https://www.jfa.jp/nadeshikojapan/">女子／なでしこジャパン</a></li>
+          <li><a href="https://www.jfa.jp/national_team/u19w_2019/">女子／U-19</a></li>
+          <li><a href="https://www.jfa.jp/national_team/u16w_2019/">女子／U-16</a></li>
+          <li><a href="https://www.jfa.jp/national_team/universityw_2019/">女子／大学</a></li>
+          <li><a href="https://www.jfa.jp/national_team/futsalw_2019/">女子／フットサル</a></li>
+          <li><a href="https://www.jfa.jp/national_team/identity/">日本代表アイデンティティ</a></li>
+          <li><a href="https://www.jfa.jp/national_team/jerseys/">歴代ジャージ</a></li>
+          <li><a href="https://www.jfa.jp/national_team/download.html">壁紙ダウンロード</a></li>
+          <li><a href="https://www.jfa.jp/national_team/moriyasu_memo/">森保一監督手記「一心一意、一心一向 -MORIYASU Hajime MEMO-」</a></li>
+          <li><a href="https://www.jfa.jp/national_team/bruno_garcia_futsal_dojo/">ブルーノ・ガルシアのフットサル道場</a></li>
+          <li><a href="https://www.jfa.jp/national_team/guide/index.html">初めての日本代表戦 観戦ガイド</a></li>
+        </ul>
+      </li>
+
+
+      <li class="watch item">
+        <h4><a href="javascript:void(0);" class="slide">見る</a></h4>
+        <ul class="sub-sitemap">
+          <li class="bold_s"><a href="https://www.jfa.jp/match/">大会・試合トップ</a></li>
+          <li><a href="https://www.jfa.jp/international_match/">国際大会一覧</a></li>
+          <li class="mT10 bold_s">[1種(一般)]</li>
+          <li><a href="https://www.jfa.jp/match/emperorscup/">天皇杯 JFA 全日本サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/acl/">AFCチャンピオンズリーグ</a></li>
+          <li><a href="https://www.jfa.jp/match/j_conmebol/">ＪリーグYBCルヴァンカップ/CONMEBOLスダメリカーナ　王者決定戦</a></li>
+          <li><a href="https://www.jfa.jp/match/nationalsportsfestival/">国民体育大会(サッカー競技)</a></li>
+          <li><a href="https://www.jfa.jp/match/regional_league/">全国地域サッカーチャンピオンズリーグ</a></li>
+          <li><a href="https://www.jfa.jp/match/clubteams/">全国クラブチームサッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/adults_football_tournament/">全国社会人サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/municipality/">全国自治体職員サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/jsdf/">全国自衛隊サッカー大会</a></li>
+          <li><a href="https://www.jfa.jp/match/sports_masters/">日本スポーツマスターズ(サッカー競技会)</a></li>
+          <li><a href="https://www.jfa.jp/match/alljapan_university/">全日本大学サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/prime_minister_cup/">総理大臣杯 全日本大学サッカートーナメント</a></li>
+          <li><a href="https://www.jfa.jp/match/densocup/">デンソーカップチャレンジサッカー</a></li>
+          <li><a href="https://www.jfa.jp/match/japanandkorea/">DENSO CUP SOCCER 第15回大学日韓(韓日)定期戦</a></li>
+          <li><a href="https://www.jfa.jp/match/alljapan_technicalcollege/">全国高等専門学校サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/professionalschool/">全国専門学校サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/fcwc_2018/">Alibaba Cloud プレゼンツ FIFA クラブワールドカップ UAE 2018</a></li>
+          <li><a href="https://www.jfa.jp/national_team/EAFF_E1_Football_Championship_2019/">EAFF E-1 サッカー選手権 2019 決勝大会</a></li>
+          <li class="mT10 bold_s">[2種(高校生年代)]</li>
+          <li><a href="https://www.jfa.jp/match/takamado_jfa_u18_premier2019_final/">高円宮杯 JFA U-18サッカープレミアリーグ 2018 ファイナル</a></li>
+          <li><a href="https://www.jfa.jp/match/takamado_jfa_u18_premier/">高円宮杯 JFA U-18サッカープレミアリーグ</a></li>
+          <li><a href="https://www.jfa.jp/match/takamado_jfa_u18_premier2019_playoff/">高円宮杯 JFA U-18サッカープレミアリーグ 2018 プレーオフ</a></li>
+          <li><a href="https://www.jfa.jp/match/takamado_jfa_u18_prince/">高円宮杯 JFA U-18サッカープリンスリーグ</a></li>
+          <li><a href="https://www.jfa.jp/match/alljapan_highschool/">全国高等学校サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/koukou_soutai/">全国高等学校総合体育大会(サッカー競技)</a></li>
+          <li><a href="https://www.jfa.jp/match/evening_correspondence_hs/">全国高等学校定時制通信制サッカー大会</a></li>
+          <li><a href="https://www.jfa.jp/match/club_youth_u18/">日本クラブユースサッカー選手権(U-18)大会</a></li>
+          <li><a href="https://www.jleague.jp/jyouth/" target="_blank">Jユースカップ Jリーグユース選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/nationalsportsfestival/">国民体育大会(サッカー競技)</a></li>
+          <li><a href="https://www.jfa.jp/match/u16_InternationalDreamCup/">U-16 インターナショナルドリームカップ2019 JAPAN presented by 朝日新聞</a></li>
+          <li class="mT10 bold_s">[3種(中学生年代)]</li>
+          <li><a href="https://www.jfa.jp/match/takamado_jfa_u15/">高円宮杯 JFA 全日本U-15サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/jfa_u15_tournament/">JFA 全日本U-15サッカー大会</a></li>
+          <li><a href="https://www.jfa.jp/match/alljapan_juniorhs/">全国中学校体育大会／全国中学校サッカー大会</a></li>
+          <li><a href="https://www.jfa.jp/match/u13_league/">U-13地域サッカーリーグ</a></li>
+          <li><a href="https://www.jfa.jp/match/club_youth_u15/">日本クラブユースサッカー選手権(U-15)大会</a></li>
+          <li><a href="https://www.jfa.jp/match/meniconcup/">メニコンカップ 日本クラブユースサッカー東西対抗戦(U-15)</a></li>
+          <li class="mT10 bold_s">[4種(小学生年代)]</li>
+          <li><a href="https://www.jfa.jp/match/japan_u12_football_championship/">JFA 全日本U-12サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/girlseight/">キヤノン ガールズ・エイト　～ JFA地域ガールズ・エイト(U-12)サッカー大会 ～</a></li>
+          <li class="mT10 bold_s">[女子]</li>
+          <li><a href="https://www.jfa.jp/match/empressscup/">皇后杯 JFA 全日本女子サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/alljapan_ladies/">JFA 全日本O-30女子サッカー大会</a></li>
+          <li><a href="https://www.jfa.jp/match/alljapan_ladies_o40/">JFA O-40女子サッカーオープン大会</a></li>
+          <li><a href="https://www.jfa.jp/match/nationalsportsfestival/">国民体育大会(サッカー競技)</a></li>
+          <li><a href="https://www.jfa.jp/match/university_womens/">全日本大学女子サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/highschool_womens/">全日本高等学校女子サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/koukou_soutai/">全国高等学校総合体育大会(サッカー競技)</a></li>
+          <li><a href="https://www.jfa.jp/match/joc_womens/">JFA 全日本U-18女子サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/joshi_youth_u15/">JFA 全日本U-15女子サッカー選手権大会</a></li>
+          <li class="mT10 bold_s">[シニア]</li>
+          <li><a href="https://www.jfa.jp/match/jfa_o40_tournament/">JFA 全日本O-40サッカー大会</a></li>
+          <li><a href="https://www.jfa.jp/match/jfa_o50_tournament/">JFA 全日本O-50サッカー大会</a></li>
+          <li><a href="https://www.jfa.jp/match/jfa_o60_tournament/">JFA 全日本O-60サッカー大会</a></li>
+          <li><a href="https://www.jfa.jp/match/jfa_o70_open_tournament/">JFA O-70サッカーオープン大会</a></li>
+          <li><a href="https://www.jfa.jp/match/nenrinpic/">全国健康福祉祭サッカー交流大会(ねんりんピック)</a></li>
+          <li class="mT10 bold_s">[フットサル]</li>
+          <li><a href="https://www.jfa.jp/match/pumacup/">JFA 全日本フットサル選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/womens_futsal/">JFA 全日本女子フットサル選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/jsdf_women/">自衛隊女子フットサル大会</a></li>
+          <li><a href="https://www.jfa.jp/match/alljapan_university_futsal/">全日本大学フットサル大会</a></li>
+          <li><a href="https://www.jfa.jp/match/alljapan_youth_u18_futsal/">JFA 全日本U-18フットサル選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/alljapan_u15_futsal/">JFA 全日本U-15フットサル選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/alljapan_u15womens_futsal/">JFA 全日本U-15女子フットサル選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/vermontcup/">JFA バーモントカップ 全日本U-12フットサル選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/jfaenjoy5/">JFAエンジョイ5～JFAフットサルエンジョイ大会～</a></li>
+          <li><a href="https://www.jfa.jp/match/afc_futsal_club_championship/">AFCフットサルクラブ選手権</a></li>
+          <li class="mT10 bold_s">[ビーチサッカー]</li>
+          <li><a href="https://www.jfa.jp/match/japan_beach/">JFA 全日本ビーチサッカー大会</a></li>
+			<li class="mT10 bold_s"><a href="https://www.jfa.jp/rule/">ルールを知ろう！</a></li>
+      <li class="mT10 bold_s"><a href="https://www.jfa.jp/football_museum/">日本サッカーミュージアム</a></li>
+        </ul>
+      </li>
+
+      <li class="navplay item">
+        <h4><a href="javascript:void(0);" class="slide">する</a></h4>
+        <ul class="sub-sitemap">
+          <li class="bold_s"><a href="https://www.jfa.jp/grass_roots/">グラスルーツトップ</a></li>
+          <li><a href="https://www.jfa.jp/grass_roots/declaration/">JFAグラスルーツ宣言</a></li>
+          <li><a href="https://www.jfa.jp/grass_roots/festival/">JFAフェスティバル</a></li>
+          <li><a href="https://www.jfa.jp/grass_roots/square/">JFAスクエア</a></li>
+          <li><a href="https://www.jfa.jp/nadeshikohiroba/">JFAなでしこひろば</a></li>
+          <li><a href="https://www.jfa.jp/football_family/challengegame/">JFAチャレンジゲーム</a></li>
+          <li><a href="https://www.jfa.jp/grass_roots/kidsprogram/">キッズプログラム</a></li>
+          <li><a href="https://www.jfa.jp/grass_roots/disability/">障がい者サッカー</a></li>
+          <li><a href="https://www.jfa.jp/grass_roots/partner/">JFAグラスルーツ推進・賛同パートナー制度</a></li>
+          <li class="mT10 bold_s"><a href="https://www.jfa.jp/match/">大会・試合トップ</a></li>
+          <li class="mT10 bold_s"><a href="https://www.jfa.jp/rule/">ルールを知ろう！</a></li>
+        </ul>
+      </li>
+
+      <li class="affect item">
+        <h4><a href="javascript:void(0);" class="slide">関わる</a></h4>
+        <ul class="sub-sitemap">
+          <li class="bold_s"><a href="https://www.jfa.jp/referee/">審判トップ</a></li>
+          <li><a href="https://www.jfa.jp/referee/system/">審判制度概要</a></li>
+          <li><a href="https://www.jfa.jp/referee/registration/">審判登録制度</a></li>
+          <li><a href="https://www.jfa.jp/referee/referee_caravan/">JFAレフェリーキャラバン</a></li>
+          <li><a href="https://www.jfa.jp/referee/exchange/">交流プログラム</a></li>
+          <li><a href="https://www.jfa.jp/referee/training_center/">審判トレーニングセンター</a></li>
+          <li><a href="https://www.jfa.jp/referee/college/">JFAレフェリーカレッジ</a></li>
+          <li><a href="https://www.jfa.jp/referee/profile/">審判員紹介</a></li>
+          <li><a href="https://www.jfa.jp/laws/">競技規則</a></li>
+
+          <li class="mT10 bold_s"><a href="https://www.jfa.jp/coach/">指導者トップ</a></li>
+          <li><a href="https://www.jfa.jp/coach/official/">JFA公認指導者</a></li>
+          <li><a href="https://www.jfa.jp/coach/official/training.html">指導者養成講習会</a></li>
+          <li><a href="https://www.jfa.jp/coach/official/instructor.html">インストラクター制度</a></li>
+          <li><a href="https://www.jfa.jp/coach/official/refresh.html">リフレッシュ研修会</a></li>
+          <li><a href="https://www.jfa.jp/coach/download/">各種資料・申請書</a></li>
+          <li><a href="https://www.jfa.jp/coach/physical_training_club_activity/">学校体育・部活動</a></li>
+
+          <li class="mT10 bold_s"><a href="https://www.jfa.jp/respect/">リスペクト・フェアプレートップ</a></li>
+          <li><a href="https://www.jfa.jp/respect/declaration/">リスペクト宣言</a></li>
+          <li><a href="https://www.jfa.jp/respect/fairplaydays/">JFAリスペクト フェアプレー デイズ</a></li>
+          <li><a href="https://www.jfa.jp/respect/fc_japan/">リスペクトFC.JAPAN</a></li>
+          <li><a href="https://www.jfa.jp/violence_eradication/">暴力等根絶相談窓口</a></li>
+        </ul>
+      </li>
+
+      <li class="kiyaku">
+        <h4><a href="javascript:void(0);" class="slide">JFA</a></h4>
+        <ul class="sub-sitemap">
+          <li class="bold_s"><a href="https://www.jfa.jp/youth_development/">選手育成トップ</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/outline/">選手育成のコンセプト</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/national_tracen/top.html">ナショナルトレセン</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/elite_programme/">JFAエリートプログラム</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/gk_camp/">ナショナルGKキャンプ</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/super_girls_project/">女子GKキャンプ</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/futsal_gk_camp/">フットサルGKキャンプ</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/futsal_talent_caravan/">フットサルタレントキャラバン</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/honor_players/">JFA・Jリーグ特別指定選手制度</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/strengthening_player/">なでしこジャパン海外強化指定選手</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/environmental_arrangement/">ゲーム環境整備</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/jfa_academy/">JFAアカデミー</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/jfa_academy/fukushima/">JFAアカデミー福島</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/jfa_academy/kumamoto_uki/">JFAアカデミー熊本宇城</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/jfa_academy/sakai/">JFAアカデミー堺</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/jfa_academy/imabari/">JFAアカデミー今治</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/players_first/">PLAYERS FIRST!</a></li>
+
+          <li class="mT10 bold_s"><a href="https://www.jfa.jp/social_action_programme/">社会貢献活動トップ</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/football_contribution/">サッカーを通じた社会への貢献（SDGs）</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/relief_efforts/">復興支援活動</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/yumesen/">JFAこころのプロジェクト</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/global_compact/">国連グローバル・コンパクトへの参加</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/green_project/">JFAグリーンプロジェクト/ポット苗式・芝生化モデル事業</a></li>
+          <li><a href="https://www.jfa.jp/smc/">JFAスポーツマネジャーズカレッジ（SMC）</a></li>
+
+          <li class="mT10 bold_s"><a href="https://www.jfa.jp/social_action_programme/international_exchange/">国際交流・アジア貢献活動トップ</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/international_exchange/dispatch_member/">JFA公認指導者の海外派遣</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/international_exchange/assistanceh.html">JFAユース育成資金援助</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/international_exchange/coaching.html">JFAインターナショナルコーチングコース</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/international_exchange/referee_instructor.html">JFAインターナショナル レフェリーインストラクター コース</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/international_exchange/training_camp_hosting.html">アジアの代表チーム／選手／コーチの受け入れ</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/international_exchange/hosting_of_study_visits.html">各国協会／リーグの視察団の受け入れ</a></li>
+
+          <li class="mT10 bold_s"><a href="https://www.jfa.jp/medical/">メディカルトップ</a></li>
+          <li><a href="https://www.jfa.jp/medical/medical_committee.html">医学委員会とは</a></li>
+          <li><a href="https://www.jfa.jp/medical/medical_committee_conference.html">全国医学委員長会議</a></li>
+          <li><a href="https://www.jfa.jp/medical/nf_representative_conference.html">NF Representative会議</a></li>
+          <li><a href="https://www.jfa.jp/medical/jleague_teamdoctor_conference.html">Ｊリーグチームドクター会議</a></li>
+          <li><a href="https://www.jfa.jp/medical/football_doctor_seminar.html">サッカードクターセミナー</a></li>
+          <li><a href="https://www.jfa.jp/medical/jfa_athletic_trainer_seminar.html">JFA アスレティックトレーナーセミナー</a></li>
+          <li><a href="https://www.jfa.jp/medical/critical_care.html">救命救急</a></li>
+          <li><a href="https://www.jfa.jp/medical/heat_measures_hydration.html">暑熱対策･水分補給</a></li>
+          <li><a href="https://www.jfa.jp/medical/concussion.html">脳振盪</a></li>
+          <li><a href="https://www.jfa.jp/medical/nutrition.html">栄養</a></li>
+          <li><a href="https://www.jfa.jp/medical/anti-doping.html">アンチ・ドーピング</a></li>
+          <li><a href="https://www.jfa.jp/medical/food_allergy.html">食物アレルギー</a></li>
+          <li><a href="https://www.jfa.jp/medical/injury_prevention.html">ケガの予防・対応</a></li>
+          <li><a href="https://www.jfa.jp/medical/publication.html">書籍</a></li>
+          <li><a href="https://www.jfa.jp/medical/medical_column/">メディカル通信</a></li>
+          <li><a href="https://www.jfa.jp/medical/library.html">LIBRARY</a></li>
+
+          <li class="mT10 bold_s"><a href="https://www.jfa.jp/about_jfa/">日本サッカー協会トップ</a></li>
+          <li><a href="https://www.jfa.jp/about_jfa/president/">会長メッセージ</a></li>
+          <li><a href="https://www.jfa.jp/about_jfa/overview/">JFAの概要</a></li>
+          <li><a href="https://www.jfa.jp/about_jfa/goal/">JFAの目標</a></li>
+          <li><a href="https://www.jfa.jp/about_jfa/policy_rule/">基本方針・規則</a></li>
+          <li><a href="https://www.jfa.jp/about_jfa/media/">メディアの皆様へ</a></li>
+          <li><a href="https://www.jfa.jp/about_jfa/documents/">申請・手続き・登録</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/football_contribution/">サッカーを通じた社会への貢献（SDGs）</a></li>
+          <li><a href="https://www.jfa.jp/about_jfa/report/">公開資料</a></li>
+          </ul>
+          </li>
+
+          <ul class="sub-sitemap">
+          <h4><a href="https://www.jfa.jp/women/">女子サッカー</a></h4>
+          <h4><a href="https://www.jfa.jp/futsal_s/">フットサル</a></h4>
+          <h4><a href="https://www.jfa.jp/beachsoccer/">ビーチサッカー</a></h4>
+          <h4><a href="https://www.jfa.jp/jyd/">JFA Youth &amp; Development Programme</a></h4>
+          <h4><a href="https://www.jfa.jp/documents/transfer_list/">ドキュメント</a></h4>
+          <h4><a href="https://www.jfa.jp/registration/">JFAへの登録</a></h4>
+          <h4><a href="https://www.jfa.jp/shop/">チケット／ショップ</a></h4>
+          <h4><a href="https://www.jfa.jp/documents/#l1">規約・規程</a></h4>
+          <h4><a href="https://www.jfa.jp/laws/">競技規則</a></h4>
+          <h4><a href="https://www.jfa.jp/documents/#l2">申請／手続き</a></h4>
+          <h4><a href="https://www.jfa.jp/documents/#l3">公開資料</a></h4>
+          <h4><a href="https://www.jfa.jp/documents/#l4">その他</a></h4>
+          <h4><a href="https://www.jfa.jp/documents/#l5">Q &amp; A</a></h4>
+          <h4><a href="https://www.jfa.jp/information/link.html">リンク</a></h4>
+          </ul>
+    </ul>
+  </nav>
+</div>
+<!-- //////////////// SP fin //////////////// -->
+
+  <!-- end header -->
+
+  <!-- start subnavi social -->
+    <div id="subnavi" class="outer-block match">
+    <div class="outer-inner">
+      <div class="head-area">
+        <h2 class="title"><a href="/match/">大会・試合</a></h2>
+        <div class="menu-btn"><img src="/common/sp-img/sp-menu-btn.png" alt="MENU"></div>
+      </div>
+      <div class="body-area">
+        <ul class="subnavi">
+        	<li><a href="/match/">大会トップ</a></li>
+<li><a href="/match/news/">ニュース</a></li>
+<div class="bold">1種（一般）</div>
+	<ul class="sub-content">
+					<li><a href="/match/emperorscup/">天皇杯 JFA 全日本サッカー選手権大会</a></li>
+					<li><a href="/match/acl/">AFCチャンピオンズリーグ</a></li>
+					<li><a href="/match/j_conmebol_2019/">ＪリーグYBCルヴァンカップ/CONMEBOLスダメリカーナ　王者決定戦</a></li>
+
+					<li><a href="/match/nationalsportsfestival/">国民体育大会(サッカー競技)</a></li>
+
+					<li><a href="/match/regional_league/">全国地域サッカーチャンピオンズリーグ</a></li>
+					<li><a href="/match/clubteams/">全国クラブチームサッカー選手権大会</a></li>
+					<li><a href="/match/adults_football_tournament/">全国社会人サッカー選手権大会</a></li>
+					<li><a href="/match/municipality/">全国自治体職員サッカー選手権大会</a></li>
+					<li><a href="/match/jsdf/">全国自衛隊サッカー大会</a></li>
+					<li><a href="/match/sports_masters/">日本スポーツマスターズ(サッカー競技会)</a></li>
+
+					<li><a href="/match/alljapan_university/">全日本大学サッカー選手権大会</a></li>
+					<li><a href="/match/prime_minister_cup/">総理大臣杯 全日本大学サッカートーナメント</a></li>
+					<li><a href="/match/alljapan_university_rookie/">全日本大学サッカー新人戦</a></li>
+					<li><a href="/match/densocup/">デンソーカップチャレンジサッカー</a></li>
+					<li><a href="/match/japanandkorea/">DENSO CUP SOCCER 第15回大学日韓(韓日)定期戦</a></li>
+					<li><a href="/match/alljapan_technicalcollege/">全国高等専門学校サッカー選手権大会</a></li>
+					<li><a href="/match/professionalschool/">全国専門学校サッカー選手権大会</a></li>
+					<li><a href="/match/fcwc_2018/">Alibaba Cloud プレゼンツ FIFA クラブワールドカップ UAE 2018</a></li>
+					<li><a href="/match/EAFF_E1_Football_Championship_2017/">EAFF E-1 サッカー選手権 2017 決勝大会</a></li>	</ul>
+<div class="bold">2種（高校生年代）</div>
+	<ul class="sub-content">
+  				<li><a href="/match/takamado_jfa_u18_premier2018_final/">高円宮杯 JFA U-18サッカープレミアリーグ 2018 ファイナル</a></li>
+				<li><a href="/match/takamado_jfa_u18_premier2018/">高円宮杯 JFA U-18サッカープレミアリーグ</a></li>
+				<li><a href="/match/takamado_jfa_u18_premier2018_playoff/">高円宮杯 JFA U-18サッカープレミアリーグ 2018 プレーオフ</a></li>
+				<li><a href="/match/takamado_jfa_u18_prince2018/">高円宮杯 JFA U-18サッカープリンスリーグ</a></li>
+  				<li><a href="/match/alljapan_highschool/">全国高等学校サッカー選手権大会</a></li>
+  				<li><a href="/match/koukou_soutai/">全国高等学校総合体育大会(サッカー競技)</a></li>
+  				<li><a href="/match/evening_correspondence_hs/">全国高等学校定時制通信制サッカー大会</a></li>
+  				<li><a href="/match/club_youth_u18/">日本クラブユースサッカー選手権(U-18)大会</a></li>
+  				<li><a href="https://www.jleague.jp/jyouth/" target="_blank">Jユースカップ Jリーグユース選手権大会<img src="/common/img/ico_blank_local_nav.png"></a></li>
+  				<li><a href="/match/nationalsportsfestival/">国民体育大会(サッカー競技)</a></li>
+  				<li><a href="/match/u16_InternationalDreamCup/">U-16 インターナショナルドリームカップ2018 JAPAN presented by 朝日新聞</a></li>
+	</ul>
+
+
+<div class="bold">3種（中学生年代）</div>
+	<ul class="sub-content">
+					<li><a href="/match/takamado_jfa_u15/">高円宮杯 JFA 全日本U-15サッカー選手権大会</a></li>
+					<li><a href="/match/jfa_u15_tournament/">JFA 全日本U-15サッカー大会</a></li>
+					<li><a href="/match/alljapan_juniorhs/">全国中学校体育大会／全国中学校サッカー大会</a></li>
+					<li><a href="/match/u13_league/">U-13地域サッカーリーグ</a></li>
+					<li><a href="/match/club_youth_u15/">日本クラブユースサッカー選手権(U-15)大会</a></li>
+					<li><a href="/match/meniconcup/">メニコンカップ 日本クラブユースサッカー東西対抗戦(U-15)</a></li>
+	</ul>
+
+<div class="bold">4種（小学生年代）</div>
+	<ul class="sub-content">
+					<li><a href="/match/japan_u12_football_championship/">JFA 全日本U-12サッカー選手権大会</a></li>
+					<li><a href="/match/girlseight/">キヤノン ガールズ・エイト　～ JFA地域ガールズ・エイト(U-12)サッカー大会 ～</a></li>
+	</ul>
+
+<div class="bold">女子</div>
+	<ul class="sub-content">
+  				<li><a href="/match/empressscup/">皇后杯 JFA 全日本女子サッカー選手権大会</a></li>
+  				<li><a href="/match/alljapan_ladies/">JFA 全日本O-30女子サッカー大会 </a></li>
+  				<li><a href="/match/alljapan_ladies_o40/">JFA O-40女子サッカーオープン大会</a></li>
+  				<li><a href="/match/nationalsportsfestival/">国民体育大会(サッカー競技)</a></li>
+  				<li><a href="/match/university_womens/">全日本大学女子サッカー選手権大会</a></li>
+  				<li><a href="/match/highschool_womens/">全日本高等学校女子サッカー選手権大会</a></li>
+  				<li><a href="/match/koukou_soutai/">全国高等学校総合体育大会(サッカー競技)</a></li>
+  				<li><a href="/match/joc_womens/">JFA 全日本U-18女子サッカー選手権大会</a></li>
+  				<li><a href="/match/joshi_youth_u15/">JFA 全日本U-15女子サッカー選手権大会</a></li>
+
+	</ul>
+
+
+<div class="bold">シニア</div>
+	<ul class="sub-content">
+					<li><a href="/match/jfa_o40_tournament/">JFA 全日本O-40サッカー大会</a></li>
+					<li><a href="/match/jfa_o50_tournament/">JFA 全日本O-50サッカー大会</a></li>
+					<li><a href="/match/jfa_o60_tournament/">JFA 全日本O-60サッカー大会</a></li>
+					<li><a href="/match/jfa_o70_open_tournament/">JFA O-70サッカーオープン大会</a></li>
+					<li><a href="/match/nenrinpic/">全国健康福祉祭サッカー交流大会(ねんりんピック)</a></li>
+	</ul>
+
+<div class="bold">フットサル</div>
+	<ul class="sub-content">
+					<li><a href="/match/pumacup/">JFA 全日本フットサル選手権大会</a></li>
+					<li><a href="/match/womens_futsal/">JFA 全日本女子フットサル選手権大会</a></li>
+					<li><a href="/match/jsdf_women/">自衛隊女子フットサル大会</a></li>
+					<li><a href="/match/alljapan_university_futsal/">全日本大学フットサル大会</a></li>
+					<li><a href="/match/alljapan_youth_u18_futsal/">JFA 全日本U-18フットサル選手権大会</a></li>
+					<li><a href="/match/alljapan_u15_futsal/">JFA 全日本U-15フットサル選手権大会</a></li>
+					<li><a href="/match/alljapan_u15womens_futsal/">JFA 全日本U-15女子フットサル選手権大会</a></li>
+					<li><a href="/match/vermontcup/">JFAバーモントカップ 全日本U-12フットサル選手権大会</a></li>
+					<li><a href="/match/jfaenjoy5/">JFAエンジョイ5～JFAフットサルエンジョイ大会～</a></li>
+					<li><a href="/match/afc_futsal_club_championship/">AFCフットサルクラブ選手権</a></li>
+	</ul>
+
+
+<div class="bold">ビーチサッカー</div>
+	<ul class="sub-content">
+	<li><a href="/match/japan_beach/">JFA 全日本ビーチサッカー大会</a></li>
+	</ul>
+
+        </ul>
+        <div class="close-btn"><a href="javascript:void(0);" class="close">閉じる</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- end subnavi -->
+
+
+
+  <!-- start pankz -->
+  <div class="outer-block pankz">
+    <div class="outer-inner">
+      <div class="pankz-list">
+        <span><a href="/">ホーム</a></span> &gt;
+        <span><a href="/match/">大会・試合</a></span> &gt;
+        <span><a href="/match/japan_u12_football_championship_2015/">第39回全日本少年サッカー大会</a></span> &gt;
+        <span><a href="/match/japan_u12_football_championship_2015/schedule_result/">日程・結果</a></span> &gt;
+        <span>試合結果</span>
+      </div>
+    </div>
+  </div>
+  <!-- end pankz -->
+
+  <!--start kirinchallenge title-->
+	  <!--start kirinchallenge title-->
+  <div id="match_title" class="outer-block clearfix">
+  <div id="ttl_pc"><img src="/match/japan_u12_football_championship_2015/img/match_japan_u12_football_championship_2015.png" alt="第39回全日本少年サッカー大会 決勝大会"/></div>
+  <div id="ttl_sp"><img src="/match/japan_u12_football_championship_2015/img/sp_match_japan_u12_football_championship_2015.png" alt="第39回全日本少年サッカー大会 決勝大会"/></div>
+		<div class="textarea-match"><span>2015/12/26（土）〜2015/12/29（火）</span></div>
+        
+	  <div id="outer-inner-menu">
+	  	<div class="menu-triggeer disp_sp"><a href="javascript:void(0);" class="match-menu">大会メニュー</a></div>
+	  	<div class="sp-menu-wrap disp_sp">
+	  	<ul>
+	<li>
+<a href="/match/japan_u12_football_championship_2015/about.html">大会要項</a>
+<a href="/match/japan_u12_football_championship_2015/img/schedule.pdf" target="_blank">全大会日程</a>
+<a href="/match/japan_u12_football_championship_2015/schedule_result/">日程・結果</a>
+<a href="/match/japan_u12_football_championship_2015/access.html#round1">会場アクセス 会場案内図</a>
+<a href="/match/japan_u12_football_championship_2015/event.html">イベント</a>
+<a href="/match/japan_u12_football_championship_2015/tv.html">TV放送/JFA-TV</a>
+<a href="/match/japan_u12_football_championship_2015/manners.html">観戦マナー</a>
+<a href="/match/japan_u12_football_championship_2015/standings/">都道府県大会</a>
+<a href="/match/japan_u12_football_championship_2015/history.html">歴代優勝チーム</a>
+<a href="http://webshop.jfa.jp/fs/jfagoods/gd29" target="_blank">大会プログラム オンライン販売 <img src="/common/img/ico_blank_local_nav.png"></a>
+</li>
+</ul>
+
+	  	<div class="close-btn"><a href="javascript:void(0);">メニューを閉じる</a></div>
+	  	</div>
+	  </div>
+
+  </div>
+
+
+
+<div class="outer-block clearfix" id="container">
+     	<div id="main-colum">
+		<div id="page-title"><h3>日程・結果</h3></div>
+			<div class="section-block">
+				<div id="header-schedule-result">
+					<div id="inner-header-score" class="clearfix">
+						<div class="text-schedule">［26］第2節　2015年12月26日　13:00 KickOff　Pitch(2)</div>
+						<div class="official-record"><a href="../schedule_result/pdf/m26.pdf" target="_blank"><img src="/common/img/icon_pdf.gif" alt="icon_pdf" height="16" width="16">公式記録</a></div>
+					</div>
+					<div id="score-board" class="clearfix">
+						<div id="score-board-header">
+							<div class="team_name">レジスタFC</div>
+							<div class="total-score">4</div>
+							<div class="score-detail">
+								<ul class="inner-score">
+									<li>
+										<span>2</span>
+										<span>前半</span>
+										<span>0</span>
+									</li>
+									<li>
+										<span>2</span>
+										<span>後半</span>
+										<span>1</span>
+									</li>
+								</ul>
+							</div>
+							<div class="total-score">1</div>
+							<div class="team_name">ソレッソ熊本</div>
+						</div>
+						<div id="game-content-wrap">
+							<div class="scorerLeft">10分 山崎 倫<br />17分 篠田 大輝<br />29分 篠田 大輝<br />40+1分 川地 皓<br /></div>
+							<div class="title-scorer">得点者</div>
+							<div class="scorerRight">27分 坂本 一彩<br /></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="section-block">
+				<div id="header-match-result">
+					<ul>
+						<li>
+							<span class="team-photo"><img src="../images/team_img/team02.JPG" alt="photo_result01"></span>
+							<span class="team-name">（埼玉県）　レジスタFC</span>
+						</li>
+						<li>
+							<span class="team-photo"><img src="../images/team_img/team04.JPG" alt="photo_result01"></span>
+							<span class="team-name">（熊本県）　ソレッソ熊本</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="section-block">
+				<table class="match-result">
+					<tbody><tr>
+					<td class="header" colspan="3">レジスタFC</td>
+					<td class="header" colspan="3">ソレッソ熊本</td>
+					</tr>
+					<tr>
+						<td class="position"><span class="gk">GK</span></td>
+						<td class="number">1</td>
+						<td>彼島 優 (Cap.)</td>
+						<td class="position"><span class="fw">FW</span></td>
+						<td class="number">5</td>
+						<td>深草 純矢</td>
+					</tr>
+					<tr>
+						<td class="position"><span class="mf">MF</span></td>
+						<td class="number">4</td>
+						<td>宇田川 瑛琉</td>
+						<td class="position"><span class="mf">MF</span></td>
+						<td class="number">7</td>
+						<td>岩本 昌大郎</td>
+					</tr>
+					<tr>
+						<td class="position"><span class="df">DF</span></td>
+						<td class="number">5</td>
+						<td>宇田川 侑潤</td>
+						<td class="position"><span class="mf">MF</span></td>
+						<td class="number">8</td>
+						<td>田上 廉太郎</td>
+					</tr>
+					<tr>
+						<td class="position"><span class="mf">MF</span></td>
+						<td class="number">6</td>
+						<td>小林 純太</td>
+						<td class="position"><span class="mf">MF</span></td>
+						<td class="number">9</td>
+						<td>吉永 亨</td>
+					</tr>
+					<tr>
+						<td class="position"><span class="fw">FW</span></td>
+						<td class="number">7</td>
+						<td>篠田 大輝</td>
+						<td class="position"><span class="mf">MF</span></td>
+						<td class="number">10</td>
+						<td>坂本 一彩 (Cap.)</td>
+					</tr>
+					<tr>
+						<td class="position"><span class="fw">FW</span></td>
+						<td class="number">9</td>
+						<td>山崎 倫</td>
+						<td class="position"><span class="gk">GK</span></td>
+						<td class="number">12</td>
+						<td>広川 豪琉</td>
+					</tr>
+					<tr>
+						<td class="position"><span class="fw">FW</span></td>
+						<td class="number">10</td>
+						<td>川地 皓</td>
+						<td class="position"><span class="df">DF</span></td>
+						<td class="number">14</td>
+						<td>坂井 駿也</td>
+					</tr>
+					<tr>
+						<td class="position"><span class="df">DF</span></td>
+						<td class="number">16</td>
+						<td>石戸 良太</td>
+						<td class="position"><span class="df">DF</span></td>
+						<td class="number">15</td>
+						<td>原田 樹行</td>
+					</tr>
+					<tr>
+						<td class="separate" colspan="6"></td>
+					</tr>
+					<tr>
+						<td class="header" colspan="6">控え選手</td>
+					</tr>
+					<tr>
+						<td class="position"><span class="df">DF</span></td>
+						<td class="number">3</td>
+						<td>井上 貴輝</td>
+						<td class="position"><span class="gk">GK</span></td>
+						<td class="number">1</td>
+						<td>田代 健</td>
+					</tr>
+					<tr>
+						<td class="position"><span class="mf">MF</span></td>
+						<td class="number">8</td>
+						<td>吉岡 達也</td>
+						<td class="position"><span class="df">DF</span></td>
+						<td class="number">2</td>
+						<td>渡邉 暖仁</td>
+					</tr>
+					<tr>
+						<td class="position"><span class="fw">FW</span></td>
+						<td class="number">11</td>
+						<td>奥谷 凜太郎</td>
+						<td class="position"><span class="mf">MF</span></td>
+						<td class="number">3</td>
+						<td>坂元 健琉</td>
+					</tr>
+					<tr>
+						<td class="position"><span class="fw">FW</span></td>
+						<td class="number">12</td>
+						<td>狩野 隆有</td>
+						<td class="position"><span class="mf">MF</span></td>
+						<td class="number">4</td>
+						<td>髙野 蓮</td>
+					</tr>
+					<tr>
+						<td class="position"><span class="mf">MF</span></td>
+						<td class="number">15</td>
+						<td>木下 拓実</td>
+						<td class="position"><span class="mf">MF</span></td>
+						<td class="number">6</td>
+						<td>出田 秀斗</td>
+					</tr>
+					<tr>
+						<td class="position"><span class="mf">MF</span></td>
+						<td class="number">17</td>
+						<td>齋藤 百玖</td>
+						<td class="position"><span class="fw">FW</span></td>
+						<td class="number">11</td>
+						<td>梅木 耀司</td>
+					</tr>
+					<tr>
+						<td class="position"><span class="fw">FW</span></td>
+						<td class="number">20</td>
+						<td>岸本 悠将</td>
+						<td class="position"><span class="df">DF</span></td>
+						<td class="number">13</td>
+						<td>倉岡 仁</td>
+					</tr>
+					<tr>
+						<td class="position"><span class="gk">GK</span></td>
+						<td class="number">21</td>
+						<td>鮎澤 太陽</td>
+						<td class="position"><span class="df">DF</span></td>
+						<td class="number">16</td>
+						<td>石田 琉斗</td>
+					</tr>
+					<tr>
+						<td class="separate" colspan="6"></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="number">監督</td>
+						<td>渡辺 泰明</td>
+						<td colspan="2" class="number">監督</td>
+						<td>広川 靖二</td>
+					</tr>
+					</tbody></table>
+			</div>
+		</div>
+
+    <div id="sub">
+      <div class="menu-samurai-match">
+        <div class="category-name disp_pc">第39回<br>全日本少年サッカー大会</div>
+        <ul class="local-navi disp_pc" id="schedule">
+						<li class="local-top"><a href="/match/japan_u12_football_championship_2015/">大会トップ</a></li>
+<li class="local-about"><a href="/match/japan_u12_football_championship_2015/about.html">大会要項</a></li>
+<li class="local-schedule_all"><a href="/match/japan_u12_football_championship_2015/img/schedule.pdf" target="_blank">全大会日程</a></li>
+<li class="local-schedule"><a href="/match/japan_u12_football_championship_2015/schedule_result/">日程・結果</a></li>
+<li class="local-access"><a href="/match/japan_u12_football_championship_2015/access.html#pankz">会場アクセス 会場案内図</a></li>
+<li class="local-event"><a href="/match/japan_u12_football_championship_2015/event.html">イベント</a></li>
+<li class="local-tv"><a href="/match/japan_u12_football_championship_2015/tv.html">TV放送/JFA-TV</a></li>
+<li class="local-manners"><a href="/match/japan_u12_football_championship_2015/manners.html">観戦マナー</a></li>
+<li class="local-standings"><a href="javascript:void(0);" class="switch">都道府県大会</a></li>
+<ul id="sub-standings" class="sub-content">
+<li><a href="/match/japan_u12_football_championship_2015/standings/" class="standings">都道府県大会トップ</a></li>
+<!--<li><a href="/match/japan_u12_football_championship_2015/standings/info.html" class="info">TV放映</a></li>-->
+<li><a href="/match/japan_u12_football_championship_2015/standings/hokkaido/" class="hokkaido">北海道</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/aomori/" class="aomori">青森</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/akita/" class="akita">秋田</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/iwate/" class="iwate">岩手</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/yamagata/" class="yamagata">山形</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/miyagi/" class="miyagi">宮城</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/fukushima/" class="fukushima">福島</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/gunma/" class="gunma">群馬</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/tochigi/" class="tochigi">栃木</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/ibaraki/" class="ibaraki">茨城</a></li>
+
+<li><a href="/match/japan_u12_football_championship_2015/standings/chiba/" class="chiba">千葉</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/saitama/" class="saitama">埼玉</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/tokyo/" class="tokyo">東京</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/kanagawa/" class="kanagawa">神奈川</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/shizuoka/" class="shizuoka">静岡</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/yamanashi/" class="yamanashi">山梨</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/nagano/" class="nagano">長野</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/niigata/" class="niigata">新潟</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/toyama/" class="toyama">富山</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/ishikawa/" class="ishikawa">石川</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/fukui/" class="fukui">福井</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/shiga/" class="shiga">滋賀</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/gifu/" class="gifu">岐阜</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/aichi/" class="aichi">愛知</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/mie/" class="mie">三重</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/nara/" class="nara">奈良</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/wakayama/" class="wakayama">和歌山</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/osaka/" class="osaka">大阪</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/kyoto/" class="kyoto">京都</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/hyogo/" class="hyogo">兵庫</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/okayama/" class="okayama">岡山</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/tottori/" class="tottori">鳥取</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/shimane/" class="shimane">島根</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/hiroshima/" class="hiroshima">広島</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/yamaguchi/" class="yamaguchi">山口</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/kagawa/" class="kagawa">香川</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/tokushima/" class="tokushima">徳島</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/ehime/" class="ehime">愛媛</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/kochi/" class="kochi">高知</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/fukuoka/" class="fukuoka">福岡</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/saga/" class="saga">佐賀</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/nagasaki/" class="nagasaki">長崎</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/oita/" class="oita">大分</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/miyazaki/" class="miyazaki">宮崎</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/kumamoto/" class="kumamoto">熊本</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/kagoshima/" class="kagoshima">鹿児島</a></li>
+<li><a href="/match/japan_u12_football_championship_2015/standings/okinawa/" class="okinawa">沖縄</a></li>
+</ul>
+<li class="local-history"><a href="/match/japan_u12_football_championship_2015/history.html">歴代優勝チーム</a></li>
+<li><a href="http://webshop.jfa.jp/fs/jfagoods/gd29" target="_blank">大会プログラムオンライン販売 <img src="/common/img/ico_blank_local_nav.png"></a></li>
+
+        </ul>
+      </div>
+	  					<div class="r_bnr_area">
+  <p class="r_navi_sub">特別協賛</p>
+  <ul>
+    <li><a href="http://www.ykk.co.jp/japanese/index.html" target="_blank"><img src="/common/img/banner/ykk.jpg" alt="YKK" /></a></li>
+    <li><a href="http://www.kao.com/jp/" target="_blank"><img src="/common/img/banner/kao.jpg" alt="花王" /></a></li>
+  </ul>
+  <p class="r_navi_sub">協賛</p>
+  <ul>
+    <li><a href="http://www.mcdonalds.co.jp/" target="_blank"><img src="/common/img/banner/mcdonald.jpg" alt="日本マクドナルド" /></a></li>
+    <li><a href="http://www.aquarius-sports.jp/" target="_blank"><img src="/common/img/banner/cocacola.jpg" alt="コカ･コ－ラ" /></a></li>
+    <li><a href="http://www.nisshin-oillio.com/" target="_blank"><img src="/common/img/banner/oillio.jpg" alt="日清オイリオグループ" /></a></li>
+    <li><a href="http://www.supersports.co.jp/" target="_blank"><img src="/common/img/banner/bnr_xebio.jpg" alt="ゼビオ" /></a></li>
+    <li><a href="http://www.jp-bank.japanpost.jp/" target="_blank"><img src="/common/img/banner/jp-bank.jpg" alt="ゆうちょ銀行" /></a></li>
+    <li><a href="http://sho.benesse.co.jp/s/" target="_blank"><img src="/common/img/banner/benesse.jpg" alt="ベネッセコーポレーション" /></a></li>
+  </ul>
+</div>
+<div class="r_bnr_area">
+  <a class="twitter-timeline" href="https://twitter.com/u12football" data-widget-id="316481545500246016">@u12football からのツイート</a>
+  <script>!function (d, s, id) {
+      var
+        js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); }
+    }(document, "script", "twitter-wjs");</script>
+</div>
+<div class="r_bnr_area mT5">
+  <ul>
+    <li><a href="http://ameblo.jp/zensho37" target="_blank"><img src="/match/japan_u12_football_championship_2015/img/bnr_zensho_blog_2015.jpg" alt="全小ブログ" /></a></li>
+  </ul>
+</div>
+
+    </div>
+  </div>
+
+  <!-- start pankz -->
+  <div class="outer-block pankz">
+    <div class="head-line"></div>
+    <div class="outer-inner">
+      <div class="footer-pankz-list">
+        <span><a href="/">ホーム</a></span>
+        <span><a href="/match/">大会・試合</a></span>
+        <span><a href="/match/japan_u12_football_championship_2015/">第39回全日本少年サッカー大会</a></span>
+        <span><a href="/match/japan_u12_football_championship_2015/schedule_result/">日程・結果</a></span>
+        <span>試合結果</span>
+      </div>
+    </div>
+  </div>
+  <!-- end pankz -->
+
+  <!-- start sitemap -->
+  
+  <!-- end sitemap -->
+
+  <!-- start footer -->
+  <div id="sitemap" class="outer-block clearfix">
+  <div class="outer-inner">
+    <div class="sitemap-head">
+      <h3>JFA.jp</h3>
+      <ul class="sns-area clearfix disp-pc">
+        <li class="facebook"><a href="https://www.jfa.jp/sns_list/#facebook"><i class="fab fa-facebook-f fa-2x"></i></a></li>
+        <li class="twitter"><a href="https://www.jfa.jp/sns_list/#twitter"><i class="fab fa-twitter fa-2x"></i></a></li>
+        <li class="instagram"><a href="https://www.jfa.jp/sns_list/#instagram"><i class="fab fa-instagram fa-2x"></i></a></li>
+        <li class="link"><a href="https://www.jfa.jp/sns_list/">ソーシャルメディア一覧</a></li>
+      </ul>
+  </div>
+    <ul class="contents-wrap clearfix">
+      <li class="national">
+        <h4><a href="javascript:void(0);" class="slide">代表</a></h4>
+        <ul class="sub-sitemap">
+          <li class="bold_s"><a href="https://www.jfa.jp/national_team/">日本代表トップ</a></li>
+          <li class="mT10 bold_s">[日本代表]</li>
+          <li><a href="https://www.jfa.jp/samuraiblue/">SAMURAI BLUE</a></li>
+          <li><a href="https://www.jfa.jp/national_team/u22_2019/">U-22</a></li>
+          <li><a href="https://www.jfa.jp/national_team/u20_2019/">U-20</a></li>
+          <li><a href="https://www.jfa.jp/national_team/u18_2019/">U-18</a></li>
+          <li><a href="https://www.jfa.jp/national_team/u17_2019/">U-17</a></li>
+          <li><a href="https://www.jfa.jp/national_team/u16_2019/">U-16</a></li>
+          <li><a href="https://www.jfa.jp/national_team/u15_2019/">U-15</a></li>
+          <li><a href="https://www.jfa.jp/national_team/university_2019/">大学</a></li>
+          <li class="mT10 bold_s">[日本女子代表]</li>
+          <li><a href="https://www.jfa.jp/nadeshikojapan/">なでしこジャパン</a></li>
+          <li><a href="https://www.jfa.jp/national_team/u19w_2019/">U-19</a></li>
+          <li><a href="https://www.jfa.jp/national_team/u17w_2019/">U-17</a></li>
+          <li><a href="https://www.jfa.jp/national_team/u16w_2019/">U-16</a></li>
+          <li><a href="https://www.jfa.jp/national_team/universityw_2019/">大学</a></li>
+          <li class="mT10 bold_s">[フットサル日本代表]</li>
+          <li><a href="https://www.jfa.jp/national_team/futsal_2019/">男子／フットサル</a></li>
+          <li><a href="https://www.jfa.jp/national_team/u20_futsal_2019/">男子／U-20 フットサル</a></li>
+          <li><a href="https://www.jfa.jp/national_team/futsalw_2019/">女子／フットサル</a></li>
+          <li class="mT10 bold_s">[ビーチサッカー日本代表]</li>
+          <li><a href="https://www.jfa.jp/national_team/beach_2019/">ビーチサッカー</a></li>
+          <li class="mT10"><a href="/national_team/identity/">日本代表アイデンティティ</a></li>
+          <li><a href="https://www.jfa.jp/national_team/jerseys/">歴代ジャージ</a></li>
+          <li><a href="https://www.jfa.jp/national_team/download.html">壁紙ダウンロード</a></li>
+          <li><a href="https://www.jfa.jp/national_team/moriyasu_memo/">森保一監督手記「一心一意、一心一向 -MORIYASU Hajime MEMO-」</a></li>
+          <li><a href="https://www.jfa.jp/national_team/bruno_garcia_futsal_dojo/">ブルーノ・ガルシアのフットサル道場</a></li>
+          <li><a href="https://www.jfa.jp/national_team/guide/index.html">初めての日本代表戦 観戦ガイド</a></li>
+        </ul>
+      </li>
+
+
+      <li class="watch">
+        <h4><a href="javascript:void(0);" class="slide">見る</a></h4>
+        <ul class="sub-sitemap">
+          <li class="bold_s"><a href="https://www.jfa.jp/match/">大会・試合トップ</a></li>
+          <li><a href="https://www.jfa.jp/international_match/">国際大会一覧</a></li>
+          <li class="mT10 bold_s">[1種(一般)]</li>
+          <li><a href="https://www.jfa.jp/match/emperorscup/">天皇杯 JFA 全日本サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/acl/">AFCチャンピオンズリーグ</a></li>
+          <li><a href="https://www.jfa.jp/match/j_conmebol/">ＪリーグYBCルヴァンカップ/CONMEBOLスダメリカーナ　王者決定戦</a></li>
+          <li><a href="https://www.jfa.jp/match/nationalsportsfestival/">国民体育大会(サッカー競技)</a></li>
+          <li><a href="https://www.jfa.jp/match/regional_league/">全国地域サッカーチャンピオンズリーグ</a></li>
+          <li><a href="https://www.jfa.jp/match/clubteams/">全国クラブチームサッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/adults_football_tournament/">全国社会人サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/municipality/">全国自治体職員サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/jsdf/">全国自衛隊サッカー大会</a></li>
+          <li><a href="https://www.jfa.jp/match/sports_masters/">日本スポーツマスターズ(サッカー競技会)</a></li>
+          <li><a href="https://www.jfa.jp/match/alljapan_university/">全日本大学サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/prime_minister_cup/">総理大臣杯 全日本大学サッカートーナメント</a></li>
+          <li><a href="https://www.jfa.jp/match/alljapan_university_rookie/">全日本大学サッカー新人戦</a></li>
+          <li><a href="https://www.jfa.jp/match/densocup/">デンソーカップチャレンジサッカー</a></li>
+          <li><a href="https://www.jfa.jp/match/japanandkorea/">DENSO CUP SOCCER 第15回大学日韓(韓日)定期戦</a></li>
+          <li><a href="https://www.jfa.jp/match/alljapan_technicalcollege/">全国高等専門学校サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/professionalschool/">全国専門学校サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/fcwc_2018/">Alibaba Cloud プレゼンツ FIFA クラブワールドカップ UAE 2018</a></li>
+        </ul>
+        <ul class="sub-sitemap">
+          <li class="mT10 bold_s">[2種(高校生年代)]</li>
+          <li><a href="https://www.jfa.jp/match/takamado_jfa_u18_premier2019_final/">高円宮杯 JFA U-18サッカープレミアリーグ 2019 ファイナル</a></li>
+          <li><a href="https://www.jfa.jp/match/takamado_jfa_u18_premier/">高円宮杯 JFA U-18サッカープレミアリーグ</a></li>
+          <li><a href="https://www.jfa.jp/match/takamado_jfa_u18_premier2019_playoff/">高円宮杯 JFA U-18サッカープレミアリーグ 2019 プレーオフ</a></li>
+          <li><a href="https://www.jfa.jp/match/takamado_jfa_u18_prince/">高円宮杯 JFA U-18サッカープリンスリーグ</a></li>
+          <li><a href="https://www.jfa.jp/match/alljapan_highschool/">全国高等学校サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/koukou_soutai/">全国高等学校総合体育大会(サッカー競技)</a></li>
+          <li><a href="https://www.jfa.jp/match/evening_correspondence_hs/">全国高等学校定時制通信制サッカー大会</a></li>
+          <li><a href="https://www.jfa.jp/match/club_youth_u18/">日本クラブユースサッカー選手権(U-18)大会</a></li>
+          <li><a href="https://www.jleague.jp/jyouth/" target="_blank">Jユースカップ Jリーグユース選手権大会<img src="/common/img/ico_blank_local_nav.png"></a></li>
+          <li><a href="https://www.jfa.jp/match/nationalsportsfestival/">国民体育大会(サッカー競技)</a></li>
+          <li><a href="https://www.jfa.jp/match/u16_InternationalDreamCup/">U-16 インターナショナルドリームカップ2019 JAPAN presented by 朝日新聞</a></li>
+          <li class="mT10 bold_s">[3種(中学生年代)]</li>
+          <li><a href="https://www.jfa.jp/match/takamado_jfa_u15/">高円宮杯 JFA 全日本U-15サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/jfa_u15_tournament/">JFA 全日本U-15サッカー大会</a></li>
+          <li><a href="https://www.jfa.jp/match/alljapan_juniorhs/">全国中学校体育大会／全国中学校サッカー大会</a></li>
+          <li><a href="https://www.jfa.jp/match/u13_league/">U-13地域サッカーリーグ</a></li>
+          <li><a href="https://www.jfa.jp/match/club_youth_u15/">日本クラブユースサッカー選手権(U-15)大会</a></li>
+          <li><a href="https://www.jfa.jp/match/meniconcup/">メニコンカップ 日本クラブユースサッカー東西対抗戦(U-15)</a></li>
+          <li class="mT10 bold_s">[4種(小学生年代)]</li>
+          <li><a href="https://www.jfa.jp/match/japan_u12_football_championship/">JFA 全日本U-12サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/girlseight/">キヤノン ガールズ・エイト　～ JFA地域ガールズ・エイト(U-12)サッカー大会 ～</a></li>
+        </ul>
+        <ul class="sub-sitemap">
+          <li class="mT10 bold_s">[女子]</li>
+          <li><a href="https://www.jfa.jp/match/empressscup/">皇后杯 JFA 全日本女子サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/alljapan_ladies/">JFA 全日本O-30女子サッカー大会</a></li>
+          <li><a href="https://www.jfa.jp/match/alljapan_ladies_o40/">JFA O-40女子サッカーオープン大会</a></li>
+          <li><a href="https://www.jfa.jp/match/nationalsportsfestival/">国民体育大会(サッカー競技)</a></li>
+          <li><a href="https://www.jfa.jp/match/university_womens/">全日本大学女子サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/highschool_womens/">全日本高等学校女子サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/koukou_soutai/">全国高等学校総合体育大会(サッカー競技)</a></li>
+          <li><a href="https://www.jfa.jp/match/joc_womens/">JFA 全日本U-18女子サッカー選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/joshi_youth_u15/">JFA 全日本U-15女子サッカー選手権大会</a></li>
+          <li class="mT10 bold_s">[シニア]</li>
+          <li><a href="https://www.jfa.jp/match/jfa_o40_tournament/">JFA 全日本O-40サッカー大会</a></li>
+          <li><a href="https://www.jfa.jp/match/jfa_o50_tournament/">JFA 全日本O-50サッカー大会</a></li>
+          <li><a href="https://www.jfa.jp/match/jfa_o60_tournament/">JFA 全日本O-60サッカー大会</a></li>
+          <li><a href="https://www.jfa.jp/match/jfa_o70_open_tournament/">JFA O-70サッカーオープン大会</a></li>
+          <li><a href="https://www.jfa.jp/match/nenrinpic/">全国健康福祉祭サッカー交流大会(ねんりんピック)</a></li>
+          <li class="mT10 bold_s">[フットサル]</li>
+          <li><a href="https://www.jfa.jp/match/pumacup/">JFA 全日本フットサル選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/womens_futsal/">JFA 全日本女子フットサル選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/jsdf_women/">自衛隊女子フットサル大会</a></li>
+          <li><a href="https://www.jfa.jp/match/alljapan_university_futsal/">全日本大学フットサル大会</a></li>
+          <li><a href="https://www.jfa.jp/match/alljapan_youth_u18_futsal/">JFA 全日本U-18フットサル選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/alljapan_u15_futsal/">JFA 全日本U-15フットサル選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/alljapan_u15womens_futsal/">JFA 全日本U-15女子フットサル選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/vermontcup/">JFA バーモントカップ 全日本U-12フットサル選手権大会</a></li>
+          <li><a href="https://www.jfa.jp/match/jfaenjoy5/">JFAエンジョイ5～JFAフットサルエンジョイ大会～</a></li>
+          <li><a href="https://www.jfa.jp/match/afc_futsal_club_championship/">AFCフットサルクラブ選手権</a></li>
+          <li class="mT10 bold_s">[ビーチサッカー]</li>
+          <li><a href="https://www.jfa.jp/match/japan_beach/">JFA 全日本ビーチサッカー大会</a></li>
+          <ul class="sub-sitemap">
+            <li class="mT10 bold_s"><a href="https://www.jfa.jp/rule/">ルールを知ろう！</a></li>
+            <li class="mT10 bold_s"><a href="https://www.jfa.jp/football_museum/">日本サッカーミュージアム</a></li>
+          </ul>
+        </ul>
+      </li>
+
+      <li class="navplay">
+        <h4><a href="javascript:void(0);" class="slide">する</a></h4>
+        <ul class="sub-sitemap">
+          <li class="bold_s"><a href="https://www.jfa.jp/grass_roots/">グラスルーツトップ</a></li>
+          <li><a href="https://www.jfa.jp/grass_roots/declaration/">JFAグラスルーツ宣言</a></li>
+          <li><a href="https://www.jfa.jp/grass_roots/festival/">フェスティバル</a></li>
+          <li><a href="https://www.jfa.jp/grass_roots/square/">JFAスクエア</a></li>
+          <li><a href="https://www.jfa.jp/nadeshikohiroba/">JFAなでしこひろば</a></li>
+          <li><a href="https://www.jfa.jp/football_family/challengegame/">JFAチャレンジゲーム</a></li>
+          <li><a href="https://www.jfa.jp/grass_roots/kidsprogram/">キッズプログラム</a></li>
+          <!--<li><a href="https://j-futsal.jfa.jp/">エンジョイフットサル登録・<br>施設検索「j-futsal」</a></li>-->
+          <li><a href="https://www.jfa.jp/grass_roots/disability/">障がい者サッカー</a></li>
+          <li><a href="https://www.jfa.jp/grass_roots/partner/">JFAグラスルーツ推進・賛同パートナー制度</a></li>
+
+          <li class="mT10 bold_s"><a href="https://www.jfa.jp/match/">大会・試合トップ</a></li>
+          <li class="mT10 bold_s"><a href="https://www.jfa.jp/rule/">ルールを知ろう！</a></li>
+        </ul>
+      </li>
+
+      <li class="affect">
+        <h4><a href="javascript:void(0);" class="slide">関わる</a></h4>
+        <ul class="sub-sitemap">
+          <li class="bold_s"><a href="https://www.jfa.jp/referee/">審判トップ</a></li>
+          <li><a href="https://www.jfa.jp/referee/system/">審判制度概要</a></li>
+          <li><a href="https://www.jfa.jp/referee/registration/">審判登録制度</a></li>
+          <li><a href="https://www.jfa.jp/referee/referee_caravan/">JFAレフェリーキャラバン</a></li>
+          <li><a href="https://www.jfa.jp/referee/exchange/">交流プログラム</a></li>
+          <li><a href="https://www.jfa.jp/referee/training_center/">審判トレーニングセンター</a></li>
+          <li><a href="https://www.jfa.jp/referee/college/">JFAレフェリーカレッジ</a></li>
+          <li><a href="https://www.jfa.jp/referee/profile/">審判員紹介</a></li>
+          <li><a href="https://www.jfa.jp/laws/">競技規則</a></li>
+
+          <li class="mT10 bold_s"><a href="https://www.jfa.jp/coach/">指導者トップ</a></li>
+          <li><a href="https://www.jfa.jp/coach/official/">JFA公認指導者</a></li>
+          <li><a href="https://www.jfa.jp/coach/official/training.html">指導者養成講習会</a></li>
+          <li><a href="https://www.jfa.jp/coach/official/instructor.html">インストラクター制度</a></li>
+          <li><a href="https://www.jfa.jp/coach/official/refresh.html">リフレッシュ研修会</a></li>
+          <li><a href="https://www.jfa.jp/coach/download/">各種資料・申請書</a></li>
+          <li><a href="https://www.jfa.jp/coach/physical_training_club_activity/">学校体育・部活動</a></li>
+
+          <li class="mT10 bold_s"><a href="https://www.jfa.jp/respect/">リスペクト・フェアプレートップ</a></li>
+          <li><a href="https://www.jfa.jp/respect/declaration/">リスペクト宣言</a></li>
+          <li><a href="https://www.jfa.jp/respect/heart/">連載：いつも心にリスペクト</a></li>
+          <li><a href="https://www.jfa.jp/respect/tnews/">連載：サッカーの活動における暴力根絶に向けて</a></li>
+          <li><a href="https://www.jfa.jp/respect/fairplaydays/">JFAリスペクト フェアプレー デイズ</a></li>
+          <li><a href="https://www.jfa.jp/respect/download.html">各種書類ダウンロード</a></li>
+          <li><a href="https://www.jfa.jp/violence_eradication/">暴力等根絶相談窓口</a></li>
+        </ul>
+      </li>
+
+      <li class="kiyaku">
+        <h4><a href="javascript:void(0);" class="slide">JFA</a></h4>
+        <ul class="sub-sitemap">
+          <li class="bold_s"><a href="https://www.jfa.jp/youth_development/">選手育成トップ</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/outline/">選手育成のコンセプト</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/national_tracen/top.html">ナショナルトレセン</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/elite_programme/">JFAエリートプログラム</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/gk_camp/">ナショナルGKキャンプ</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/super_girls_project/">女子GKキャンプ</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/futsal_gk_camp/">フットサルGKキャンプ</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/futsal_talent_caravan/">フットサルタレントキャラバン</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/honor_players/">JFA・Jリーグ特別指定選手制度</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/strengthening_player/">なでしこジャパン海外強化指定選手</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/environmental_arrangement/">ゲーム環境整備</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/jfa_academy/">JFAアカデミー</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/jfa_academy/fukushima/">JFAアカデミー福島</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/jfa_academy/kumamoto_uki/">JFAアカデミー熊本宇城</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/jfa_academy/sakai/">JFAアカデミー堺</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/jfa_academy/imabari/">JFAアカデミー今治</a></li>
+          <li><a href="https://www.jfa.jp/youth_development/players_first/">PLAYERS FIRST!</a></li>
+          <li><a href="https://www.jfa.jp/nfc/">JFA夢フィールド</a></li>
+
+
+          <li class="mT10 bold_s"><a href="https://www.jfa.jp/social_action_programme/">社会貢献活動トップ</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/football_contribution/">サッカーを通じた社会への貢献（SDGs）</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/relief_efforts/">復興支援活動</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/yumesen/">JFAこころのプロジェクト</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/global_compact/">国連グローバル・コンパクトへの参加</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/green_project/">JFAグリーンプロジェクト/ポット苗式・芝生化モデル事業</a></li>
+          <li><a href="https://www.jfa.jp/smc/">JFAスポーツマネジャーズカレッジ（SMC）</a></li>
+
+          <li class="mT10 bold_s"><a href="https://www.jfa.jp/social_action_programme/international_exchange/">国際交流・アジア貢献活動トップ</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/international_exchange/dispatch_member/">JFA公認指導者の海外派遣</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/international_exchange/assistanceh.html">JFAユース育成資金援助</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/international_exchange/coaching.html">JFAインターナショナルコーチングコース</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/international_exchange/referee_instructor.html">JFAインターナショナル レフェリーインストラクター コース</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/international_exchange/training_camp_hosting.html">アジアの代表チーム／選手／コーチの受け入れ</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/international_exchange/hosting_of_study_visits.html">各国協会／リーグの視察団の受け入れ</a></li>
+
+          <li class="mT10 bold_s"><a href="https://www.jfa.jp/medical/">メディカルトップ</a></li>
+          <li><a href="https://www.jfa.jp/medical/medical_committee.html">医学委員会とは</a></li>
+          <li><a href="https://www.jfa.jp/medical/medical_committee_conference.html">全国医学委員長会議</a></li>
+          <li><a href="https://www.jfa.jp/medical/nf_representative_conference.html">NF Representative会議</a></li>
+          <li><a href="https://www.jfa.jp/medical/jleague_teamdoctor_conference.html">Ｊリーグチームドクター会議</a></li>
+          <li><a href="https://www.jfa.jp/medical/football_doctor_seminar.html">サッカードクターセミナー</a></li>
+          <li><a href="https://www.jfa.jp/medical/jfa_athletic_trainer_seminar.html">JFA アスレティックトレーナーセミナー</a></li>
+          <li><a href="https://www.jfa.jp/medical/critical_care.html">救命救急</a></li>
+          <li><a href="https://www.jfa.jp/medical/heat_measures_hydration.html">暑熱対策･水分補給</a></li>
+          <li><a href="https://www.jfa.jp/medical/concussion.html">脳振盪</a></li>
+          <li><a href="https://www.jfa.jp/medical/nutrition.html">栄養</a></li>
+          <li><a href="https://www.jfa.jp/medical/anti-doping.html">アンチ・ドーピング</a></li>
+          <li><a href="https://www.jfa.jp/medical/food_allergy.html">食物アレルギー</a></li>
+          <li><a href="https://www.jfa.jp/medical/injury_prevention.html">ケガの予防・対応</a></li>
+          <li><a href="https://www.jfa.jp/medical/publication.html">書籍</a></li>
+          <li><a href="https://www.jfa.jp/medical/medical_column/">メディカル通信</a></li>
+          <li><a href="https://www.jfa.jp/medical/library.html">LIBRARY</a></li>
+        </ul>
+
+        <ul class="sub-sitemap">
+          <li class="bold_s"><a href="https://www.jfa.jp/about_jfa/">日本サッカー協会トップ</a></li>
+          <li><a href="https://www.jfa.jp/about_jfa/president/">会長メッセージ</a></li>
+          <li><a href="https://www.jfa.jp/about_jfa/overview/">JFAの概要</a></li>
+          <li><a href="https://www.jfa.jp/about_jfa/jssc/">日本サッカー後援会</a></li>
+          <li><a href="https://www.jfa.jp/about_jfa/localgovernment/">日本サッカーを応援する自治体連盟</a></li>
+          <li><a href="https://www.jfa.jp/about_jfa/goal/">JFAの目標</a></li>
+          <li><a href="https://www.jfa.jp/about_jfa/policy_rule/">基本方針・規則</a></li>
+          <li><a href="https://japan2023bid.com/">FIFA女子ワールドカップ2023 日本招致</a></li>
+          <li><a href="https://www.jfa.jp/about_jfa/documents/">登録・申請・手続き</a></li>
+          <li><a href="https://www.jfa.jp/social_action_programme/football_contribution/">サッカーを通じた社会への貢献（SDGs）</a></li>
+          <li><a href="https://www.jfa.jp/about_jfa/report/">公開資料</a></li>
+          <li><a href="https://www.jfa.jp/about_jfa/media/">メディアの皆様へ</a></li>
+
+        <h4><a href="https://www.jfa.jp/women/">女子サッカー</a></h4>
+        <h4><a href="https://www.jfa.jp/futsal_s/">フットサル</a></h4>
+        <h4><a href="https://www.jfa.jp/beachsoccer/">ビーチサッカー</a></h4>
+        <h4><a href="https://www.jfa.jp/jyd/">JFA Youth &amp; Development Programme</a></h4>
+
+        <h4><a href="https://www.jfa.jp/documents/">ドキュメント</a></h4>
+        <h4><a href="https://www.jfa.jp/registration/">JFAへの登録</a></h4>
+        <h4><a href="https://www.jfa.jp/shop/">チケット／ショップ</a></h4>
+        <h4><a href="https://www.jfa.jp/documents/#l1">規約・規程</a></h4>
+        <h4><a href="https://www.jfa.jp/laws/">競技規則</a></h4>
+        <h4><a href="https://www.jfa.jp/documents/#l2">申請／手続き</a></h4>
+        <h4><a href="https://www.jfa.jp/documents/#l3">公開資料</a></h4>
+        <h4><a href="https://www.jfa.jp/documents/#l4">その他</a></h4>
+        <h4><a href="https://www.jfa.jp/documents/#l5">Q &amp; A</a></h4>
+        <h4><a href="https://www.jfa.jp/information/link.html">リンク</a></h4>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- end sitemap -->
+
+<!-- start philosophy -->
+<div id="philosophy-area">
+  <div class="head">JFAの理念</div>
+  <p>サッカーを通じて豊かなスポーツ文化を創造し、<br>人々の心身の健全な発達と社会の発展に貢献する。</p>
+  <div class="btn"><a href="https://www.jfa.jp/about_jfa/ideal/">JFAの理念・ビジョン・バリュー</a></div>
+</div>
+<!-- end philosophy -->
+
+<!-- start footer -->
+<div id="footer-area">
+  <ul class="sns-area clearfix disp-sp">
+    <li class="facebook"><a href="https://www.facebook.com/JFA.jp" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+    <li class="twitter"><a href="https://twitter.com/JFA" target="_blank"><i class="fab fa-twitter"></i></a></li>
+    <li class="instagram"><a href="https://instagram.com/japanfootballassociation/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+    <li class="link"><a href="https://www.jfa.jp/sns_list/">ソーシャルメディア一覧</a></li>
+  </ul>
+  <ul class="about">
+    <li><a href="https://www.jfa.jp/information/sitepolicy.html">サイトについて</a></li>
+    <li><a href="https://www.jfa.jp/information/legal.html">利用規約</a></li>
+    <li><a href="https://www.jfa.jp/information/personal.html">個人情報保護方針</a></li>
+    <li><a href="https://www.jfa.jp/information/mynumber.html">個人番号及び特定個人情報の適正な取扱いの確保に関する基本方針</a></li>
+    <li><a href="https://www.jfa.jp/information/privacypolicy.html">プライバシーポリシー</a></li>
+    <li><a href="http://www.jfa.or.jp/archive.html" target="_blank">アーカイブ</a></li>
+  </ul>
+  <div class="logo"><a href="https://www.jfa.jp/"><img src="/img/top/top_footer_jfa_logo.png" alt="JFA DREAM"></a></div>
+  <div class="copyright">&copy; Japan Football Association All Rights Reserved.</div>
+</div>
+
+  <!-- end footer -->
+
+  <!-- start footer -->
+  <script src="/common/js/common.js"></script>
+<script src="/js/jquery.bxslider/jquery.bxslider.min.js"></script>
+<script src="/js/slider-top.js"></script>
+<script src="/js/slider-banner.js"></script>
+<script src="/js/top.js"></script>
+<script src="/js/news.js"></script>
+<script type="text/javascript" src="/js/jquery.carouFredSel-6.1.0.js"></script>
+<script type="text/javascript" src="/js/jquery.touchSwipe.min.js"></script>
+<script type="text/javascript" src="/match/js/place_holder.js"></script> 
+<script src="/about_jfa/js/accordion.js"></script>
+<script type="text/javascript" src="/common/js/national_menu_hover.js"></script>
+<script type="text/javascript" src="/js/samurai.js"></script>
+
+  <!-- end footer -->
+
+
+</body>
+</html>
