@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[3]:
 
 
 import pandas as pd
@@ -9,7 +9,7 @@ in_file = "./u12_2018_2014.csv"
 u18_df = pd.read_csv(in_file,encoding="UTF-8")
 
 
-# In[2]:
+# In[4]:
 
 
 #列の順番を整理する time,playerの列を削除
@@ -18,7 +18,7 @@ u18_df.head(12)
 # u18_df.shape
 
 
-# In[3]:
+# In[5]:
 
 
 # スコアがNone(=未実施)の試合の行を削除
@@ -26,7 +26,7 @@ u18_df=u18_df[u18_df['results_away'] != "None"]
 u18_df.shape
 
 
-# In[4]:
+# In[6]:
 
 
 # 年が変わるときの行(カラム名が入っている)を削除(一応...)
@@ -40,7 +40,7 @@ u18_df.shape
 
 
 
-# In[5]:
+# In[7]:
 
 
 # # yearに"2002"が入ってしまっているものの対処(未実装)
@@ -48,7 +48,7 @@ u18_df.shape
 # u18_df.shape
 
 
-# In[6]:
+# In[8]:
 
 
 #idの混同を避けるため、idとyearを合わせる
@@ -57,13 +57,13 @@ u18_df["merg_id"] = u18_df["merg_id"].astype(int)
 u18_df.dtypes
 
 
-# In[7]:
+# In[9]:
 
 
 # ここからaway
 
 
-# In[8]:
+# In[10]:
 
 
 #awayチームの得点者とその試合のidのみを抜き出す
@@ -71,7 +71,7 @@ df_spr_away = pd.DataFrame(u18_df['goal_away'].str.split(',', expand=True))
 df_spr_away["merg_id"] =u18_df["merg_id"]
 
 
-# In[9]:
+# In[11]:
 
 
 # 先ほどの表から、1ゴール目のデータだけの表を作り、ゴールのない試合は削除
@@ -84,7 +84,7 @@ df_spr_away0["count_away"]=int(1)
 df_spr_away0.head(3)
 
 
-# In[10]:
+# In[12]:
 
 
 #2ゴール目以降のデータも追加
@@ -100,7 +100,7 @@ for repeat in range(1, ( (len(df_spr_away.columns)) -1) ):
 df_spr_away0
 
 
-# In[11]:
+# In[13]:
 
 
 #選手名と時間を分ける
@@ -118,22 +118,30 @@ df_spr_away0["n_time"] =df_spr_away0["n_time"].astype(int)
 df_spr_away0
 
 
-# In[12]:
+# In[14]:
 
 
 # 名前に「分」が入ってる人
-df_spr_away0.loc[ (df_spr_away0[2] != -1 ), "player"] = df_spr_away0["player"].astype(str) + str("分") + df_spr_away0[2].astype(str)
-df_spr_away0=df_spr_away0.drop(2, axis=1)
-df_spr_away0
+def inc_hunn(df):
+    try:
+        df.loc[ (df[3] != -1 ), "player"] = df["player"].astype(str) + str("分") + df[2].astype(str)
+        del df[3]
+    except:
+        try:
+            df.loc[ (df[2] != -1 ), "player"] = df["player"].astype(str) + str("分") + df[2].astype(str)
+            del df[2]
+        except:
+            pass
+inc_hunn(df_spr_away0)
 
 
-# In[13]:
+# In[15]:
 
 
 #ここからhome
 
 
-# In[14]:
+# In[16]:
 
 
 #homeチームの得点者とその試合のidのみを抜き出す
@@ -141,7 +149,7 @@ df_spr_home = pd.DataFrame(u18_df['goal_home'].str.split(',', expand=True))
 df_spr_home["merg_id"] =u18_df["merg_id"]
 
 
-# In[15]:
+# In[17]:
 
 
 # 先ほどの表から、1ゴール目のデータだけの表を作り、ゴールのない試合は削除
@@ -165,7 +173,7 @@ for repeat in range(1, ( (len(df_spr_home.columns)) -1) ):
 df_spr_home0
 
 
-# In[16]:
+# In[18]:
 
 
 #選手名と時間を分ける
@@ -182,16 +190,14 @@ df_spr_home0["a_time"] =df_spr_home0["a_time"].astype(int)
 df_spr_home0
 
 
-# In[17]:
+# In[19]:
 
 
 # 名前に「分」が入ってる人(いない場合はエラー、無視して次に進む)
-df_spr_home0.loc[ (df_spr_home0[2] != -1 ), "player"] = df_spr_home0["player"].astype(str) + str("分") + df_spr_home0[2].astype(str)
-df_spr_home0=df_spr_home0.drop(2, axis=1)
-df_spr_home0
+inc_hunn(df_spr_home0)
 
 
-# In[18]:
+# In[20]:
 
 
 #ここからまとめて
@@ -343,9 +349,15 @@ df_merged.to_csv("./adjust_" + newname + "_" + datadate + ".csv",
 
 
 
-# In[29]:
+# In[30]:
 
 
 import subprocess
 subprocess.run(['jupyter', 'nbconvert', '--to', 'python', 'dataformat.ipynb'])
+
+
+# In[ ]:
+
+
+
 
