@@ -5,7 +5,7 @@
 
 
 import pandas as pd
-in_file = "./soccer_2019_2014.csv"
+in_file = "./u12_2018_2014.csv"
 u18_df = pd.read_csv(in_file,encoding="UTF-8")
 
 
@@ -14,7 +14,7 @@ u18_df = pd.read_csv(in_file,encoding="UTF-8")
 
 #列の順番を整理する time,playerの列を削除
 u18_df=u18_df.loc[:,['id','leagu_name','year','month','day','round','team_home','team_away','url','results_away','results_home','goal_away','goal_home']]
-u18_df.head(2)
+u18_df.head(12)
 # u18_df.shape
 
 
@@ -185,7 +185,7 @@ df_spr_home0
 # In[17]:
 
 
-# 名前に「分」が入ってる人
+# 名前に「分」が入ってる人(いない場合はエラー、無視して次に進む)
 df_spr_home0.loc[ (df_spr_home0[2] != -1 ), "player"] = df_spr_home0["player"].astype(str) + str("分") + df_spr_home0[2].astype(str)
 df_spr_home0=df_spr_home0.drop(2, axis=1)
 df_spr_home0
@@ -197,7 +197,7 @@ df_spr_home0
 #ここからまとめて
 
 
-# In[19]:
+# In[21]:
 
 
 #homeとawayを合体 #並び変える（ソート）
@@ -205,11 +205,11 @@ df_merge = pd.concat([df_spr_away0,df_spr_home0],sort=True,copy=False,ignore_ind
 # .sort_values(["id","n_time","a_time"]).reset_index(drop=True)
 df_merged = pd.merge(df_merge,u18_df, on="merg_id").sort_values(["year","id","n_time","a_time"],ascending=[False,True,True,True]).reset_index(drop=True)
 
-df_merged["differ"] =df_merged["id"].diff().fillna(1)
+df_merged["differ"] =df_merged["merg_id"].diff().fillna(1)
 df_merged
 
 
-# In[20]:
+# In[22]:
 
 
 #idが変わる試合 かつ counthomeがnullのもの(=相手が先制しているので、counthomeは0になるべき)
@@ -220,7 +220,7 @@ df_merged.loc[(df_merged["differ"] != 0.0) &  (df_merged["count_away"].isnull() 
 df_merged
 
 
-# In[21]:
+# In[23]:
 
 
 #残りのNaNは、相手ゴール分なので、一つ上の行のデータで埋める
@@ -229,7 +229,7 @@ df_merged["count_home"]=df_merged["count_home"].fillna(method='ffill')
 df_merged
 
 
-# In[22]:
+# In[24]:
 
 
 #試合情報を結合
@@ -241,7 +241,7 @@ df_merged["goal_home"]=df_merged["count_home"].astype(int)
 df_merged
 
 
-# In[23]:
+# In[25]:
 
 
 #additional timeをプラス表記に
@@ -306,14 +306,7 @@ df_merged
 
 
 
-# In[20]:
-
-
-import subprocess
-subprocess.run(['jupyter', 'nbconvert', '--to', 'python', 'dataformat.ipynb'])
-
-
-# In[21]:
+# In[26]:
 
 
 # 出力CSVの名前
@@ -322,7 +315,7 @@ newname = Path(in_file).stem
 print (newname)
 
 
-# In[22]:
+# In[27]:
 
 
 # タイムスタンプ
@@ -335,11 +328,11 @@ datadate = dt.strftime('%Y%m%d%H%M')
 print (datadate)
 
 
-# In[23]:
+# In[28]:
 
 
 # 出力
-df_merged.to_csv("./U18_" + newname + "_" + datadate + ".csv", 
+df_merged.to_csv("./adjust_" + newname + "_" + datadate + ".csv", 
           index=False   # 行インデックスを削除
          )
 
@@ -348,4 +341,11 @@ df_merged.to_csv("./U18_" + newname + "_" + datadate + ".csv",
 
 
 
+
+
+# In[29]:
+
+
+import subprocess
+subprocess.run(['jupyter', 'nbconvert', '--to', 'python', 'dataformat.ipynb'])
 
