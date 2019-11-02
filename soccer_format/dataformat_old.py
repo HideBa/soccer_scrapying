@@ -9,7 +9,7 @@ in_file = "./u15_2013_2011.csv"
 u18_df = pd.read_csv(in_file,encoding="UTF-8")
 
 
-# In[30]:
+# In[2]:
 
 
 #列の順番を整理する time,playerの列を削除
@@ -142,10 +142,14 @@ df_spr_away0
 # 名前に「分」が入ってる人
 def inc_hunn(df):
     try:
-        df.loc[ (df[2] != -1 ), "player"] = df["player"].astype(str) + str("分") + df[2].astype(str)
-        del df[2]
+        df.loc[ (df[3] != -1 ), "player"] = df["player"].astype(str) + str("分") + df[2].astype(str)
+        del df[3]
     except:
-        pass
+        try:
+            df.loc[ (df[2] != -1 ), "player"] = df["player"].astype(str) + str("分") + df[2].astype(str)
+            del df[2]
+        except:
+            pass
     
 inc_hunn(df_spr_away0)
 
@@ -379,7 +383,7 @@ df_merged.to_csv("./adjust_" + "u15_2012_2010" + "_" + datadate + ".csv",
 
 
 
-# In[36]:
+# In[37]:
 
 
 import subprocess
