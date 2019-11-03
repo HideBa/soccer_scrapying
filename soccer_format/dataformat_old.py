@@ -5,7 +5,7 @@
 
 
 import pandas as pd
-in_file = "./u15_2013_2011.csv"
+in_file = "./u12_2013_2011.csv"
 u18_df = pd.read_csv(in_file,encoding="UTF-8")
 
 
@@ -37,8 +37,8 @@ u18_df.shape
 # In[5]:
 
 
-#2013以外（goal者が改行で区切られているもの）を抽出
-u18_df=u18_df[u18_df['year'] != "2013"]
+#今回は、2013以外を抽出
+u18_df=u18_df[u18_df['year'] != int("2013")]
 u18_df
 
 
@@ -65,19 +65,13 @@ u18_df.dtypes
 # ここからaway
 
 
-# In[ ]:
-
-
-
-
-
 # In[9]:
 
 
 #awayチームの得点者とその試合のidのみを抜き出す
-df_spr_away = pd.DataFrame(u18_df['goal_away'].str.split('\r', expand=True))
+df_spr_away = pd.DataFrame(u18_df['goal_away'].str.split(',', expand=True))
 df_spr_away["merg_id"] =u18_df["merg_id"]
-df_spr_away
+df_spr_away.head()
 
 
 # In[10]:
@@ -85,7 +79,7 @@ df_spr_away
 
 # 先ほどの表から、1ゴール目のデータだけの表を作り、ゴールのない試合は削除
 df_spr_away0 = pd.DataFrame({
-    "goal":df_spr_away[1],
+    "goal":df_spr_away[0],
     "merg_id":df_spr_away["merg_id"]
 })
 df_spr_away0=df_spr_away0[df_spr_away0['goal'] != "None"] # df_spr_away0.dropna(inplace=True) はもともと"None"なので、使えない
@@ -97,16 +91,16 @@ df_spr_away0.head(3)
 
 
 #2ゴール目以降のデータも追加
-for repeat in range(2, ( (len(df_spr_away.columns)) -2) ):
+for repeat in range(1, ( (len(df_spr_away.columns)) -2) ):
     df_spr_away_n = pd.DataFrame({
     "goal":df_spr_away[repeat],
     "merg_id":df_spr_away["merg_id"],
     })
     df_spr_away_n.dropna(inplace=True)
-    df_spr_away_n["count_away"]=int(repeat)
+    df_spr_away_n["count_away"]=int(repeat+1)
     df_spr_away0 = pd.concat([df_spr_away0,df_spr_away_n],sort=True,copy=False,ignore_index=True)
 
-df_spr_away0
+df_spr_away0.tail()
 
 
 # In[12]:
@@ -116,7 +110,7 @@ df_spr_away0
 df_spr_away0 = df_spr_away0[df_spr_away0["goal"].isnull() != True ]
 df_spr_away0 = df_spr_away0[df_spr_away0['goal'].str.contains("分") != False]
 
-df_spr_away0
+df_spr_away0.tail()
 
 
 # In[13]:
@@ -133,7 +127,7 @@ df_spr_away0["n_time"] =df_spr_away0["n_time"].astype(int)
 df_spr_away0["a_time"] =df_spr_away0["a_time"].astype(int)
 
 
-df_spr_away0
+df_spr_away0.head()
 
 
 # In[14]:
@@ -144,13 +138,14 @@ def inc_hunn(df):
     try:
         df.loc[ (df[3] != -1 ), "player"] = df["player"].astype(str) + str("分") + df[2].astype(str)
         del df[3]
+        return df
     except:
         try:
             df.loc[ (df[2] != -1 ), "player"] = df["player"].astype(str) + str("分") + df[2].astype(str)
             del df[2]
+            return df
         except:
             pass
-    
 inc_hunn(df_spr_away0)
 
 
@@ -170,7 +165,7 @@ inc_hunn(df_spr_away0)
 
 
 #homeチームの得点者とその試合のidのみを抜き出す
-df_spr_home = pd.DataFrame(u18_df['goal_home'].str.split('\r', expand=True))
+df_spr_home = pd.DataFrame(u18_df['goal_home'].str.split(',', expand=True))
 df_spr_home["merg_id"] =u18_df["merg_id"]
 
 
@@ -179,34 +174,50 @@ df_spr_home["merg_id"] =u18_df["merg_id"]
 
 # 先ほどの表から、1ゴール目のデータだけの表を作り、ゴールのない試合は削除
 df_spr_home0 = pd.DataFrame({
-    "goal":df_spr_home[1],
+    "goal":df_spr_home[0],
     "merg_id":df_spr_home["merg_id"]
 })
 df_spr_home0=df_spr_home0[df_spr_home0['goal'] != "None"] # df_spr_home0.dropna(inplace=True) はもともと"None"なので、使えない
 df_spr_home0["count_home"]=int(1)
 
 #2ゴール目以降のデータも追加
-for repeat in range(2, ( (len(df_spr_home.columns)) -2) ):
+for repeat in range(1, ( (len(df_spr_home.columns)) -2) ):
     df_spr_home_n = pd.DataFrame({
     "goal":df_spr_home[repeat],
     "merg_id":df_spr_home["merg_id"],
     })
     df_spr_home_n.dropna(inplace=True)
-    df_spr_home_n["count_home"]=int(repeat)
+    df_spr_home_n["count_home"]=int(repeat+1)
     df_spr_home0 = pd.concat([df_spr_home0,df_spr_home_n],sort=True,copy=False,ignore_index=True)
 
-df_spr_home0
+df_spr_home0.head()
 
 
 # In[18]:
 
 
-# 空白やNoneを消す
-df_spr_home0 = df_spr_home0[df_spr_home0["goal"].isnull() != True ]
-df_spr_home0 = df_spr_home0[df_spr_home0['goal'].str.contains("分") != False]
+#2ゴール目以降のデータも追加
+for repeat in range(1, ( (len(df_spr_home.columns)) -2) ):
+    df_spr_home_n = pd.DataFrame({
+    "goal":df_spr_home[repeat],
+    "merg_id":df_spr_home["merg_id"],
+    })
+    df_spr_home_n.dropna(inplace=True)
+    df_spr_home_n["count_home"]=int(repeat+1)
+    df_spr_home0 = pd.concat([df_spr_home0,df_spr_home_n],sort=True,copy=False,ignore_index=True)
+df_spr_home0.tail()
 
 
 # In[19]:
+
+
+# 空白やNoneを消す
+df_spr_home0 = df_spr_home0[df_spr_home0["goal"].isnull() != True ]
+df_spr_home0 = df_spr_home0[df_spr_home0['goal'].str.contains("分") != False]
+df_spr_home0.tail()
+
+
+# In[20]:
 
 
 #選手名と時間を分ける
@@ -219,37 +230,50 @@ df_spr_home0.rename(columns={0: 'n_time', 1: 'a_time'}, inplace=True)
 df_spr_home0["n_time"] =df_spr_home0["n_time"].astype(int)
 df_spr_home0["a_time"] =df_spr_home0["a_time"].astype(int)
 
-df_spr_home0
-
-
-# In[20]:
-
-
-# 名前に「分」が入ってる人(いない場合はエラー、無視して次に進む)
-inc_hunn(df_spr_home0)
-# del df_spr_home0[2]
-df_spr_home0
+df_spr_home0.head()
 
 
 # In[21]:
 
 
-#ここからまとめて
+# 名前に「分」が入ってる人(いない場合はエラー、無視して次に進む)
+inc_hunn(df_spr_home0)
+# del df_spr_home0[2]
+# df_spr_home0.loc[df_spr_home0["merg_id"]==int("20124")]
 
 
 # In[22]:
 
 
+#ここからまとめて
+
+
+# In[44]:
+
+
 #homeとawayを合体 #並び変える（ソート）
 df_merge = pd.concat([df_spr_away0,df_spr_home0],sort=True,copy=False,ignore_index=True)
-# .sort_values(["id","n_time","a_time"]).reset_index(drop=True)
+
+#試合情報を結合
+u18_df["id"]=u18_df["id"].astype(int)
 df_merged = pd.merge(df_merge,u18_df, on="merg_id").sort_values(["year","id","n_time","a_time"],ascending=[False,True,True,True]).reset_index(drop=True)
 
 df_merged["differ"] =df_merged["merg_id"].diff().fillna(1)
-df_merged
+df_merged.head(20)
 
 
-# In[23]:
+# In[45]:
+
+
+# #なぜかわからないけど、同じゴールが入っている行を削除
+# def kakuni(df):
+#     df=df[df['count_home'] != df['count_home'].shift(1)]
+    
+# df_merged = kakuni(df_merged)
+# df_merged.head(20)
+
+
+# In[24]:
 
 
 #idが変わる試合 かつ counthomeがnullのもの(=相手が先制しているので、counthomeは0になるべき)
@@ -257,31 +281,27 @@ df_merged.loc[(df_merged["differ"] != 0.0) &  (df_merged["count_home"].isnull() 
 #awayも同様
 df_merged.loc[(df_merged["differ"] != 0.0) &  (df_merged["count_away"].isnull() ), "count_away"] = 0
 
-df_merged
-
-
-# In[24]:
-
-
-#残りのNaNは、相手ゴール分なので、一つ上の行のデータで埋める
-df_merged["count_away"]=df_merged["count_away"].fillna(method='ffill')
-df_merged["count_home"]=df_merged["count_home"].fillna(method='ffill')
-df_merged
+df_merged.head()
 
 
 # In[25]:
 
 
-#試合情報を結合
-# df_merged = pd.merge(df_merge,u18_df, on="id").sort_values("year",ascending=False)
-df_merged["goal_away"]=df_merged["count_away"].astype(int)
-df_merged["goal_home"]=df_merged["count_home"].astype(int)
-# del df_merged["count_away"]
-# del df_merged["count_home"]
-df_merged
+#残りのNaNは、相手ゴール分なので、一つ上の行のデータで埋める
+df_merged["count_away"]=df_merged["count_away"].fillna(method='ffill')
+df_merged["count_home"]=df_merged["count_home"].fillna(method='ffill')
+df_merged.head(20)
 
 
 # In[26]:
+
+
+df_merged["goal_away"]=df_merged["count_away"].astype(int)
+df_merged["goal_home"]=df_merged["count_home"].astype(int)
+df_merged.head()
+
+
+# In[27]:
 
 
 #additional timeをプラス表記に
@@ -340,22 +360,17 @@ df_merged
 
 
 
-# In[ ]:
-
-
-
-
-
-# In[27]:
+# In[28]:
 
 
 # 出力CSVの名前
 from pathlib import Path
-newname = Path(in_file).stem
+# newname = Path(in_file).stem
+newname="u12_2012_2011"
 print (newname)
 
 
-# In[28]:
+# In[29]:
 
 
 # タイムスタンプ
@@ -364,15 +379,16 @@ from datetime import datetime
 t = os.path.getmtime(in_file)
 # エポック秒をdatetimeに変換
 dt = datetime.fromtimestamp(t)
-datadate = dt.strftime('%Y%m%d%H%M')
+# datadate = dt.strftime('%Y%m%d%H%M')
+datadate = dt.strftime('%m%d%H%M')
 print (datadate)
 
 
-# In[33]:
+# In[30]:
 
 
 # 出力
-df_merged.to_csv("./adjust_" + "u15_2012_2010" + "_" + datadate + ".csv", 
+df_merged.to_csv("./adj_" + newname + "_" + datadate + ".csv", 
           index=False   # 行インデックスを削除
          )
 
@@ -383,7 +399,7 @@ df_merged.to_csv("./adjust_" + "u15_2012_2010" + "_" + datadate + ".csv",
 
 
 
-# In[37]:
+# In[31]:
 
 
 import subprocess
