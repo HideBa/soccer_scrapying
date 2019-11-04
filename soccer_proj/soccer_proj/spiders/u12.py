@@ -5,6 +5,9 @@ from ..items import SoccerProjItem
 from ..selenium_middleware import *
 import re
 
+u12_game_url_nums = 0
+u12_game_url_exist = 0
+
 
 class U12Spider(scrapy.Spider):
     name = 'u12'
@@ -26,7 +29,7 @@ class U12Spider(scrapy.Spider):
             "http://www.jfa.jp/match/japan_u12_football_championship_2017/schedule_result/",
             "http://www.jfa.jp/match/japan_u12_football_championship_2016/schedule_result/",
             "http://www.jfa.jp/match/japan_u12_football_championship_2015/schedule_result/",
-            "http://www.jfa.jp/match/japan_u12_football_championship_2014/schedule_result/index.html#pankz",
+            "http://www.jfa.jp/match/japan_u12_football_championship_2014/schedule_result/index.html",
             "http://www.jfa.or.jp/match/matches/2013/0803zensho/schedule_result/schedule.html",
             "http://www.jfa.or.jp/match/matches/2012/0804zensho/schedule_result/schedule.html",
             "http://www.jfa.or.jp/match/matches/2011/0806zensho/schedule_result/schedule.html"
@@ -38,6 +41,7 @@ class U12Spider(scrapy.Spider):
                 selenium_get(url)
                 # get_aで各試合の詳細URLのa要素を取得
                 alist = get_a('li.score a')
+                self.add_url_nums(len(alist))
                 # for文を回してそれぞれのhref属性を取得
                 for a in alist:
                     page = a.get_attribute('href')
@@ -65,12 +69,14 @@ class U12Spider(scrapy.Spider):
         temp = [elem for elem in temp if 'pdf' not in elem]
         temp = list(map(lambda x: response.url.rstrip(
             "schedule_result/schedule.html") + x.strip(".."), temp))
+        self.add_url_nums(len(temp))
 
         if temp_final:
             temp_final = list(set(temp_final))
             temp_final = [elem for elem in temp_final if 'pdf' not in elem]
             temp_final = list(map(lambda x: response.url.replace(
                 "/schedule_result/schedule.html", "") + x.strip(".."), temp_final))
+            self.add_url_nums(len(temp_final))
 
         count2 = 0
         if temp:
@@ -87,6 +93,17 @@ class U12Spider(scrapy.Spider):
                 print("count2 ============================ " + str(count2))
                 yield scrapy.Request(page, callback=self.parse2, meta={'item': item}, dont_filter=True)
 
+    def add_url_nums(self, urls):
+        global u12_game_url_nums
+        u12_game_url_nums += urls
+
+    def add_url_exist_nums(self, url):
+        global u12_game_url_exist
+        u12_game_url_exist += url
+
+    def get_url_rate(self, game_url, game_url_exist):
+        return game_url_exist/game_url
+
     def parse(self, response):
         item = SoccerProjItem()
         item['leagu_name'] = response.css(
@@ -99,6 +116,12 @@ class U12Spider(scrapy.Spider):
         item['team_away'] = response.css(
             '#score-board-header > div:nth-child(5)::text').extract_first()
         item['url'] = response.url
+        if item['url']:
+            self.add_url_exist_nums(1)
+            global u12_game_url_exist
+            global u12_game_url_nums
+            rate = self.get_url_rate(u12_game_url_nums, u12_game_url_exist)
+            print("rate===========" + str(rate))
         results_home = response.css(
             '#score-board-header > div:nth-child(2)::text').extract_first()
         if results_home:
@@ -180,6 +203,12 @@ class U12Spider(scrapy.Spider):
             '#resultbox-inner > div.r_team::text').extract_first()
         item['team_away'] = item['team_away'].strip()
         item['url'] = response.url
+        if item['url']:
+            self.add_url_exist_nums(1)
+            global u12_game_url_exist
+            global u12_game_url_nums
+            rate = self.get_url_rate(u12_game_url_nums, u12_game_url_exist)
+            print("rate===========" + str(rate))
         results_home = response.css(
             '#resultbox-inner > div.score > span::text').extract()[0]
         if results_home:
@@ -207,16 +236,16 @@ class U12Spider(scrapy.Spider):
         goal_home = response.css(
             'td.t_right::text').extract()
         if goal_home:
-            item['goal_home'] = " ".join(goal_home).replace(' ', '').replace(
-                "\n", "").replace("\t", "")
+            goal_home = list(map(lambda x: x.strip(), goal_home))
+            item['goal_home'] = goal_home
         else:
             item['goal_home'] = 'None'
 
         goal_away = response.css(
             'td.t_left span::text').extract()
         if goal_away:
-            item['goal_away'] = " ".join(goal_away).replace(' ', '').replace(
-                "\n", "").replace("\t", "")
+            goal_away = list(map(lambda x: x.strip(), goal_away))
+            item['goal_away'] = goal_away
         else:
             item['goal_away'] = 'None'
         temp2 = response.css(
@@ -247,6 +276,7 @@ class U12Spider(scrapy.Spider):
                 item['time'].append(temp)
             else:
                 continue
+        print("url nums O=========" + str(u12_game_url_nums))
         yield item
 
     def closed(self, response):

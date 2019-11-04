@@ -37,7 +37,10 @@ process = CrawlerProcess(get_project_settings())
 
 # process.crawl('SoccerSpider')
 # process.start()
+# print("url nums ============ " + process.Soccerspider.get_u18_url_nums())
+# print("url exist ============= " + process.Soccerspider.get_u18_url_exist_nums())
 process.crawl('u15')
 process.start()
+
 # process.crawl('u12')
-# process.start()
+process.start()

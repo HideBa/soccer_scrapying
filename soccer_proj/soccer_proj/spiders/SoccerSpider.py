@@ -10,8 +10,8 @@ import re
 
 #  実行時CSVに書き出す場合はーーーーー　scrapy crawl SoccerSpider -o results/soccer.csv
 
-game_url_nums = 0
-game_url_exist = 0
+u18_game_url_nums = 0
+u18_game_url_exist = 0
 
 
 class SoccerspiderSpider(scrapy.Spider):
@@ -20,7 +20,7 @@ class SoccerspiderSpider(scrapy.Spider):
     # 高円宮杯U18サッカープレミアリーグ
     start_urls = [
         'http://www.jfa.jp/match/takamado_jfa_u18_premier2019/']
-    # 高円宮杯U15サッカー選手権大会
+    # 高円宮杯u18サッカー選手権大会
     # start_urls = ['']
     # U12サッカー選手権大会
 
@@ -60,6 +60,8 @@ class SoccerspiderSpider(scrapy.Spider):
                 selenium_get(url)
                 # get_aで各試合の詳細URLのa要素を取得
                 alist = get_a('li.score a')
+                self.add_url_nums(len(alist))
+
                 # for文を回してそれぞれのhref属性を取得
                 for a in alist:
                     page = a.get_attribute('href')
@@ -79,6 +81,7 @@ class SoccerspiderSpider(scrapy.Spider):
                 # 2012、13年は以下を使用。-------------------------
                 alist = get_a(
                     'div.mainarea div > table > tbody td:nth-child(6) a')
+                self.add_url_nums(len(alist))
                 # for文を回してそれぞれのhref属性を取得
                 pages = []
                 for a in alist:
@@ -92,6 +95,7 @@ class SoccerspiderSpider(scrapy.Spider):
                 # 2012、13年の場合は以下を使用。----------------------------------------
                 next_alist = get_a(
                     'div.mainarea div > table > tbody td:nth-child(6) a')
+                self.add_url_nums(len(next_alist))
                 next_pages = []
                 for a in next_alist:
                     next_page = a.get_attribute('href')
@@ -113,12 +117,12 @@ class SoccerspiderSpider(scrapy.Spider):
                 # 2011年はサイト構造が違うため以下を使用。--------------------------------------
                 alist = get_a(
                     'div.mainarea div > table > tbody td:nth-child(5) a')
+                self.add_url_nums(len(alist))
                 # for文を回してそれぞれのhref属性を取得
                 pages = []
                 for a in alist:
                     page = a.get_attribute('href')
                     pages.append(page)
-                    print("page ============ " + page)
                 for page in pages:
                     yield scrapy.Request(page, callback=self.parse2)
 
@@ -126,6 +130,8 @@ class SoccerspiderSpider(scrapy.Spider):
                 # 2011年のモノはサイト構造が違うため、以下を使用。--------------------------------
                 next_alist = get_a(
                     'div.mainarea div > table > tbody td:nth-child(5) a')
+                self.add_url_nums(len(next_alist))
+                print("url nums ============ " + str(u18_game_url_nums))
                 next_pages = []
                 for a in next_alist:
                     next_page = a.get_attribute('href')
@@ -133,6 +139,25 @@ class SoccerspiderSpider(scrapy.Spider):
 
                 for next_page in next_pages:
                     yield scrapy.Request(next_page, callback=self.parse2)
+
+    def add_url_nums(self, urls):
+        global u18_game_url_nums
+        u18_game_url_nums += urls
+
+    def add_url_exist_nums(self, url):
+        global u18_game_url_exist
+        u18_game_url_exist += url
+
+    def get_u18_url_nums(self):
+        global u18_game_url_nums
+        return u18_game_url_nums
+
+    def get_u18_url_exist_nums(self):
+        global u18_game_url_exist
+        return u18_game_url_exist
+
+    def get_url_rate(self, game_url, game_url_exist):
+        return game_url_exist/game_url
 
         # # 以下はU18の年度によってサイト構成が違うものを自動化する段階（途中）－－－－－－－－－－－－－－－－－－－－－－－－
         # selenium_get(url)
@@ -182,7 +207,7 @@ class SoccerspiderSpider(scrapy.Spider):
     #     domain = 'http://www.jfa.jp'
     #     # 高円宮杯U18サッカープレミアリーグ
     #     url = "http://www.jfa.jp/match/takamado_jfa_u18_premier2019/"
-    #     # 高円宮杯U15サッカー選手権大会
+    #     # 高円宮杯u18サッカー選手権大会
 
     #     # U12サッカー選手権大会
 
@@ -250,7 +275,7 @@ class SoccerspiderSpider(scrapy.Spider):
     #         game_detail_url = a.get_attribute('href')
     #         game_detail_url_list.append(game_detail_url)
     #     return game_detail_url_list
-            # ここまでーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+        # ここまでーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 
     def parse(self, response):
         item = SoccerProjItem()
@@ -264,6 +289,13 @@ class SoccerspiderSpider(scrapy.Spider):
         item['team_away'] = response.css(
             '#score-board-header > div:nth-child(5) > p:nth-child(2)::text').extract_first()
         item['url'] = response.url
+        if item['url']:
+            self.add_url_exist_nums(1)
+            global u18_game_url_exist
+            global u18_game_url_nums
+            rate = self.get_url_rate(u18_game_url_nums, u18_game_url_exist)
+            print("rate===========" + str(rate))
+        print("nums url exist===========" + str(u18_game_url_exist))
         results_home = response.css(
             '#score-board-header > div:nth-child(2)::text').extract_first()
         if results_home:
@@ -279,7 +311,7 @@ class SoccerspiderSpider(scrapy.Spider):
             item['results_away'] = 'None'
 
         year_pattern = '20[0-9]{2}'
-        item['year'] = re.search(year_pattern, temp).group()
+        item['year'] = re.search(year_pattern, temp).group(0)
         # item['year'] = re.search(year_pattern, temp).group()
         month_pattern = '[0-1][0-9]月'
         item['month'] = re.findall(month_pattern, temp)
@@ -342,6 +374,13 @@ class SoccerspiderSpider(scrapy.Spider):
         item['team_away'] = item['team_away'].replace(extract_team_away[0], "")
         item['team_away'] = item['team_away'].strip()
         item['url'] = response.url
+        if item['url']:
+            self.add_url_exist_nums(1)
+            global u18_game_url_exist
+            global u18_game_url_nums
+            rate = self.get_url_rate(u18_game_url_nums, u18_game_url_exist)
+            print("rate===========" + str(rate))
+        print("nums url exist===========" + str(u18_game_url_exist))
         results_home = response.css(
             '#u18wrapper > div > div.mainarea > div > div.resultarea.clearfix > p.point1::text').extract_first()
         if results_home:
@@ -368,27 +407,31 @@ class SoccerspiderSpider(scrapy.Spider):
         #u18wrapper > div > div.mainarea > div > table > tbody > tr > td.matchgoal1
         goal_home = response.css(
             'td.matchgoal1::text').extract()
+        # print("goal_home ===== " + str(goal_home))
         if goal_home:
-            item['goal_home'] = " ".join(goal_home).strip().replace('分 ', '分,')
-            print("goal_home=======--" + item['goal_home'])
+            # item['goal_home'] = " ".join(goal_home).strip().replace('分 ', '分,')
+            # item['goal_home'] = " ".join(goal_home).strip().replace('\n', ',')
+            goal_home = list(map(lambda x: x.strip(), goal_home))
+            # print("goal_home2 ===== " + str(goal_home))
+            item['goal_home'] = goal_home
         else:
             item['goal_home'] = 'None'
 
         goal_away = response.css(
             'td.matchgoal2::text').extract()
         if goal_away:
-            item['goal_away'] = " ".join(
-                goal_away).strip().replace(' [0-9]+分 ', ',[0-9]+分')
+            # item['goal_away'] = " ".join(
+            #     goal_away).strip().replace(' [0-9]+分 ', ',[0-9]+分')
+            goal_away = list(map(lambda x: x.strip(), goal_away))
+            item['goal_away'] = goal_away
         else:
             item['goal_away'] = 'None'
         # time_temp = response.css('#game-content-wrap::text').extract()
         # print("time_temp =========" + time_temp)
         temp2 = response.css(
             '#u18wrapper > div > div.mainarea > div > p.league::text').extract()
-        print("temp2 ====== " + str(temp2))
         # round_num = re.search('No\..*', temp2[0]).group()
         round_num = re.search('[0-9]+', temp2[0]).group()
-        print("round num ========" + round_num)
         # item['id'] = re.search('[0-9]{1,3}', temp2).group()
         item['id'] = re.search('[0-9]{1,3}', temp2[0]).group()
 
@@ -415,8 +458,7 @@ class SoccerspiderSpider(scrapy.Spider):
             else:
                 continue
 
-        print('time=' + str(item['time']))
-
+        print("url nums O=========" + str(u18_game_url_nums))
         yield item
 
     def closed(self, response):
