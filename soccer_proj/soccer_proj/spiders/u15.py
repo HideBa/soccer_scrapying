@@ -429,6 +429,10 @@ class U15Spider(scrapy.Spider):
         item['month'] = re.sub('..\.', '', month)
         day = re.search("..\...\.[0-9]+", temp[1]).group()
         item['day'] = re.sub('..\...\.', '', day)
+        if item['day'] == '29':
+            item['round'] = '決勝'
+        else:
+            item['round'] = '準決勝'
         item['leagu_name'] = response.css(
             'div.repCntAreaBack div p:nth-child(2) > img::attr(alt)').extract_first()
         item['team_home'] = response.css(

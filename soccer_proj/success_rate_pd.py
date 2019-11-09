@@ -47,26 +47,26 @@ class GetSuccessRatio:
 
     def get_summary(self):
         u18_1, u18_2, u18_3, u18_4, u18_5 = self.get_u18_url_nums()
-        # print("u18-----------------------------------------")
-        # print("record_num_game_url_exist=" + str(u18_1))
-        # print("record_num_url_noexist=" + str(u18_2))
-        # print("ratio_success=" + str(u18_3))
-        # print("ratio_failure=" + str(u18_4))
+        print("u18-----------------------------------------")
+        print("record_num_game_url_exist=" + str(u18_1))
+        print("record_num_url_noexist=" + str(u18_2))
+        print("ratio_success=" + str(u18_3))
+        print("ratio_failure=" + str(u18_4))
 
         u15_1, u15_2, u15_3, u15_4, u15_5 = self.get_u15_url_nums()
-        # print("u15-----------------------------------------")
-        # print("record_num_game_url_exist=" + str(u15_1))
-        # print("record_num_url_noexist=" + str(u15_2))
-        # print("ratio_success=" + str(u15_3))
-        # print("ratio_failure=" + str(u15_4))
+        print("u15-----------------------------------------")
+        print("record_num_game_url_exist=" + str(u15_1))
+        print("record_num_url_noexist=" + str(u15_2))
+        print("ratio_success=" + str(u15_3))
+        print("ratio_failure=" + str(u15_4))
 
         u12_1, u12_2, u12_3, u12_4, u12_5 = self.get_u12_url_nums()
 
-        # print("u15-----------------------------------------")
-        # print("record_num_game_url_exist=" + str(u12_1))
-        # print("record_num_url_noexist=" + str(u12_2))
-        # print("ratio_success=" + str(u12_3))
-        # print("ratio_failure=" + str(u12_4))
+        print("u15-----------------------------------------")
+        print("record_num_game_url_exist=" + str(u12_1))
+        print("record_num_url_noexist=" + str(u12_2))
+        print("ratio_success=" + str(u12_3))
+        print("ratio_failure=" + str(u12_4))
 
     def make_frame(self):
         df = pd.DataFrame(np.arange(24).reshape(3, 8), columns=[
@@ -87,5 +87,5 @@ class GetSuccessRatio:
 
 
 test = GetSuccessRatio()
-test.get_summary()
+# test.get_summary()
 test.make_frame()

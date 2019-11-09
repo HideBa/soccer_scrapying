@@ -34,27 +34,27 @@ class SoccerspiderSpider(scrapy.Spider):
     def start_requests(self):
 
         url_list = [
-            # "http://www.jfa.jp/match/takamado_jfa_u18_premier2019/east/schedule_result/",
-            # "http://www.jfa.jp/match/takamado_jfa_u18_premier2019/west/schedule_result/",
-            # "http://www.jfa.jp/match/takamado_jfa_u18_premier2018/east/schedule_result/",
-            # "http://www.jfa.jp/match/takamado_jfa_u18_premier2018/west/schedule_result/",
-            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2017/premier_2017/east/schedule_result/",
-            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2017/premier_2017/west/schedule_result/",
-            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2016/premier_2016/east/schedule_result/",
-            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2016/premier_2016/west/schedule_result/",
-            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2015/premier_2015/east/schedule_result/",
-            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2015/premier_2015/west/schedule_result/",
-            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2014/2014/premier/east/schedule_result/",
-            # "http://www.jfa.jp/match/prince_takamado_trophy_u18_2014/2014/premier/west/schedule_result/",
-            "http://www.jfa.or.jp/match/matches/2013/premier_league/east/match/index2.html",
-            "http://www.jfa.or.jp/match/matches/2013/premier_league/west/match/index2.html",
-            "http://www.jfa.or.jp/match/matches/2012/premier_league/east/match/index2.html",
-            "http://www.jfa.or.jp/match/matches/2012/premier_league/west/match/index2.html",
-            "http://www.jfa.or.jp/match/matches/2011/premier_league/east/match/index2.html",
-            "http://www.jfa.or.jp/match/matches/2011/premier_league/west/match/index2.html"
+            "http://www.jfa.jp/match/takamado_jfa_u18_premier2019/east/schedule_result/",
+            "http://www.jfa.jp/match/takamado_jfa_u18_premier2019/west/schedule_result/",
+            "http://www.jfa.jp/match/takamado_jfa_u18_premier2018/east/schedule_result/",
+            "http://www.jfa.jp/match/takamado_jfa_u18_premier2018/west/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2017/premier_2017/east/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2017/premier_2017/west/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2016/premier_2016/east/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2016/premier_2016/west/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2015/premier_2015/east/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2015/premier_2015/west/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2014/2014/premier/east/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u18_2014/2014/premier/west/schedule_result/",
+            # "http://www.jfa.or.jp/match/matches/2013/premier_league/east/match/index2.html",
+            # "http://www.jfa.or.jp/match/matches/2013/premier_league/west/match/index2.html",
+            # "http://www.jfa.or.jp/match/matches/2012/premier_league/east/match/index2.html",
+            # "http://www.jfa.or.jp/match/matches/2012/premier_league/west/match/index2.html",
+            # "http://www.jfa.or.jp/match/matches/2011/premier_league/east/match/index2.html",
+            # "http://www.jfa.or.jp/match/matches/2011/premier_league/west/match/index2.html"
         ]
         for url in url_list:
-            if any((s in url) for s in ['2019', '2018', '2017', '2016', '2015', '2014']):
+            if any((s in url) for s in ['2019', '2018', '2017', '2016', '2015']):
                 # 以下2014年以降用-------------------------------------------------------
                 # ここで、ブラウザを起動してページを開く
                 selenium_get(url)
@@ -67,6 +67,17 @@ class SoccerspiderSpider(scrapy.Spider):
                     page = a.get_attribute('href')
                     # それぞれのURLにおいてScrapyRequestを生成
                     yield scrapy.Request(page, callback=self.parse)
+            elif '2014' in url:
+                selenium_get(url)
+                # get_aで各試合の詳細URLのa要素を取得
+                alist = get_a('li.score a')
+                self.add_url_nums(len(alist))
+
+                # for文を回してそれぞれのhref属性を取得
+                for a in alist:
+                    page = a.get_attribute('href')
+                    # それぞれのURLにおいてScrapyRequestを生成
+                    yield scrapy.Request(page, callback=self.parse_2014)
                 # ------------------------------------------------------------------------------------
             elif any((s in url) for s in ['2013', '2012']):
                 # 以下2013年以前用-----------------------------------------
@@ -286,8 +297,96 @@ class SoccerspiderSpider(scrapy.Spider):
             '#inner-header-score > div.text-schedule::text').extract_first()
         item['team_home'] = response.css(
             '#score-board-header > div:nth-child(1) > p:nth-child(2)::text').extract_first()
+        # item['team_home'] = response.css(
+        #     '#score-board-header > div:nth-child(1)::text').extract_first()
+
+        # item['team_away'] = response.css(
+        #     '#score-board-header > div:nth-child(5)::text').extract_first()
         item['team_away'] = response.css(
             '#score-board-header > div:nth-child(5) > p:nth-child(2)::text').extract_first()
+        item['url'] = response.url
+        if item['url']:
+            self.add_url_exist_nums(1)
+            global u18_game_url_exist
+            global u18_game_url_nums
+            rate = self.get_url_rate(u18_game_url_nums, u18_game_url_exist)
+            print("rate===========" + str(rate))
+        print("nums url exist===========" + str(u18_game_url_exist))
+        results_home = response.css(
+            '#score-board-header > div:nth-child(2)::text').extract_first()
+        if results_home:
+            item['results_home'] = results_home
+        else:
+            item['results_home'] = 'None'
+
+        results_away = response.css(
+            '#score-board-header > div:nth-child(4)::text').extract_first()
+        if results_away:
+            item['results_away'] = results_away
+        else:
+            item['results_away'] = 'None'
+
+        year_pattern = '20[0-9]{2}'
+        item['year'] = re.search(year_pattern, temp).group(0)
+        # item['year'] = re.search(year_pattern, temp).group()
+        month_pattern = '[0-1][0-9]月'
+        item['month'] = re.findall(month_pattern, temp)
+        day_pattern = '[0-3][0-9]日'
+        item['day'] = re.findall(day_pattern, temp)
+        # 以下試合がまだ行われていないデータにはNoneを入れる
+        goal_home = response.css(
+            '#game-content-wrap > div.scorerLeft::text').extract()
+        if goal_home:
+
+            item['goal_home'] = goal_home
+        else:
+            item['goal_home'] = 'None'
+
+        goal_away = response.css(
+            '#game-content-wrap > div.scorerRight::text').extract()
+        if goal_away:
+            item['goal_away'] = goal_away
+        else:
+            item['goal_away'] = 'None'
+        item['id'] = re.search('[0-9]{3,4}', temp).group()
+        if item['id'][-1] == 0:
+            item['round'] = re.search('第[0-9]+節', temp).group() + '10'
+        else:
+            item['round'] = re.search(
+                '第[0-9]+節', temp).group() + item['id'][-1]
+
+        item['time'] = []
+        for elem in item['goal_home']:
+            temp = re.findall('.*分', elem)
+            if temp:
+                item['time'].append(temp)
+            else:
+                continue
+
+        for elem in item['goal_away']:
+            temp = re.findall('.*分', elem)
+            if temp:
+                item['time'].append(temp)
+            else:
+                continue
+
+        yield item
+    def parse_2014(self, response):
+        item = SoccerProjItem()
+        item['leagu_name'] = response.css(
+            '#ttl_sp > img::attr(alt)').extract_first()
+        # いったんtempとして値を取得しているが、ここから後は正規表現だの、Splitみたいなので不要な文字列を削って出力すればよし
+        temp = response.css(
+            '#inner-header-score > div.text-schedule::text').extract_first()
+        # item['team_home'] = response.css(
+        #     '#score-board-header > div:nth-child(1) > p:nth-child(2)::text').extract_first()
+        item['team_home'] = response.css(
+            '#score-board-header > div:nth-child(1)::text').extract_first()
+
+        item['team_away'] = response.css(
+            '#score-board-header > div:nth-child(5)::text').extract_first()
+        # item['team_away'] = response.css(
+        #     '#score-board-header > div:nth-child(5) > p:nth-child(2)::text').extract_first()
         item['url'] = response.url
         if item['url']:
             self.add_url_exist_nums(1)
