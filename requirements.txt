@@ -24,5 +24,7 @@ II データ加工
 
 2. ファイルの実行
 コマンダーや、PowerShellで
-> python 〇〇.py
+> python （実行するファイル名）.py -f （加工するCSVファイル名）
+例:
+> > python dataformat_classify.py -f soccer_2006
 を実行すると、結果が出力される。

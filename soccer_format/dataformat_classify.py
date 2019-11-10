@@ -1,25 +1,16 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import pandas as pd
-in_file = "./soccer_2006.csv"
+import argparse
+
+parser = argparse.ArgumentParser(epilog="which file should be adjusted?")
+parser.add_argument('-f', '--importfile', required=True)
+args = parser.parse_args()
+in_file = "./"+ args.importfile +".csv"
 u18_df = pd.read_csv(in_file,encoding="UTF-8")
 
-
-# In[2]:
-
-
-# 抽出(任意)
+# 抽出 (任意)
 # u18_df=u18_df[u18_df['year'] == int("2013")]
 u18_df = u18_df[u18_df["id"].isnull() != True ]
-
 # u18_df
-
-
-# In[3]:
 
 
 def normalize(u18_df):
@@ -35,17 +26,8 @@ def normalize(u18_df):
     return u18_df
 
 u18_df=normalize(u18_df)
-u18_df
-
-
-# In[4]:
-
 
 # ここからaway
-
-
-# In[5]:
-
 
 def sprit_away(u18_df):
     #awayチームの得点者とその試合のidのみを抜き出す
@@ -53,10 +35,7 @@ def sprit_away(u18_df):
     df_spr_away["merg_id"] =u18_df["merg_id"]
     return df_spr_away
 df_spr_away = sprit_away(u18_df)
-df_spr_away.head()
 
-
-# In[6]:
 
 
 def goal_frame(df_spr):
@@ -85,8 +64,6 @@ df_spr_away0.shape
 # ！注意！ homeに使うときは、count_awayをcount_homeにrename！
 
 
-# In[7]:
-
 
 # 名前に「分」が入ってる人
 def inc_hunn(df):
@@ -102,8 +79,6 @@ def inc_hunn(df):
         except:
             return df
 
-
-# In[8]:
 
 
 def sprit_pat(df):
@@ -125,23 +100,10 @@ def sprit_pat(df):
     return df
 
 df_spr_away0=sprit_pat(df_spr_away0)
-df_spr_away0
 
-
-# In[ ]:
-
-
-
-
-
-# In[9]:
 
 
 #ここからhome
-
-
-# In[10]:
-
 
 def sprit_home(u18_df):
     #homeチームの得点者とその試合のidのみを抜き出す
@@ -149,31 +111,18 @@ def sprit_home(u18_df):
     df_spr_home["merg_id"] =u18_df["merg_id"]
     return df_spr_home
 df_spr_home = sprit_home(u18_df)
-df_spr_home.head()
 
-
-# In[11]:
 
 
 df_spr_home0=goal_frame(df_spr_home)
 #home用にrename
 df_spr_home0.rename(columns={"count_away": 'count_home'}, inplace=True)
 
-
-# In[12]:
-
-
 df_spr_home0=sprit_pat(df_spr_home0)
-df_spr_home0
 
-
-# In[13]:
 
 
 #ここからまとめて
-
-
-# In[17]:
 
 
 def noside(u18_df,df_spr_away0,df_spr_home0):
@@ -187,10 +136,7 @@ def noside(u18_df,df_spr_away0,df_spr_home0):
     return df_merged
 
 df_merged = noside(u18_df,df_spr_away0,df_spr_home0)
-df_merged
 
-
-# In[18]:
 
 
 def counting(df_merged):
@@ -220,47 +166,11 @@ def counting(df_merged):
 df_merged = counting(df_merged)
 
 
-# In[19]:
-
-
-df_merged
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[17]:
-
 
 # 出力CSVの名前
 from pathlib import Path
 newname = Path(in_file).stem
 # newname="u12_2012_2011"
-print (newname)
-
-
-# In[18]:
 
 
 # タイムスタンプ
@@ -271,27 +181,8 @@ t = os.path.getmtime(in_file)
 dt = datetime.fromtimestamp(t)
 # datadate = dt.strftime('%Y%m%d%H%M')
 datadate = dt.strftime('%m%d%H%M')
-print (datadate)
-
-
-# In[23]:
-
 
 # 出力
 df_merged.to_csv("./adj_" + newname + "_" + datadate + ".csv", 
           index=False   # インデックスを削除
          )
-
-
-# In[ ]:
-
-
-
-
-
-# In[21]:
-
-
-import subprocess
-subprocess.run(['jupyter', 'nbconvert', '--to', 'python', 'dataformat_classify.ipynb'])
-
