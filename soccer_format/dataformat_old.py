@@ -346,7 +346,7 @@ df_merged
 
 
 
-# In[29]:
+# In[28]:
 
 
 # 出力CSVの名前
@@ -356,7 +356,7 @@ newname="u12_2012_2011"
 print (newname)
 
 
-# In[30]:
+# In[29]:
 
 
 # タイムスタンプ
@@ -370,7 +370,7 @@ datadate = dt.strftime('%m%d%H%M')
 print (datadate)
 
 
-# In[31]:
+# In[30]:
 
 
 # 出力
@@ -385,7 +385,7 @@ df_merged.to_csv("./adj_" + newname + "_" + datadate + ".csv",
 
 
 
-# In[32]:
+# In[31]:
 
 
 import subprocess
