@@ -1,1 +1,28 @@
-pandas
+I スクレイピング
+
+1. 必要なモジュールのインストール
+- python
+- scrapy(spider)
+- celenium
+- ドライバー
+- (仮想環境)
+
+2. ファイルの実行
+コマンダーや、PowerShellで
+> python 〇〇.py
+を実行すると、結果が出力される。
+
+
+
+II データ加工
+
+1. 必要なモジュールのインストール
+- python(継続)
+- pandas
+> pip install pandas
+でインストールできる。
+
+2. ファイルの実行
+コマンダーや、PowerShellで
+> python 〇〇.py
+を実行すると、結果が出力される。
