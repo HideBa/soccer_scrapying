@@ -5,16 +5,18 @@
 
 
 import pandas as pd
-in_file = "./u12_2013_2011.csv"
+in_file = "./soccer_2006.csv"
 u18_df = pd.read_csv(in_file,encoding="UTF-8")
-u18_df
 
 
 # In[2]:
 
 
-#今回は、2013以外を抽出
-# u18_df=u18_df[u18_df['year'] != int("2013")]
+# 抽出(任意)
+# u18_df=u18_df[u18_df['year'] == int("2013")]
+u18_df = u18_df[u18_df["id"].isnull() != True ]
+
+# u18_df
 
 
 # In[3]:
@@ -109,10 +111,14 @@ def sprit_pat(df):
     df = pd.concat([df,df["goal"].str.split("分",expand=True)],axis=1).drop("goal", axis=1)
     df.rename(columns={0: 'time', 1: 'player'}, inplace=True)
     # additional timeで別カラム
-    df = pd.concat([df,df["time"].str.split("+",expand=True)],axis=1).drop("time", axis=1).fillna(-1)
-    df.rename(columns={0: 'n_time', 1: 'a_time'}, inplace=True)
-    df["n_time"] =df["n_time"].astype(int)
-    df["a_time"] =df["a_time"].astype(int)
+    try:
+        df = pd.concat([df,df["time"].str.split("+",expand=True)],axis=1).drop("time", axis=1).fillna(-1)
+        df.rename(columns={0: 'n_time', 1: 'a_time'}, inplace=True)
+        df["n_time"] =df["n_time"].astype(int)
+        df["a_time"] =df["a_time"].astype(int)
+    except:
+        df["n_time"] =df["n_time"].astype(int)
+        df["a_time"] =int("-1")
     
     #名前に「分」が入ってる人
     df=inc_hunn(df)
@@ -167,7 +173,7 @@ df_spr_home0
 #ここからまとめて
 
 
-# In[14]:
+# In[17]:
 
 
 def noside(u18_df,df_spr_away0,df_spr_home0):
@@ -176,7 +182,7 @@ def noside(u18_df,df_spr_away0,df_spr_home0):
 
     #試合情報を結合
     u18_df["id"]=u18_df["id"].astype(int)
-    df_merged = pd.merge(df_merge,u18_df, on="merg_id").sort_values(["year","id","n_time","a_time"],ascending=[False,True,True,True]).reset_index(drop=True)
+    df_merged = pd.merge(df_merge,u18_df, on="merg_id").sort_values(["year","merg_id","n_time","a_time"],ascending=[False,True,True,True]).reset_index(drop=True)
     
     return df_merged
 
@@ -184,7 +190,7 @@ df_merged = noside(u18_df,df_spr_away0,df_spr_home0)
 df_merged
 
 
-# In[15]:
+# In[18]:
 
 
 def counting(df_merged):
@@ -214,7 +220,7 @@ def counting(df_merged):
 df_merged = counting(df_merged)
 
 
-# In[16]:
+# In[19]:
 
 
 df_merged
@@ -268,12 +274,12 @@ datadate = dt.strftime('%m%d%H%M')
 print (datadate)
 
 
-# In[19]:
+# In[23]:
 
 
 # 出力
 df_merged.to_csv("./adj_" + newname + "_" + datadate + ".csv", 
-          index=False   # 行インデックスを削除
+          index=False   # インデックスを削除
          )
 
 
@@ -283,9 +289,9 @@ df_merged.to_csv("./adj_" + newname + "_" + datadate + ".csv",
 
 
 
-# In[20]:
+# In[21]:
 
 
 import subprocess
-subprocess.run(['jupyter', 'nbconvert', '--to', 'python', 'dataformat_old.ipynb'])
+subprocess.run(['jupyter', 'nbconvert', '--to', 'python', 'dataformat_classify.ipynb'])
 
