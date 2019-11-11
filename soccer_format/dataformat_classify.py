@@ -1,18 +1,6 @@
 import pandas as pd
 import argparse
 
-parser = argparse.ArgumentParser(epilog="which file should be adjusted?")
-parser.add_argument('-f', '--importfile', required=True)
-args = parser.parse_args()
-in_file = "./"+ args.importfile +".csv"
-u18_df = pd.read_csv(in_file,encoding="UTF-8")
-
-# 抽出 (任意)
-# u18_df=u18_df[u18_df['year'] == int("2013")]
-u18_df = u18_df[u18_df["id"].isnull() != True ]
-# u18_df
-
-
 def normalize(u18_df):
     #列の順番を整理する time,playerの列を削除
     u18_df=u18_df.loc[:,['id','leagu_name','year','month','day','round','team_home','team_away','url','results_away','results_home','goal_away','goal_home']]
@@ -20,12 +8,16 @@ def normalize(u18_df):
     u18_df=u18_df[u18_df['results_away'] != "None"]
     # 年が変わるときの行(カラム名が入っている行)を削除(一応...)
     u18_df=u18_df[u18_df['results_away'] != "results_away"]
+    #eastとwestでidかぶりを防ぐ：east→77  west→88
+    u18_df["url"] = u18_df["url"].astype(str)
+    u18_df["area"]=int("77")
+    u18_df.loc[(u18_df['url'].str.contains('west')), "area"] = int("88")
     #idの混同を避けるため、idとyearを合わせる
-    u18_df["merg_id"] = u18_df["year"].astype(str)+u18_df["id"].astype(str)
+    u18_df["merg_id"] = u18_df["year"].astype(str)+u18_df["area"].astype(str)+u18_df["id"].astype(str)
     u18_df["merg_id"] = u18_df["merg_id"].astype(int)
     return u18_df
 
-u18_df=normalize(u18_df)
+# u18_df=normalize(u18_df)
 
 # ここからaway
 
@@ -34,7 +26,7 @@ def sprit_away(u18_df):
     df_spr_away = pd.DataFrame(u18_df['goal_away'].str.split(',', expand=True))
     df_spr_away["merg_id"] =u18_df["merg_id"]
     return df_spr_away
-df_spr_away = sprit_away(u18_df)
+# df_spr_away = sprit_away(u18_df)
 
 
 
@@ -59,8 +51,7 @@ def goal_frame(df_spr):
     df_spr_0.dropna(inplace=True) 
     return df_spr_0
 
-df_spr_away0=goal_frame(df_spr_away)
-df_spr_away0.shape
+# df_spr_away0=goal_frame(df_spr_away)
 # ！注意！ homeに使うときは、count_awayをcount_homeにrename！
 
 
@@ -99,26 +90,29 @@ def sprit_pat(df):
     df=inc_hunn(df)
     return df
 
-df_spr_away0=sprit_pat(df_spr_away0)
+# df_spr_away0=sprit_pat(df_spr_away0)
 
 
 
 #ここからhome
 
-def sprit_home(u18_df):
+def home_all(u18_df):
     #homeチームの得点者とその試合のidのみを抜き出す
     df_spr_home = pd.DataFrame(u18_df['goal_home'].str.split(',', expand=True))
     df_spr_home["merg_id"] =u18_df["merg_id"]
-    return df_spr_home
-df_spr_home = sprit_home(u18_df)
+    df_spr_home0=goal_frame(df_spr_home)
+    df_spr_home0.rename(columns={"count_away": 'count_home'}, inplace=True) 
+    df_spr_home0=sprit_pat(df_spr_home0)
+    return df_spr_home0
+# df_spr_home0 = home_all(u18_df)
 
 
 
-df_spr_home0=goal_frame(df_spr_home)
-#home用にrename
-df_spr_home0.rename(columns={"count_away": 'count_home'}, inplace=True)
+# df_spr_home0=goal_frame(df_spr_home)
+# #home用にrename
+# df_spr_home0.rename(columns={"count_away": 'count_home'}, inplace=True)
 
-df_spr_home0=sprit_pat(df_spr_home0)
+# df_spr_home0=sprit_pat(df_spr_home0)
 
 
 
@@ -135,7 +129,7 @@ def noside(u18_df,df_spr_away0,df_spr_home0):
     
     return df_merged
 
-df_merged = noside(u18_df,df_spr_away0,df_spr_home0)
+# df_merged = noside(u18_df,df_spr_away0,df_spr_home0)
 
 
 
@@ -163,26 +157,54 @@ def counting(df_merged):
 
     return df_merged
 
-df_merged = counting(df_merged)
+# df_merged = counting(df_merged)
 
 
+def naming(in_file):
+    # 出力CSVの名前
+    from pathlib import Path
+    newname = Path(in_file).stem
+    # newname="u12_2012_2011"
+    # タイムスタンプ
+    import os
+    from datetime import datetime
+    t = os.path.getmtime(in_file)
+    # エポック秒をdatetimeに変換
+    dt = datetime.fromtimestamp(t)
+    # datadate = dt.strftime('%Y%m%d%H%M')
+    datadate = dt.strftime('%m%d%H%M')
 
-# 出力CSVの名前
-from pathlib import Path
-newname = Path(in_file).stem
-# newname="u12_2012_2011"
+    return newname + "_" + datadate
+
+# # 出力
+# df_merged.to_csv("./adj_" + newname + "_" + datadate + ".csv", 
+#           index=False   # インデックスを削除
+#          )
+
+def main(u18_df,in_file):
+    u18_df=normalize(u18_df)
+    df_spr_away = sprit_away(u18_df)
+    df_spr_away0=goal_frame(df_spr_away)
+    df_spr_away0=sprit_pat(df_spr_away0)
+    df_spr_home0 = home_all(u18_df)
+    df_merged = noside(u18_df,df_spr_away0,df_spr_home0)
+    df_merged = counting(df_merged)
+    adjname = naming(in_file)
+    return (df_merged, adjname)
 
 
-# タイムスタンプ
-import os
-from datetime import datetime
-t = os.path.getmtime(in_file)
-# エポック秒をdatetimeに変換
-dt = datetime.fromtimestamp(t)
-# datadate = dt.strftime('%Y%m%d%H%M')
-datadate = dt.strftime('%m%d%H%M')
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(epilog="which file should be adjusted?")
+    parser.add_argument('-f', '--importfile', required=True)
+    args = parser.parse_args()
+    in_file = "./"+ args.importfile +".csv"
+    u18_df = pd.read_csv(in_file,encoding="UTF-8")
 
-# 出力
-df_merged.to_csv("./adj_" + newname + "_" + datadate + ".csv", 
+    # 抽出 (任意)
+    # u18_df=u18_df[u18_df['year'] == int("2013")]
+    u18_df = u18_df[u18_df["id"].isnull() != True ]
+
+    df_merged, adjname = main(u18_df,in_file)
+    df_merged.to_csv("./adj_" + adjname + ".csv", 
           index=False   # インデックスを削除
          )
