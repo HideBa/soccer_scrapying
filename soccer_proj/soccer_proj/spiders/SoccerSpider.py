@@ -46,12 +46,12 @@ class SoccerspiderSpider(scrapy.Spider):
             "http://www.jfa.jp/match/prince_takamado_trophy_u18_2015/premier_2015/west/schedule_result/",
             "http://www.jfa.jp/match/prince_takamado_trophy_u18_2014/2014/premier/east/schedule_result/",
             "http://www.jfa.jp/match/prince_takamado_trophy_u18_2014/2014/premier/west/schedule_result/",
-            # "http://www.jfa.or.jp/match/matches/2013/premier_league/east/match/index2.html",
-            # "http://www.jfa.or.jp/match/matches/2013/premier_league/west/match/index2.html",
-            # "http://www.jfa.or.jp/match/matches/2012/premier_league/east/match/index2.html",
-            # "http://www.jfa.or.jp/match/matches/2012/premier_league/west/match/index2.html",
-            # "http://www.jfa.or.jp/match/matches/2011/premier_league/east/match/index2.html",
-            # "http://www.jfa.or.jp/match/matches/2011/premier_league/west/match/index2.html"
+            "http://www.jfa.or.jp/match/matches/2013/premier_league/east/match/index2.html",
+            "http://www.jfa.or.jp/match/matches/2013/premier_league/west/match/index2.html",
+            "http://www.jfa.or.jp/match/matches/2012/premier_league/east/match/index2.html",
+            "http://www.jfa.or.jp/match/matches/2012/premier_league/west/match/index2.html",
+            "http://www.jfa.or.jp/match/matches/2011/premier_league/east/match/index2.html",
+            "http://www.jfa.or.jp/match/matches/2011/premier_league/west/match/index2.html"
         ]
         for url in url_list:
             if any((s in url) for s in ['2019', '2018', '2017', '2016', '2015']):
@@ -327,7 +327,10 @@ class SoccerspiderSpider(scrapy.Spider):
             item['results_away'] = 'None'
 
         year_pattern = '20[0-9]{2}'
-        item['year'] = re.search(year_pattern, temp).group(0)
+        if re.search(year_pattern, temp):
+            item['year'] = re.search(year_pattern, temp).group(0)
+        else:
+            item['year'] = '未定'
         # item['year'] = re.search(year_pattern, temp).group()
         month_pattern = '[0-1][0-9]月'
         item['month'] = re.findall(month_pattern, temp)
@@ -371,6 +374,7 @@ class SoccerspiderSpider(scrapy.Spider):
                 continue
 
         yield item
+
     def parse_2014(self, response):
         item = SoccerProjItem()
         item['leagu_name'] = response.css(

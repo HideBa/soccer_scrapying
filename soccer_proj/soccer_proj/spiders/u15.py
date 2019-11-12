@@ -23,24 +23,24 @@ class U15Spider(scrapy.Spider):
 
     def start_requests(self):
         url_list = [
-            # "http://www.jfa.jp/match/takamado_jfa_u15_2018/schedule_result/",
-            # "http://www.jfa.jp/match/prince_takamado_trophy_u15_2017/schedule_result/",
-            # "http://www.jfa.jp/match/prince_takamado_trophy_u15_2016/schedule_result/",
-            # "http://www.jfa.jp/match/prince_takamado_trophy_u15_2015/schedule_result/",
-            # "http://www.jfa.jp/match/prince_takamado_trophy_u15_2014/schedule_result/",
-            # "http://www.jfa.or.jp/match/matches/2013/1228takamado_u15/index.html",
-            # "http://www.jfa.or.jp/match/matches/2012/1229takamado_u15/index.html",
-            # "http://www.jfa.or.jp/match/matches/2011/1229takamado_u15/index.html",
-            # "http://www.jfa.or.jp/match/matches/2010/takamado_u15/index.html",
+            "http://www.jfa.jp/match/takamado_jfa_u15_2018/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u15_2017/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u15_2016/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u15_2015/schedule_result/",
+            "http://www.jfa.jp/match/prince_takamado_trophy_u15_2014/schedule_result/",
+            "http://www.jfa.or.jp/match/matches/2013/1228takamado_u15/index.html",
+            "http://www.jfa.or.jp/match/matches/2012/1229takamado_u15/index.html",
+            "http://www.jfa.or.jp/match/matches/2011/1229takamado_u15/index.html",
+            "http://www.jfa.or.jp/match/matches/2010/takamado_u15/index.html",
             # "http://www.jfa.or.jp/match/matches/2009/takamado_u15/schedule_result/schedule.html",
             # "http://www.jfa.or.jp/match/matches/2008/takamado_u15/schedule_result/schedule.html",
-            # "http://www.jfa.or.jp/archive/domestic/category_3/games/2007/takamado_jy_2007/",
+            "http://www.jfa.or.jp/archive/domestic/category_3/games/2007/takamado_jy_2007/",
             "http://www.jfa.or.jp/archive/domestic/category_3/games/2006/takamado_jy_2006/"
         ]
         # ----------------------------------2009年以前はそもそも各試合の詳細ページが存在しない。－－－－－－－－－－
 
         for url in url_list:
-            if any((s in url) for s in ['2018', '2017', '2016', '2015', '2014']):
+            if any((s in url) for s in ['2018', '2017', '2016', '2015']):
                 selenium_get(url)
                 # get_aで各試合の詳細URLのa要素を取得
                 # 以下2014-2018年用ーーーーーーーーーーーーーーーーーーー
@@ -51,6 +51,18 @@ class U15Spider(scrapy.Spider):
                     page = a.get_attribute('href')
                     # それぞれのURLにおいてScrapyRequestを生成
                     yield scrapy.Request(page, callback=self.parse)
+
+            elif '2014' in url:
+                selenium_get(url)
+                # get_aで各試合の詳細URLのa要素を取得
+                # 以下2014-2018年用ーーーーーーーーーーーーーーーーーーー
+                alist = get_a('li.score a')
+                self.add_url_nums(len(alist))
+                # for文を回してそれぞれのhref属性を取得
+                for a in alist:
+                    page = a.get_attribute('href')
+                    # それぞれのURLにおいてScrapyRequestを生成
+                    yield scrapy.Request(page, callback=self.parse_2014)
 
             elif any((s in url) for s in ['2013', '2012', '2011', '2010']):
                 selenium_get(url)
@@ -149,8 +161,88 @@ class U15Spider(scrapy.Spider):
         if re.search('.回戦', temp):
             item['round'] = re.search('.回戦', temp).group()
         else:
+            print("round======---" + temp)
             item['round'] = re.search(
-                '.+勝', temp).group()
+                "\］.+勝", temp).group().strip('］')
+
+        item['time'] = []
+        for elem in item['goal_home']:
+            temp = re.findall('.*分', elem)
+            if temp:
+                item['time'].append(temp)
+            else:
+                continue
+
+        for elem in item['goal_away']:
+            temp = re.findall('.*分', elem)
+            if temp:
+                item['time'].append(temp)
+            else:
+                continue
+        yield item
+
+    def parse_2014(self, response):
+        item = SoccerProjItem()
+        item['leagu_name'] = response.css(
+            '#ttl_sp > img::attr(alt)').extract_first()
+        # いったんtempとして値を取得しているが、ここから後は正規表現だの、Splitみたいなので不要な文字列を削って出力すればよし
+        temp = response.css(
+            '#inner-header-score > div.text-schedule::text').extract_first()
+        item['team_home'] = response.css(
+            '#score-board-header > div:nth-child(1)::text').extract_first()
+        item['team_away'] = response.css(
+            '#score-board-header > div:nth-child(5)::text').extract_first()
+        item['url'] = response.url
+        if item['url']:
+            self.add_url_exist_nums(1)
+            global u15_game_url_exist
+            global u15_game_url_nums
+            rate = self.get_url_rate(u15_game_url_nums, u15_game_url_exist)
+            print("rate===========" + str(rate))
+        results_home = response.css(
+            '#score-board-header > div:nth-child(2)::text').extract_first()
+        if results_home:
+            item['results_home'] = results_home
+        else:
+            item['results_home'] = 'None'
+
+        results_away = response.css(
+            '#score-board-header > div:nth-child(4)::text').extract_first()
+        if results_away:
+            item['results_away'] = results_away
+        else:
+            item['results_away'] = 'None'
+
+        year_pattern = '20[0-9]{2}'
+        item['year'] = re.findall(year_pattern, temp)
+        # item['year'] = re.search(year_pattern, temp).group()
+        month_pattern = '[0-1][0-9]月'
+        item['month'] = re.findall(month_pattern, temp)
+        day_pattern = '[0-3][0-9]日'
+        item['day'] = re.findall(day_pattern, temp)
+        # 以下試合がまだ行われていないデータにはNoneを入れる
+        goal_home = response.css(
+            '#game-content-wrap > div.scorerLeft::text').extract()
+        if goal_home:
+
+            item['goal_home'] = goal_home
+        else:
+            item['goal_home'] = 'None'
+
+        goal_away = response.css(
+            '#game-content-wrap > div.scorerRight::text').extract()
+        if goal_away:
+            item['goal_away'] = goal_away
+        else:
+            item['goal_away'] = 'None'
+        # time_temp = response.css('#game-content-wrap::text').extract()
+        # print("time_temp =========" + time_temp)
+        item['id'] = re.search('[0-9]{1,4}', temp).group()
+        if re.search('.回戦', temp):
+            item['round'] = re.search('.回戦', temp).group()
+        else:
+            item['round'] = re.search(
+                '］.+勝', temp).group().strip('］')
 
         item['time'] = []
         for elem in item['goal_home']:
@@ -248,8 +340,13 @@ class U15Spider(scrapy.Spider):
         if re.search('.回戦', temp2[0]):
             item['round'] = re.search('.回戦', temp2[0]).group()
         else:
-            item['round'] = re.search(
-                '.+勝', temp2[0]).group()
+            if re.search("Match No\.[0-9]{2}", temp2[0]):
+                round_num = re.search("Match No\.[0-9]{2}", temp2[0]).group()
+                print("round temp ========== " + str(round_num))
+                item['round'] = re.search(
+                    ' .*決勝', temp2[0]).group().strip(str(round_num))
+            else:
+                item['round'] = re.search(' .*決勝', temp2[0]).group().strip()
         for elem in goal_home:
             temp = re.findall('.*分', elem)
             temp = " ".join(temp).strip()
@@ -316,6 +413,7 @@ class U15Spider(scrapy.Spider):
         datas3 = response.css(
             'div.repCntAreaBack > div > div table:nth-child(23) tr')
         print("data3 ======= " + str(datas3.css('::text').extract()))
+        self.count = 100
         for data in datas3:
             # result = data.css('td:nth-child(6) a::text').extract()
             url = data.css("td:nth-child(6) a::attr(href)").extract_first()
@@ -352,9 +450,13 @@ class U15Spider(scrapy.Spider):
         item['year'] = "20" + re.search("[0-9]+", temp).group()
         month = re.search("..\.[0-9]+", temp).group()
         # print("month = " + month)
-        item['month'] = re.sub('..\.', '', month)
+        item['month'] = re.sub('..\.', '', month) + '月'
         day = re.search("..\...\.[0-9]+", temp).group()
-        item['day'] = re.sub('..\...\.', '', day)
+        item['day'] = re.sub('..\...\.', '', day) + '日'
+        if item['day'] == '29':
+            item['round'] = '決勝'
+        else:
+            item['round'] = '準決勝'
         item['leagu_name'] = response.css(
             'div.repCntAreaBack div p:nth-child(2) > img::attr(alt)').extract_first()
         item['team_home'] = response.css('#scoreL::text').extract_first()
@@ -369,6 +471,9 @@ class U15Spider(scrapy.Spider):
             '#scorerName > div:nth-child(2) > span::text').extract()
         item['time'] = []
         item['url'] = response.url
+        self.count += 1
+        item['id'] = self.count
+
         for elem in item['goal_home']:
             temp = re.findall('.*分', elem)
             temp = " ".join(temp).strip()
@@ -402,6 +507,7 @@ class U15Spider(scrapy.Spider):
             url = response.urljoin(url)
             print("url ========== " + str(url))
             item = SoccerProjItem()
+
             yield scrapy.Request(url, callback=self.parse_2006_2, meta={'item': item}, dont_filter=True)
 
         datas4 = response.css(
@@ -416,6 +522,7 @@ class U15Spider(scrapy.Spider):
             url = response.urljoin(url)
             print("url ========== " + str(url))
             item = SoccerProjItem()
+
             yield scrapy.Request(url, callback=self.parse_2006_2, meta={'item': item}, dont_filter=True)
 
     def parse_2006_2(self, response):
@@ -426,9 +533,9 @@ class U15Spider(scrapy.Spider):
         item['year'] = "20" + re.search("[0-9]+", temp[1]).group()
         month = re.search("..\.[0-9]+", temp[1]).group()
         # print("month = " + month)
-        item['month'] = re.sub('..\.', '', month)
+        item['month'] = re.sub('..\.', '', month) + '月'
         day = re.search("..\...\.[0-9]+", temp[1]).group()
-        item['day'] = re.sub('..\...\.', '', day)
+        item['day'] = re.sub('..\...\.', '', day) + '日'
         if item['day'] == '29':
             item['round'] = '決勝'
         else:
@@ -455,6 +562,8 @@ class U15Spider(scrapy.Spider):
             item['goal_away'] = goal_away
         item['time'] = []
         item['url'] = response.url
+        self.count += 1
+        item['id'] = self.count
         for elem in item['goal_home']:
             temp = re.findall('.*分', elem)
             temp = " ".join(temp).strip()

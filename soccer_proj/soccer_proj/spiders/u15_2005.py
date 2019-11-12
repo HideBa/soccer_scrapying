@@ -57,8 +57,11 @@ class U152005Spider(scrapy.Spider):
             day = data.css('td:nth-child(1) span::text').extract_first()
             day = day[6:8]
             item['day'] = day
+            item['round'] = data.css(
+                'td:nth-child(2) > span::text').extract_first()
 
 
+# tr: nth-child(2) > td: nth-child(2) > span
 # td: nth-child(4) > span > a
 # table:nth-child(8) > tbody > tr:nth-child(3) > td:nth-child(4) > div > a
             result = data.css(

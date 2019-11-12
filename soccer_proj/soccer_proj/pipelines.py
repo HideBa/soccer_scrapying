@@ -18,7 +18,7 @@ from scrapy import signals
 #             return '$ %s' % str(value)
 #         return super(SoccerProjItem, self).serialize_field(field, name, value)
 
-
+# --------------------------------------------------------------
 class SoccerProjPipeline(object):
     def __init__(self):
         self.files = {}
@@ -45,25 +45,25 @@ class SoccerProjPipeline(object):
     def process_item(self, item, spider):
         self.exporter.export_item(item)
         return item
+# --------------------------------------------------------------------
+# def open_spider(self, spider):
+#     self.leagu_name_to_exporter = {}
 
-    # def open_spider(self, spider):
-    #     self.leagu_name_to_exporter = {}
+# def close_spider(self, spider):
+#     for exporter in self.leagu_name_to_exporter.values():
+#         exporter.finish_exporting()
+#         exporter.file.close()
 
-    # def close_spider(self, spider):
-    #     for exporter in self.leagu_name_to_exporter.values():
-    #         exporter.finish_exporting()
-    #         exporter.file.close()
+# def _exporter_for_item(self, item):
+#     leagu_name = item['leagu_name']
+#     if leagu_name not in self.leagu_name_to_exporter:
+#         f = open('results_all/results_all.csv'.format(leagu_name), 'wb')
+#         exporter = SoccerCsvExporter(f)
+#         exporter.start_exporting()
+#         self.leagu_name_to_exporter[leagu_name] = exporter
+#     return self.leagu_name_to_exporter[leagu_name]
 
-    # def _exporter_for_item(self, item):
-    #     leagu_name = item['leagu_name']
-    #     if leagu_name not in self.leagu_name_to_exporter:
-    #         f = open('results_all/results_all.csv'.format(leagu_name), 'wb')
-    #         exporter = SoccerCsvExporter(f)
-    #         exporter.start_exporting()
-    #         self.leagu_name_to_exporter[leagu_name] = exporter
-    #     return self.leagu_name_to_exporter[leagu_name]
-
-    # def process_item(self, item, spider):
-    #     exporter = self._exporter_for_item(item)
-    #     exporter.export_item(item)
-    #     return item
+# def process_item(self, item, spider):
+#     exporter = self._exporter_for_item(item)
+#     exporter.export_item(item)
+#     return item

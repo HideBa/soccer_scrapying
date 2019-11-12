@@ -168,7 +168,7 @@ class U12Spider(scrapy.Spider):
             item['round'] = re.search('ラウンド..', temp).group()
         else:
             item['round'] = re.search(
-                '.+勝', temp).group()
+                '\］.+勝', temp).group().strip('］')
 
         item['time'] = []
         for elem in item['goal_home']:
@@ -254,13 +254,19 @@ class U12Spider(scrapy.Spider):
         if re.search('No\..*', temp2[0]):
             round_num = re.search('No\..*', temp2[0]).group()
         item['time'] = []
-        if re.search('.回戦', temp2[0]):
-            item['round'] = re.search('.回戦', temp2[0]).group()
+        if re.search('[0-9]回戦', temp2[0]):
+            item['round'] = re.search('[0-9]回戦', temp2[0]).group()
         elif re.search('第[0-9]+節', temp2[0]):
-            item['round'] = re.search('第[0-9]+節', temp2[0]).group() + round_num
+            item['round'] = re.search('第[0-9]+節', temp2[0]).group()
+            # item['round'] = re.search('第[0-9]+節', temp2[0]).group() + round_num
         else:
-            item['round'] = re.search(
-                '.+勝', temp2[0]).group()
+            if re.search("Match No\.[0-9]+", temp2[0]):
+                round_num = re.search("Match No\.[0-9]+", temp2[0]).group()
+                item['round'] = re.search(
+                    '.+勝', temp2[0]).group().strip(str(round_num))
+            else:
+                item['round'] = re.search(
+                    '.+勝', temp2[0]).group()
         for elem in goal_home:
             temp = re.findall('.*分', elem)
             temp = " ".join(temp).strip()
