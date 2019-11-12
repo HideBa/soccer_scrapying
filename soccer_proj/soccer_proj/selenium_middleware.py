@@ -40,9 +40,9 @@ from selenium.common.exceptions import TimeoutException
 # Chromeで任意のサイトを開く
 
 driver = webdriver.Chrome()
-driver.set_page_load_timeout(10)
+driver.set_page_load_timeout(20)
 retries = 3
-timeout = 10
+timeout = 20
 
 
 def selenium_get(url):
