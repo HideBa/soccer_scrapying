@@ -1,7 +1,23 @@
 import pandas as pd
 import argparse
 
+def kessyo(u18_df):
+    kes_df = u18_df[u18_df["id"].isnull()]
+    kes_df = kes_df.sort_values(["year","month","day"],ascending=[False,True,True]).reset_index(drop=True)
+    kes_df["id"] = range(1,(len(kes_df))+1)
+    #2006,2007の6試合なら↓
+    # kes_df["round"] = ["準決勝1", "準決勝2", "決勝","準決勝1", "準決勝2", "決勝"]
+    new_df = pd.concat([u18_df,kes_df],sort=True,copy=False,ignore_index=True)
+    return new_df
+
 def normalize(u18_df):
+    if u18_df["id"].isnull().sum() != 0:
+        u18_df=kessyo(u18_df)
+        u18_df = u18_df[u18_df["id"].isnull() != True ]
+    else:
+        pass
+    
+    u18_df["id"]= u18_df["id"].astype(int)
     #列の順番を整理する time,playerの列を削除
     u18_df=u18_df.loc[:,['id','leagu_name','year','month','day','round','team_home','team_away','url','results_away','results_home','goal_away','goal_home']]
     # スコアがNone(=未実施)の試合の行を削除
@@ -16,8 +32,6 @@ def normalize(u18_df):
     u18_df["merg_id"] = u18_df["year"].astype(str)+u18_df["area"].astype(str)+u18_df["id"].astype(str)
     u18_df["merg_id"] = u18_df["merg_id"].astype(int)
     return u18_df
-
-# u18_df=normalize(u18_df)
 
 # ここからaway
 
@@ -176,11 +190,6 @@ def naming(in_file):
 
     return newname + "_" + datadate
 
-# # 出力
-# df_merged.to_csv("./adj_" + newname + "_" + datadate + ".csv", 
-#           index=False   # インデックスを削除
-#          )
-
 def main(u18_df,in_file):
     u18_df=normalize(u18_df)
     df_spr_away = sprit_away(u18_df)
@@ -192,7 +201,6 @@ def main(u18_df,in_file):
     adjname = naming(in_file)
     return (df_merged, adjname)
 
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(epilog="which file should be adjusted?")
     parser.add_argument('-f', '--importfile', required=True)
@@ -201,10 +209,11 @@ if __name__ == '__main__':
     u18_df = pd.read_csv(in_file,encoding="UTF-8")
 
     # 抽出 (任意)
-    # u18_df=u18_df[u18_df['year'] == int("2013")]
-    u18_df = u18_df[u18_df["id"].isnull() != True ]
+    # u18_df=u18_df[u18_df['year'] != int("2013")]
 
+    #関数の実行
     df_merged, adjname = main(u18_df,in_file)
+    #CSV出力
     df_merged.to_csv("./adj_" + adjname + ".csv", 
           index=False   # インデックスを削除
          )
