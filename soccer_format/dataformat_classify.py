@@ -5,7 +5,7 @@ def kessyo(u18_df):
     kes_df = u18_df[u18_df["id"].isnull()]
     kes_df = kes_df.sort_values(["year","month","day"],ascending=[False,True,True]).reset_index(drop=True)
     kes_df["id"] = range(1,(len(kes_df))+1)
-    #2006,2007の6試合なら↓
+    #2006,2007の6試合のidがないなら↓
     # kes_df["round"] = ["準決勝1", "準決勝2", "決勝","準決勝1", "準決勝2", "決勝"]
     new_df = pd.concat([u18_df,kes_df],sort=True,copy=False,ignore_index=True)
     return new_df
@@ -16,14 +16,17 @@ def normalize(u18_df):
         u18_df = u18_df[u18_df["id"].isnull() != True ]
     else:
         pass
-    
     u18_df["id"]= u18_df["id"].astype(int)
+
     #列の順番を整理する time,playerの列を削除
     u18_df=u18_df.loc[:,['id','leagu_name','year','month','day','round','team_home','team_away','url','results_away','results_home','goal_away','goal_home']]
     # スコアがNone(=未実施)の試合の行を削除
+    u18_df['results_away']=u18_df['results_away'].astype(str)
     u18_df=u18_df[u18_df['results_away'] != "None"]
     # 年が変わるときの行(カラム名が入っている行)を削除(一応...)
     u18_df=u18_df[u18_df['results_away'] != "results_away"]
+    u18_df['results_away']=u18_df['results_away'].astype(int)
+    
     #eastとwestでidかぶりを防ぐ：east→77  west→88
     u18_df["url"] = u18_df["url"].astype(str)
     u18_df["area"]=int("77")
@@ -34,15 +37,11 @@ def normalize(u18_df):
     return u18_df
 
 # ここからaway
-
 def sprit_away(u18_df):
     #awayチームの得点者とその試合のidのみを抜き出す
     df_spr_away = pd.DataFrame(u18_df['goal_away'].str.split(',', expand=True))
     df_spr_away["merg_id"] =u18_df["merg_id"]
     return df_spr_away
-# df_spr_away = sprit_away(u18_df)
-
-
 
 def goal_frame(df_spr):
     # 先ほどの表から、1ゴール目のデータだけの表を作る
@@ -64,11 +63,7 @@ def goal_frame(df_spr):
     df_spr_0 = df_spr_0[df_spr_0['goal'] != ""]
     df_spr_0.dropna(inplace=True) 
     return df_spr_0
-
-# df_spr_away0=goal_frame(df_spr_away)
 # ！注意！ homeに使うときは、count_awayをcount_homeにrename！
-
-
 
 # 名前に「分」が入ってる人
 def inc_hunn(df):
@@ -84,8 +79,6 @@ def inc_hunn(df):
         except:
             return df
 
-
-
 def sprit_pat(df):
     #選手名と時間を分ける
     df = pd.concat([df,df["goal"].str.split("分",expand=True)],axis=1).drop("goal", axis=1)
@@ -99,17 +92,11 @@ def sprit_pat(df):
     except:
         df["n_time"] =df["n_time"].astype(int)
         df["a_time"] =int("-1")
-    
     #名前に「分」が入ってる人
     df=inc_hunn(df)
     return df
 
-# df_spr_away0=sprit_pat(df_spr_away0)
-
-
-
 #ここからhome
-
 def home_all(u18_df):
     #homeチームの得点者とその試合のidのみを抜き出す
     df_spr_home = pd.DataFrame(u18_df['goal_home'].str.split(',', expand=True))
@@ -118,21 +105,8 @@ def home_all(u18_df):
     df_spr_home0.rename(columns={"count_away": 'count_home'}, inplace=True) 
     df_spr_home0=sprit_pat(df_spr_home0)
     return df_spr_home0
-# df_spr_home0 = home_all(u18_df)
-
-
-
-# df_spr_home0=goal_frame(df_spr_home)
-# #home用にrename
-# df_spr_home0.rename(columns={"count_away": 'count_home'}, inplace=True)
-
-# df_spr_home0=sprit_pat(df_spr_home0)
-
-
 
 #ここからまとめて
-
-
 def noside(u18_df,df_spr_away0,df_spr_home0):
     #homeとawayを合体 #並び変える（ソート）
     df_merge = pd.concat([df_spr_away0,df_spr_home0],sort=True,copy=False,ignore_index=True)
@@ -143,49 +117,41 @@ def noside(u18_df,df_spr_away0,df_spr_home0):
     
     return df_merged
 
-# df_merged = noside(u18_df,df_spr_away0,df_spr_home0)
-
-
-
-def counting(df_merged):
-    #試合が変わる行を示すカラムを作る
-    df_merged["differ"] =df_merged["merg_id"].diff().fillna(1)
+def counting(df):
+    #試合が変わる行を示すカラムを作る（一行目はNaNになるので、1で埋める)
+    df["differ"] =df["merg_id"].diff().fillna(1)
     
     #idが変わる試合 かつ counthomeがnullのもの(=相手が先制しているので、counthomeは0になるべき)
-    df_merged.loc[(df_merged["differ"] != 0.0) &  (df_merged["count_home"].isnull() ), "count_home"] = 0
-    df_merged.loc[(df_merged["differ"] != 0.0) &  (df_merged["count_away"].isnull() ), "count_away"] = 0
+    df.loc[(df["differ"] != 0.0) &  (df["count_home"].isnull() ), "count_home"] = 0
+    df.loc[(df["differ"] != 0.0) &  (df["count_away"].isnull() ), "count_away"] = 0
 
     #残りのNaNは、相手ゴール分なので、一つ上の行のデータで埋める
-    df_merged["count_away"]=df_merged["count_away"].fillna(method='ffill')
-    df_merged["count_home"]=df_merged["count_home"].fillna(method='ffill')
+    df["count_away"]=df["count_away"].fillna(method='ffill')
+    df["count_home"]=df["count_home"].fillna(method='ffill')
     
     #整数表記にする
-    df_merged["goal_away"]=df_merged["count_away"].astype(int)
-    df_merged["goal_home"]=df_merged["count_home"].astype(int)
+    df["goal_away"]=df["count_away"].astype(int)
+    df["goal_home"]=df["count_home"].astype(int)
     
     #additional timeをプラス表記に
-    df_merged["time"] = df_merged["n_time"]
-    df_merged.loc[ (df_merged["a_time"] !=-1 ), "time"] = df_merged["n_time"].astype(str) + str("+") + df_merged["a_time"].astype(str)
+    df["time"] = df["n_time"]
+    df.loc[ (df["a_time"] !=-1 ), "time"] = df["n_time"].astype(str) + str("+") + df["a_time"].astype(str)
 
-    df_merged=df_merged.loc[:,['id','leagu_name','year','month','day','round','team_home','team_away','url','results_away','results_home','goal_away','goal_home','time','player']]
+    df=df.loc[:,['id','leagu_name','year','month','day','round','team_home','team_away','url','results_away','results_home','goal_away','goal_home','time','player']]
 
-    return df_merged
-
-# df_merged = counting(df_merged)
-
+    return df
 
 def naming(in_file):
     # 出力CSVの名前
     from pathlib import Path
     newname = Path(in_file).stem
-    # newname="u12_2012_2011"
     # タイムスタンプ
     import os
     from datetime import datetime
     t = os.path.getmtime(in_file)
     # エポック秒をdatetimeに変換
     dt = datetime.fromtimestamp(t)
-    # datadate = dt.strftime('%Y%m%d%H%M')
+    # datadate = dt.strftime('%Y%m%d%H%M')で、「年」から
     datadate = dt.strftime('%m%d%H%M')
 
     return newname + "_" + datadate
@@ -207,7 +173,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
     in_file = "./"+ args.importfile +".csv"
     u18_df = pd.read_csv(in_file,encoding="UTF-8")
-
     # 抽出 (任意)
     # u18_df=u18_df[u18_df['year'] != int("2013")]
 
@@ -217,3 +182,12 @@ if __name__ == '__main__':
     df_merged.to_csv("./adj_" + adjname + ".csv", 
           index=False   # インデックスを削除
          )
+
+
+    if df_merged.isnull().values.sum()==0:
+        print("adj_{0}.csv を正常に出力しました。".format(adjname))
+        print("データ個数：\n{0}".format(df_merged.count()) )   
+    else:
+        print("adj_{0}.csv は出力されましたが、問題があります。".format(adjname))
+        print("データ個数：\n{0}\n".format(df_merged.count()) )   
+        print("欠損値：\n{0}\n".format(df_merged.isnull().sum()))
