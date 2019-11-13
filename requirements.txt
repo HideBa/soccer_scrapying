@@ -4,7 +4,7 @@ I スクレイピング
 - python
 - scrapy(spider)
 - celenium
-- ドライバー
+- ドライバー：https://sites.google.com/a/chromium.org/chromedriver/downloads
 - (仮想環境)
 
 2. ファイルの実行
@@ -12,7 +12,17 @@ I スクレイピング
 > python 〇〇.py
 を実行すると、結果が出力される。
 
-
+・ Scrapyの実行
+・ U18の試合結果を取得
+`scrapy crawl SoccerSpider -o directory_name/filename.csv`　でCSV出力
+・ U15の試合結果を取得
+`scrapy crawl u15`
+・ U12の試合結果を取得
+`scrapy crawl u12`
+*・U15の各年の試合結果取得
+`scrapy crawl u15_2007`
+・ 取得結果サマリーを作成(必要に応じて欲しい関数の事項部分をコメントアウト、解除)
+`python success_rate_pd'
 
 II データ加工
 
